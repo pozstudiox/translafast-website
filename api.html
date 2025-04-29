@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Anahtarı | TranslaFast</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="container" style="padding-top: 100px;">
+  <h1 style="color: var(--color-accent);">API Anahtarı</h1>
+  <p style="margin: 20px 0; color: var(--color-muted);">
+    TranslaFast API'yi kullanmak için aşağıdaki API anahtarınızı kullanabilirsiniz.
+  </p>
+
+  <div style="background: var(--color-surface); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow); max-width: 600px;">
+    <label for="apiKey" style="display: block; margin-bottom: 10px; font-weight: bold;">API Anahtarınız:</label>
+    <input type="text" id="apiKey" value="TF-API-9876-1234-ABCD" readonly style="width: 100%; padding: 10px; font-size: 1rem; border-radius: var(--radius); border: var(--border); background: var(--color-surface-alt); color: var(--color-text);">
+    <button onclick="copyAPI()" style="margin-top: 14px; width: 100%; padding: 12px; font-size: 1rem; background: var(--color-accent); color: white; border: none; border-radius: var(--radius); cursor: pointer;">Kopyala</button>
+  </div>
+
+  <script>
+    function copyAPI() {
+      const apiKey = document.getElementById('apiKey');
+      apiKey.select();
+      document.execCommand('copy');
+      alert('API Anahtarı kopyalandı!');
+    }
+  </script>
+</div>
+
+</body>
+</html>
