@@ -61,7 +61,7 @@ body {
   justify-content: space-between;
   align-items: center;
   display: flex;
-  gap: 12px;
+  gap: 4px;
 }
 
 .navbar .logo {
