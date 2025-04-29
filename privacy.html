@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gizlilik Politikası | TranslaFast</title>
-  <link rel="stylesheet" href="style-enhanced.css" />
+  <link rel="stylesheet" href="style.css" />
   <style>
     body {
       background: var(--color-bg);
@@ -15,48 +15,38 @@
     }
 
     .privacy-container {
-      max-width: 960px;
-      margin: 60px auto;
-      padding: 60px 30px;
-      background: var(--color-surface);
-      border-radius: 12px;
-      box-shadow: 0 6px 24px rgba(0,0,0,0.2);
-    }
-
-    .privacy-container h1 {
-      font-size: 2.2rem;
-      margin-bottom: 30px;
-      color: var(--color-accent);
-      text-align: center;
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 100px 20px 60px;
     }
 
     .privacy-container h2 {
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       margin-top: 40px;
       margin-bottom: 14px;
       color: var(--color-accent);
     }
 
-    .privacy-container p, .privacy-container ul, .privacy-container li {
+    .privacy-container p {
       font-size: 1.05rem;
       color: var(--color-muted);
-    }
-
-    .privacy-container ul {
-      margin-left: 30px;
       margin-bottom: 20px;
     }
 
-    .privacy-container hr {
-      margin: 50px 0;
-      border: 0;
-      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    .privacy-container ul {
+      margin-left: 24px;
+      margin-bottom: 20px;
+      color: var(--color-muted);
+    }
+
+    .privacy-container li {
+      margin-bottom: 10px;
     }
 
     .navbar {
       background: var(--color-surface);
       border-bottom: var(--border);
-      box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+      box-shadow: var(--shadow);
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -66,7 +56,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
+      padding: 20px;
       max-width: 1240px;
       margin: 0 auto;
     }
@@ -74,43 +64,31 @@
     .navbar .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
       text-decoration: none;
     }
 
     .logo-img {
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
     }
 
     .logo-text {
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-size: 1.9rem;
+      font-weight: 800;
       color: var(--color-accent);
     }
 
-    footer {
-      margin-top: 80px;
-      padding: 40px 20px;
-      background: var(--color-surface);
-      text-align: center;
-      font-size: 0.95rem;
-      color: var(--color-muted);
-      border-top: var(--border);
-    }
-
-    a {
+    .navbar-right {
+      font-size: 1.1rem;
       color: var(--color-accent);
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
+  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="container">
       <a href="index.html" class="logo">
@@ -123,59 +101,36 @@
     </div>
   </nav>
 
+  <!-- CONTENT -->
   <div class="privacy-container">
-    <h1>Gizlilik Politikamız</h1>
-
-    <p>TranslaFast olarak, kullanıcı gizliliğini en üst düzeyde korumayı taahhüt ediyoruz. Bu politika, veri toplama, işleme ve güvenlik uygulamalarımızı şeffaf bir şekilde açıklamak için oluşturulmuştur. Kullanıcıların verilerini koruma konusundaki sorumluluğumuzu ciddiyetle ele alıyor ve en güncel güvenlik standartlarına uygun şekilde hareket ediyoruz.</p>
+    <p>TranslaFast olarak kullanıcılarımızın gizliliğine en üst düzeyde önem veriyoruz. Bu politika, uzantımızın kullanıcı verileriyle nasıl bir etkileşim içinde olduğunu, hangi bilgileri toplamadığımızı ve neden hiçbir veriyi işlemediğimizi açıklamak amacıyla hazırlanmıştır.</p>
 
     <h2>1. Veri Toplamıyoruz</h2>
-    <p>TranslaFast, kullanıcılarından hiçbir kişisel veri toplamaz. İsim, e-posta adresi, IP adresi veya cihaz bilgileri gibi kullanıcıyı tanımlamaya yarayan bilgiler hiçbir şekilde kayıt altına alınmaz. Kullanıcılarımızın uygulamayı kullanırken tam gizlilik içinde hareket etmeleri sağlanır. Bu yaklaşım, yalnızca kullanıcı güvenliğini artırmakla kalmaz, aynı zamanda güvene dayalı bir hizmet deneyimi oluşturur.</p>
+    <p>TranslaFast uzantısı, kullanıcılarından hiçbir şekilde kişisel veri toplamaz. İsim, e-posta adresi, telefon numarası, konum bilgisi, IP adresi veya çerez bilgileri gibi kullanıcıyı doğrudan ya da dolaylı olarak tanımlayan hiçbir veri uzantı tarafından kaydedilmez. Uygulamanın tüm çeviri işlevleri, kullanıcı tarayıcısı üzerinde lokal olarak gerçekleştirilir. Sunucularımız bu işlemlere dâhil olmaz ve kullanıcı aktiviteleri takip edilmez.</p>
 
     <h2>2. Çeviri Verileri İşlenmez</h2>
-    <p>TranslaFast üzerinden yapılan tüm çeviri işlemleri tamamen kullanıcı tarayıcısında gerçekleştirilir. Veriler yalnızca geçici hafızada tutulur ve işlem tamamlandığında otomatik olarak temizlenir. Sunucu tarafında hiçbir içerik saklanmaz, analiz edilmez veya üçüncü taraflarla paylaşılmaz. Böylece kullanıcıların çeviri verileri tam bir gizlilik içinde kalır.</p>
+    <p>Yapılan çeviri işlemleri, yalnızca geçici olarak tarayıcı belleğinde tutulur. Bu veriler herhangi bir şekilde dışa aktarılmaz, kayıt altına alınmaz ya da analiz edilmez. Çeviri süreci tamamlandığında veya tarayıcı sekmesi kapatıldığında bu veriler kalıcı olmayan şekilde otomatik olarak silinir. Bu yapı, çeviri sırasında girilen içeriklerin üçüncü şahıslar tarafından erişilmesini teknik olarak imkânsız hale getirir.</p>
 
-    <h2>3. Üçüncü Taraflarla Paylaşım Yok</h2>
-    <p>TranslaFast, kullanıcı bilgilerini hiçbir üçüncü taraf kuruluşla paylaşmaz. Reklam ağları, analiz araçları veya sosyal medya platformları ile entegrasyon bulunmaz. Böylelikle kullanıcılar, verilerinin asla izlenmediğinden veya başka platformlara aktarılmadığından emin olabilirler.</p>
+    <h2>3. Üçüncü Taraflarla Paylaşım Yoktur</h2>
+    <p>TranslaFast, kullanıcı verilerini üçüncü taraflara satmaz, kiralamaz veya paylaşmaz. Reklam ağları, analiz platformları, sosyal medya hizmetleri veya başka yazılımlar ile entegrasyon bulunmadığından dolayı hiçbir dış kaynakla veri paylaşımı söz konusu değildir. Uygulama, kullanıcı mahremiyetini temel ilke olarak benimsemektedir.</p>
 
-    <h2>4. Çerez Kullanımı</h2>
-    <p>TranslaFast, kullanıcıların tarayıcılarına hiçbir çerez yerleştirmez. Kullanıcı tercihlerini veya davranışlarını izlemek amacıyla herhangi bir izleyici veya analiz aracı kullanılmaz. Kullanıcılar, gizliliklerinden ödün vermeden özgürce hizmetlerimizi kullanabilirler.</p>
+    <h2>4. Güvenlik Politikamız</h2>
+    <p>TranslaFast, yalnızca tarayıcı izinleri kapsamında çalışır. Kullanıcının izni dışında kamera, mikrofon, konum veya dosya sistemine erişim talebinde bulunmaz. Kod yapısı, kötü amaçlı yazılım barındırmaz ve düzenli olarak güvenlik kontrollerinden geçirilir. Uygulama hiçbir şekilde sistem kaynaklarına zarar vermez veya veri bütünlüğünü tehdit etmez.</p>
 
-    <h2>5. Veri Güvenliği Önlemleri</h2>
-    <ul>
-      <li>Veri şifreleme yöntemleri kullanılarak bilgiler korunur.</li>
-      <li>Yazılım güvenlik açıklarına karşı düzenli testler yapılır.</li>
-      <li>Uygulama yalnızca gerekli minimum izinleri talep eder.</li>
-      <li>Kodlarımız bağımsız güvenlik denetimlerinden geçirilir.</li>
-    </ul>
+    <h2>5. Yasal Yükümlülükler ve KVKK Uygunluğu</h2>
+    <p>6698 Sayılı Kişisel Verilerin Korunması Kanunu (KVKK) uyarınca, kişisel veri işleyen her gerçek veya tüzel kişi, bu verilerin işlenme amacı, süresi ve güvenliği hakkında bilgilendirme yapmakla yükümlüdür. TranslaFast kişisel veri işlemediğinden, KVKK kapsamında yükümlülük doğurmaz. Ancak şeffaflık ilkesi gereği kullanıcılarımıza bu politikayı sunmaktayız.</p>
 
-    <h2>6. Uluslararası Kullanıcılar</h2>
-    <p>TranslaFast, dünya genelinde tüm kullanıcılarına eşit gizlilik standartları sunar. Kullanıcıların bulundukları ülkeye veya bölgeye göre veri işleme uygulamalarında bir farklılık bulunmaz. Avrupa Birliği GDPR, Türkiye KVKK gibi uluslararası gizlilik yasalarına tam uyumluluk sağlanır.</p>
+    <h2>6. Gizlilik Politikasında Yapılacak Değişiklikler</h2>
+    <p>Gizlilik politikamız zaman zaman güncellenebilir. Bu güncellemeler genellikle yasal mevzuata uyum sağlamak, yeni teknolojik gelişmeleri takip etmek veya kullanıcı deneyimini geliştirmek amacıyla yapılır. Her değişiklik bu sayfada yayınlanarak duyurulacaktır.</p>
 
-    <h2>7. Kullanıcı Hakları</h2>
-    <ul>
-      <li><strong>Erişim Hakkı:</strong> Kullanıcılar, kendileriyle ilgili tutulan hiçbir verinin olmadığını talep edebilirler.</li>
-      <li><strong>Düzeltme Hakkı:</strong> Yanlış veya eksik verilerin bulunması durumunda düzeltme isteyebilirler.</li>
-      <li><strong>Silme Hakkı:</strong> Veri tutulmadığı için otomatik olarak gizlilik sağlanır.</li>
-      <li><strong>Şikâyet Hakkı:</strong> Gizlilik politikamıza ilişkin şikâyetler iletilebilir.</li>
-    </ul>
+    <h2>7. Kullanıcı Hakları ve İletişim</h2>
+    <p>Kullanıcılar, gizlilik politikamız hakkında daha fazla bilgi almak, görüş bildirmek ya da herhangi bir talepte bulunmak isterlerse bizimle iletişime geçebilirler. Tüm talepler için <a href="mailto:pozstudiosh@gmail.com">pozstudiosh@gmail.com</a> adresinden bize ulaşabilirsiniz.</p>
 
-    <h2>8. Çocukların Gizliliği</h2>
-    <p>TranslaFast, 13 yaşın altındaki çocuklardan bilerek bilgi toplamaz veya hizmetlerini bu yaş grubuna özel sunmaz. Eğer bir çocuğun kişisel verilerini yanlışlıkla işlediğimizi fark edersek, bu veriler derhal silinir.</p>
-
-    <h2>9. Gizlilik Politikasında Değişiklikler</h2>
-    <p>TranslaFast, zaman zaman gizlilik politikasında değişiklik yapabilir. Yapılan önemli değişiklikler kullanıcıya bildirilecek ve "Son Güncelleme Tarihi" bilgisi güncellenecektir. Kullanıcılar politikayı düzenli aralıklarla gözden geçirmelidirler.</p>
-
-    <h2>10. İletişim</h2>
-    <p>Gizlilik uygulamalarımız hakkında sorularınız varsa veya daha fazla bilgi almak istiyorsanız lütfen bize ulaşın: <a href="mailto:pozstudiosh@gmail.com">pozstudiosh@gmail.com</a>. Tüm geri bildirimleriniz bizim için değerlidir ve gizliliğinizi sürekli geliştirmemize yardımcı olur.</p>
-
-    <hr>
-
-    <p style="text-align: center;">© 2025 TranslaFast | Tüm Hakları Saklıdır</p>
+    <hr style="margin-top: 40px; border: 1px solid rgba(255,255,255,0.06);">
+    <p style="text-align: center; font-size: 0.95rem; color: var(--color-muted); margin-top: 30px;">
+      © 2025 TranslaFast. Tüm hakları saklıdır.
+    </p>
   </div>
-
-  <footer>
-    Gizliliğiniz bizim için en yüksek önceliktir.
-  </footer>
 
 </body>
 </html>
