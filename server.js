@@ -22,7 +22,9 @@ const pages = [
   'privacy.html',
   'kvkk.html',
   'logs.html',
-  'index.html'
+  'index.html',
+  'api.html',
+  'destek.html'
 ];
 
 // HTML sayfaları için yönlendirme ve parametre işle
