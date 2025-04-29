@@ -756,8 +756,7 @@ html {
 }
 
 .language-selector {
-  margin-left: auto;
-  margin-right: 12px;
+  margin-left: 16px;
   display: flex;
   align-items: center;
 }
@@ -766,11 +765,10 @@ html {
   background-color: var(--color-surface);
   color: var(--color-text);
   border: 1px solid rgba(255,255,255,0.1);
-  padding: 6px 10px;
-  border-radius: 8px;
+  padding: 6px 12px;
+  border-radius: 10px;
   font-size: 0.95rem;
   font-family: inherit;
-  appearance: none;
   cursor: pointer;
   transition: 0.3s ease;
 }
