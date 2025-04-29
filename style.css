@@ -912,3 +912,25 @@ html {
     height: auto;
   }
 }
+
+
+
+/* 📏 Navbar hizalama düzenlemesi */
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+}
+
+.navbar .menu {
+  display: flex;
+  gap: 24px;
+  flex: 1;
+  justify-content: center;
+}
+
+.hamburger-btn {
+  margin-left: auto;
+}
