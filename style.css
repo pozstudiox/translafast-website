@@ -915,13 +915,15 @@ html {
 
 
 
-/* 📏 Navbar hizalama düzenlemesi */
 .navbar .container {
-  display: flex;
+  width: 90%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 16px 0;
   justify-content: space-between;
   align-items: center;
+  display: flex;
   gap: 12px;
-  padding: 12px 20px;
 }
 
 .navbar .menu {
