@@ -8,20 +8,6 @@ window.addEventListener("load", () => {
   }
 });
 
-
-
-// ✅ Scroll-to-top görünürlüğü
-const scrollBtn = document.getElementById("scrollTopBtn");
-
-window.addEventListener("scroll", () => {
-  scrollBtn.style.display = window.scrollY > 300 ? "block" : "none";
-});
-
-// ✅ Scroll-to-top tıklanınca yukarı git
-scrollBtn.addEventListener("click", () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-});
-
 // ✅ Navbar küçült (shrink) efekti
 const navbar = document.querySelector(".navbar");
 
@@ -80,6 +66,7 @@ const observer = new IntersectionObserver(
 
 fadeEls.forEach((el) => observer.observe(el));
 
+// ✅ Hamburger Menü
 const hamburgerBtn = document.getElementById("hamburgerMenu");
 const hamburgerPanel = document.getElementById("hamburgerPanel");
 
