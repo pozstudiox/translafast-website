@@ -2,119 +2,190 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>API Dökümantasyonu | TranslaFast</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API Oluştur - TranslaFast</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    .api-container {
-      max-width: 960px;
-      margin: 0 auto;
-      padding: 100px 20px 60px;
+    body {
+      margin: 0;
+      background-color: #0e0e0f;
+      font-family: 'Inter', sans-serif;
+      color: #e5e5e5;
+      padding: 20px;
     }
 
-    .api-container h1 {
-      font-size: 2.2rem;
-      color: var(--color-accent);
+    h1 {
+      font-size: 26px;
       margin-bottom: 20px;
     }
 
-    .api-container h2 {
-      font-size: 1.4rem;
-      color: var(--color-accent);
-      margin-top: 40px;
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background-color: #1c1c1e;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.6);
     }
 
-    .api-container p {
-      color: var(--color-muted);
-      line-height: 1.8;
-      margin-bottom: 16px;
+    .form-group {
+      margin-bottom: 20px;
     }
 
-    .code-block {
-      background: #0f172a;
+    label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background-color: #2a2a2c;
+      color: #fff;
+      font-size: 15px;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      background-color: #10a37f;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0e8a6a;
+    }
+
+    .api-key-box {
+      background-color: #2a2a2c;
       padding: 16px;
       border-radius: 10px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.95rem;
-      overflow-x: auto;
-      color: #e2e8f0;
-      box-shadow: var(--shadow);
-      margin-top: 10px;
-      margin-bottom: 30px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .badge {
-      display: inline-block;
-      background: var(--color-accent);
-      color: #fff;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      margin-left: 8px;
+    .api-key {
+      font-family: monospace;
+      word-break: break-all;
     }
+
+    .copy-btn {
+      background-color: #333;
+      border: none;
+      padding: 6px 12px;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .copy-btn:hover {
+      background-color: #444;
+    }
+
+    .info {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #aaa;
+    }
+
+    .key-list {
+      margin-top: 30px;
+    }
+
+    .key-item {
+      background-color: #18181a;
+      padding: 14px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .key-name {
+      font-weight: 500;
+    }
+
+    .delete-btn {
+      background: none;
+      border: none;
+      color: #f55353;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      text-decoration: underline;
+    }
+
   </style>
 </head>
 <body>
+  <div class="container">
+    <h1>API Anahtarı Oluştur</h1>
+    <div class="form-group">
+      <label for="api-name">Anahtar Adı</label>
+      <input type="text" id="api-name" placeholder="Örn: TranslaFast Mobil Uygulama" />
+    </div>
+    <button class="btn" onclick="createApiKey()">API Anahtarı Oluştur</button>
 
-  <!-- Menü vs. buraya eklenecekse buraya eklenir -->
-
-  <div class="api-container fade-in">
-    <h1>TranslaFast API Dökümantasyonu</h1>
-    <p>TranslaFast API ile kendi uygulama veya sitelerinizde hızlı ve kolay çeviri entegrasyonu sağlayabilirsiniz.</p>
-
-    <h2>🔑 API Anahtarı</h2>
-    <p>Her istek için bir <strong>API anahtısı</strong> gerekir. Kayıt olduktan sonra panelden anahtarınızı alabilirsiniz.</p>
-    <div class="code-block">X-API-Key: senin-api-anahtarın</div>
-
-    <h2>📨 Çeviri İsteği Gönderme</h2>
-    <p><strong>POST</strong> isteği ile aşağıdaki uç noktaya çeviri isteği gönderin:</p>
-    <div class="code-block">https://translafast.onrender.com/api/translate</div>
-
-    <h2>📦 Gönderilecek Veri (JSON)</h2>
-    <div class="code-block">
-{
-  "text": "Merhaba dünya",
-  "from": "tr",
-  "to": "en"
-}
+    <div id="new-key-section" style="display:none;">
+      <div class="api-key-box">
+        <div class="api-key" id="generated-key">sk-...</div>
+        <button class="copy-btn" onclick="copyKey()">Kopyala</button>
+      </div>
+      <div class="info">Bu anahtar yalnızca bir kez gösterilir. Güvende tutun.</div>
     </div>
 
-    <h2>📝 Python Örneği <span class="badge">Python</span></h2>
-    <div class="code-block">
-import requests
-
-url = "https://translafast.onrender.com/api/translate"
-headers = {"X-API-Key": "senin-api-anahtarın"}
-data = {"text": "Merhaba", "from": "tr", "to": "en"}
-
-res = requests.post(url, json=data, headers=headers)
-print(res.json())
+    <div class="key-list">
+      <h2 style="margin-bottom: 10px; margin-top: 40px;">Mevcut API Anahtarları</h2>
+      <div class="key-item">
+        <div>
+          <div class="key-name">TranslaFast Mobil</div>
+          <div class="info">Oluşturulma: 28 Nisan 2025</div>
+        </div>
+        <button class="delete-btn">Sil</button>
+      </div>
+      <div class="key-item">
+        <div>
+          <div class="key-name">Geliştirici Testi</div>
+          <div class="info">Oluşturulma: 25 Nisan 2025</div>
+        </div>
+        <button class="delete-btn">Sil</button>
+      </div>
     </div>
-
-    <h2>💻 JavaScript Örneği <span class="badge">JS</span></h2>
-    <div class="code-block">
-fetch("https://translafast.onrender.com/api/translate", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    "X-API-Key": "senin-api-anahtarın"
-  },
-  body: JSON.stringify({
-    text: "Hello world",
-    from: "en",
-    to: "tr"
-  })
-})
-.then(res => res.json())
-.then(data => console.log(data));
-    </div>
-
-    <h2>📚 Desteklenen Diller</h2>
-    <p>178 dili desteklemekteyiz. Örneğin: <code>en</code> (İngilizce), <code>tr</code> (Türkçe), <code>fr</code> (Fransızca), vb.</p>
-
-    <h2>📞 Yardım ve Destek</h2>
-    <p>Herhangi bir sorunla karşılaşırsanız lütfen <a href="destek.html">Destek</a> sayfamızdan bizimle iletişime geçin.</p>
   </div>
 
+  <script>
+    function createApiKey() {
+      const apiName = document.getElementById("api-name").value.trim();
+      if (apiName === "") {
+        alert("Lütfen bir ad girin.");
+        return;
+      }
+
+      const key = "sk-" + Math.random().toString(36).substring(2, 18);
+      document.getElementById("generated-key").textContent = key;
+      document.getElementById("new-key-section").style.display = "block";
+      document.getElementById("api-name").value = "";
+    }
+
+    function copyKey() {
+      const key = document.getElementById("generated-key").textContent;
+      navigator.clipboard.writeText(key).then(() => {
+        alert("API anahtarı kopyalandı!");
+      });
+    }
+  </script>
 </body>
 </html>
