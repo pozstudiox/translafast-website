@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Destek | TranslaFast</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .support-container {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 100px 20px 60px;
+    }
+
+    .support-container h1 {
+      font-size: 2.4rem;
+      color: var(--color-accent);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .support-container p {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    form.support-form {
+      background: var(--color-surface);
+      padding: 40px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    form.support-form input,
+    form.support-form textarea {
+      padding: 14px 16px;
+      font-size: 1rem;
+      border: var(--border);
+      border-radius: 10px;
+      background: var(--color-surface-alt);
+      color: var(--color-text);
+    }
+
+    form.support-form textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    form.support-form button {
+      background: var(--color-accent);
+      color: white;
+      padding: 14px;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+
+    form.support-form button:hover {
+      background: var(--color-accent-hover);
+    }
+
+    .note {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 12px;">
+        <img src="translafast-icon.svg" alt="TranslaFast Logo" class="logo-img" style="width: 36px; height: 36px;">
+        <span class="logo-text" style="font-size: 1.7rem; font-weight: 700; color: var(--color-accent);">TranslaFast</span>
+      </a>
+      <div class="navbar-right">
+        Destek
+      </div>
+    </div>
+  </nav>
+
+  <!-- DESTEK FORMU -->
+  <div class="support-container">
+    <h1>Yardıma mı ihtiyacınız var?</h1>
+    <p>Her türlü geri bildirim, soru veya teknik sorun için bize ulaşabilirsiniz.</p>
+
+    <form class="support-form" action="mailto:pozstudiosh@gmail.com" method="POST" enctype="text/plain">
+      <input type="text" name="adsoyad" placeholder="Adınız ve Soyadınız" required>
+      <input type="email" name="email" placeholder="E-posta Adresiniz" required>
+      <textarea name="mesaj" placeholder="Mesajınız..." required></textarea>
+      <button type="submit">Gönder</button>
+    </form>
+
+    <div class="note">
+      Form, e-posta uygulamanız üzerinden <strong>pozstudiosh@gmail.com</strong> adresine gönderilir.
+    </div>
+  </div>
+
+</body>
+</html>
