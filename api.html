@@ -2,188 +2,119 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>API Anahtarı | TranslaFast</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>API Dökümantasyonu | TranslaFast</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Basit hamburger stilleri */
-    .hamburger {
-      position: fixed;
-      top: 20px;
-      left: 20px;
-      width: 30px;
-      height: 22px;
-      cursor: pointer;
-      z-index: 3000;
+    .api-container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 100px 20px 60px;
     }
-    .hamburger span {
-      display: block;
-      width: 100%;
-      height: 4px;
-      background: var(--color-text);
-      margin-bottom: 5px;
-      border-radius: 4px;
+
+    .api-container h1 {
+      font-size: 2.2rem;
+      color: var(--color-accent);
+      margin-bottom: 20px;
     }
-    .hamburger-panel {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 260px;
-      height: 100%;
-      background: var(--color-surface);
-      padding: 60px 20px;
-      transform: translateX(-100%);
-      transition: transform 0.3s ease;
-      z-index: 2500;
-    }
-    .hamburger-panel.open {
-      transform: translateX(0);
-    }
-    .hamburger-panel ul {
-      list-style: none;
-      padding: 0;
+
+    .api-container h2 {
+      font-size: 1.4rem;
+      color: var(--color-accent);
       margin-top: 40px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
     }
-    .hamburger-panel ul li a {
-      color: var(--color-text);
-      text-decoration: none;
-      font-size: 1.2rem;
-      font-weight: bold;
+
+    .api-container p {
+      color: var(--color-muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .code-block {
+      background: #0f172a;
+      padding: 16px;
+      border-radius: 10px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      overflow-x: auto;
+      color: #e2e8f0;
+      box-shadow: var(--shadow);
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--color-accent);
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      margin-left: 8px;
     }
   </style>
 </head>
 <body>
 
-<!-- ✅ Hamburger Menü -->
-<div class="hamburger" onclick="toggleHamburger()">
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+  <!-- Menü vs. buraya eklenecekse buraya eklenir -->
 
-<div class="hamburger-panel" id="hamburgerPanel">
-  <ul>
-    <li><a href="index.html">Ana Sayfa</a></li>
-    <li><a href="privacy.html">Gizlilik</a></li>
-    <li><a href="api.html">API</a></li>
-  </ul>
-</div>
+  <div class="api-container fade-in">
+    <h1>TranslaFast API Dökümantasyonu</h1>
+    <p>TranslaFast API ile kendi uygulama veya sitelerinizde hızlı ve kolay çeviri entegrasyonu sağlayabilirsiniz.</p>
 
-<script>
-  function toggleHamburger() {
-    document.getElementById('hamburgerPanel').classList.toggle('open');
-  }
-</script>
+    <h2>🔑 API Anahtarı</h2>
+    <p>Her istek için bir <strong>API anahtısı</strong> gerekir. Kayıt olduktan sonra panelden anahtarınızı alabilirsiniz.</p>
+    <div class="code-block">X-API-Key: senin-api-anahtarın</div>
 
-<!-- ✅ Ana İçerik -->
-<div class="container" style="padding-top: 100px;">
-  <h1 style="color: var(--color-accent);">API Anahtarı</h1>
-  <p style="margin: 20px 0; color: var(--color-muted);">TranslaFast API'yi kullanmak için aşağıdaki API anahtarınızı kullanabilirsiniz.</p>
+    <h2>📨 Çeviri İsteği Gönderme</h2>
+    <p><strong>POST</strong> isteği ile aşağıdaki uç noktaya çeviri isteği gönderin:</p>
+    <div class="code-block">https://translafast.onrender.com/api/translate</div>
 
-  <div style="background: var(--color-surface); padding: 20px; border-radius: var(--radius); box-shadow: var(--shadow); max-width: 600px;">
-    <label for="apiKey" style="display: block; margin-bottom: 10px; font-weight: bold;">API Anahtarınız:</label>
-    <input type="text" id="apiKey" value="TF-API-9876-1234-ABCD" readonly style="width: 100%; padding: 10px; font-size: 1rem; border-radius: var(--radius); border: var(--border); background: var(--color-surface-alt); color: var(--color-text);">
-    <button onclick="copyAPI()" style="margin-top: 14px; width: 100%; padding: 12px; font-size: 1rem; background: var(--color-accent); color: white; border: none; border-radius: var(--radius); cursor: pointer;">Kopyala</button>
-  </div>
+    <h2>📦 Gönderilecek Veri (JSON)</h2>
+    <div class="code-block">
+{
+  "text": "Merhaba dünya",
+  "from": "tr",
+  "to": "en"
+}
+    </div>
 
-  <script>
-    function copyAPI() {
-      const apiKey = document.getElementById('apiKey');
-      apiKey.select();
-      document.execCommand('copy');
-      alert('API Anahtarı kopyalandı!');
-    }
-  </script>
+    <h2>📝 Python Örneği <span class="badge">Python</span></h2>
+    <div class="code-block">
+import requests
 
-  <!-- ✅ 23 Detay Alanı Başlangıç -->
-  <section style="margin-top: 80px;">
-    <h2>API Kullanım Rehberi</h2>
-    <p>API'nizi nasıl kullanacağınız hakkında detaylı bilgi edinin.</p>
+url = "https://translafast.onrender.com/api/translate"
+headers = {"X-API-Key": "senin-api-anahtarın"}
+data = {"text": "Merhaba", "from": "tr", "to": "en"}
 
-    <h2>API Anahtarı Nasıl Alınır?</h2>
-    <p>TranslaFast hesabınıza giriş yaparak ücretsiz bir API anahtarı oluşturabilirsiniz.</p>
+res = requests.post(url, json=data, headers=headers)
+print(res.json())
+    </div>
 
-    <h2>API Sınırları</h2>
-    <p>Günde maksimum 10.000 istek yapabilirsiniz.</p>
-
-    <h2>Geliştirici Belgeleri</h2>
-    <p>Tüm uç noktalar ve yanıt formatları detaylı şekilde belgelenmiştir.</p>
-
-    <h2>Ücretlendirme</h2>
-    <p>Temel kullanım ücretsizdir. Profesyonel planlar için iletişime geçin.</p>
-
-    <h2>API Kullanım Örneği</h2>
-    <pre style="background: var(--color-surface-alt); padding: 10px; border-radius: var(--radius); overflow-x: auto;">
-fetch('https://api.translafast.com/translate', {
-  method: 'POST',
+    <h2>💻 JavaScript Örneği <span class="badge">JS</span></h2>
+    <div class="code-block">
+fetch("https://translafast.onrender.com/api/translate", {
+  method: "POST",
   headers: {
-    'Authorization': 'Bearer TF-API-9876-1234-ABCD',
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
+    "X-API-Key": "senin-api-anahtarın"
   },
-  body: JSON.stringify({ text: 'Merhaba', target_lang: 'en' })
+  body: JSON.stringify({
+    text: "Hello world",
+    from: "en",
+    to: "tr"
+  })
 })
-.then(response => response.json())
+.then(res => res.json())
 .then(data => console.log(data));
-    </pre>
+    </div>
 
-    <h2>Hızlı Başlangıç</h2>
-    <p>İlk 5 isteğiniz örnek cevaplarla hızlı şekilde test edilebilir.</p>
+    <h2>📚 Desteklenen Diller</h2>
+    <p>178 dili desteklemekteyiz. Örneğin: <code>en</code> (İngilizce), <code>tr</code> (Türkçe), <code>fr</code> (Fransızca), vb.</p>
 
-    <h2>Yanıt Biçimi</h2>
-    <p>Tüm API cevapları JSON formatındadır.</p>
-
-    <h2>Güvenlik</h2>
-    <p>API anahtarınızı kimseyle paylaşmayın ve gizli tutun.</p>
-
-    <h2>API Versiyonları</h2>
-    <p>Şu anda v1.0 sürümü aktiftir. Gelecekte v2.0 desteklenecektir.</p>
-
-    <h2>İstek Limiti Arttırımı</h2>
-    <p>Limit arttırımı için destek ekibimize başvurabilirsiniz.</p>
-
-    <h2>Hata Kodları</h2>
-    <p>Her hata kodu ilgili açıklamayla birlikte döner.</p>
-
-    <h2>Test Ortamı</h2>
-    <p>Test ortamı anahtarlarıyla canlı sisteme zarar vermeden deneyimleyebilirsiniz.</p>
-
-    <h2>Başarılı İstek Örneği</h2>
-    <p>200 OK yanıtı başarılı bir isteği gösterir.</p>
-
-    <h2>Yetkilendirme</h2>
-    <p>Her istekte Bearer Token kullanılması zorunludur.</p>
-
-    <h2>IP Kısıtlaması</h2>
-    <p>İsteğe bağlı olarak belirli IP adreslerine API kullanımı sınırlandırılabilir.</p>
-
-    <h2>Webhook Desteği</h2>
-    <p>Çeviri tamamlandığında webhook ile otomatik bildirim alabilirsiniz.</p>
-
-    <h2>Kullanım Koşulları</h2>
-    <p>API kullanımı TranslaFast kullanım koşullarına tabidir.</p>
-
-    <h2>Sıkça Sorulan Sorular</h2>
-    <p>API hakkında sık sorulan soruları ve cevapları okuyabilirsiniz.</p>
-
-    <h2>Canlı Destek</h2>
-    <p>Herhangi bir sorunda 7/24 destek alabilirsiniz.</p>
-
-    <h2>Performans Ölçümleri</h2>
-    <p>İstek yanıt sürelerini ve işlem sürelerini takip edebilirsiniz.</p>
-
-    <h2>Veri Politikası</h2>
-    <p>Gönderdiğiniz içerikler gizlilikle korunur, üçüncü kişilerle paylaşılmaz.</p>
-
-    <h2>Versiyon Geçişleri</h2>
-    <p>Yeni sürümlere geçiş süreci hakkında bilgilendirme yapılır.</p>
-
-  </section>
-  <!-- ✅ 23 Detay Alanı Bitti -->
-
-</div>
+    <h2>📞 Yardım ve Destek</h2>
+    <p>Herhangi bir sorunla karşılaşırsanız lütfen <a href="destek.html">Destek</a> sayfamızdan bizimle iletişime geçin.</p>
+  </div>
 
 </body>
 </html>
