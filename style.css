@@ -821,3 +821,94 @@ html {
     height: auto;
   }
 }
+
+
+
+/* 📱 Geliştirilmiş mobil görünüm */
+@media (max-width: 768px) {
+  body {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    padding: 8px;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 14px;
+  }
+
+  nav.navbar, .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .menu li {
+    width: 100%;
+  }
+
+  .menu li a {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1.1rem;
+  }
+
+  .hamburger-panel {
+    width: 100%;
+    height: auto;
+    top: 56px;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .hamburger-panel ul {
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .hero .hero-content {
+    text-align: center;
+    padding: 0 10px;
+  }
+
+  .feature-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .feature-card {
+    width: 100%;
+  }
+
+  .btn-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn, .btn.outline {
+    width: 100%;
+    text-align: center;
+    padding: 12px;
+    font-size: 1.1rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 20px 10px;
+  }
+
+  img, svg, .logo-img {
+    max-width: 100%;
+    height: auto;
+  }
+}
