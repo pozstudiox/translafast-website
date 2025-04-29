@@ -754,3 +754,27 @@ html {
 .panel-logo img:hover {
   transform: scale(1.08);
 }
+
+.language-selector {
+  margin-left: auto;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.language-selector select {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  appearance: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.language-selector select:hover {
+  background-color: var(--color-surface-alt);
+}
