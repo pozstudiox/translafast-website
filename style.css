@@ -82,9 +82,9 @@ body::-webkit-scrollbar-thumb:hover {
 .navbar .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding: 12px 20px;
-  gap: 4px;
+  gap: 20px;
 }
 
 .navbar .logo {
@@ -109,21 +109,20 @@ body::-webkit-scrollbar-thumb:hover {
 .menu {
   list-style: none;
   display: flex;
-  gap: 24px;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
-  flex: 1;
+  gap: 16px;
+  margin-right: 20px;
+  justify-content: flex-end;
 }
 
 .menu a {
   color: var(--color-text);
   text-decoration: none;
   font-size: 16px;
-  padding: 10px 18px;
+  padding: 10px 12px;
   border-radius: 12px;
   transition: var(--transition);
   position: relative;
+  white-space: nowrap;
 }
 
 .menu a::after {
@@ -150,9 +149,9 @@ body::-webkit-scrollbar-thumb:hover {
 .menu-group {
   display: flex;
   align-items: center;
-  gap: 14px;
-  flex: 1;
-  justify-content: flex-start;
+  gap: 10px;
+  flex: 0 1 auto;
+  margin-left: auto;
 }
 
 .hamburger-btn {
@@ -160,7 +159,7 @@ body::-webkit-scrollbar-thumb:hover {
   border: none;
   cursor: pointer;
   padding: 8px;
-  margin-left: auto;
+  margin-left: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
