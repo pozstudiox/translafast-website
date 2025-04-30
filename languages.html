@@ -6,12 +6,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="header">
-    <h1>🌐 Desteklenen Diller</h1>
-    <a href="index.html" class="back-button">← Geri Dön</a>
+
+  <!-- Temiz Header (Sadece Logo ve Yazı) -->
+  <header class="clean-header">
+    <div class="logo-area">
+      <img src="assets/logo.png" alt="TranslaFast Logo" class="logo-icon">
+      <span class="logo-text">TranslaFast</span>
+    </div>
   </header>
 
+  <!-- Diller Listesi -->
   <main class="languages-container">
+    <h2>🌐 Desteklenen Diller</h2>
     <ul class="language-list">
       <li>Türkçe (tr)</li>
       <li>English (en)</li>
@@ -28,7 +34,7 @@
       <li>বাংলা (bn)</li>
       <li>اردو (ur)</li>
       <li>فارسی (fa)</li>
-      <!-- Gerekirse daha fazlası eklenebilir -->
+      <!-- Daha fazla dil buraya eklenebilir -->
     </ul>
   </main>
 
@@ -37,31 +43,43 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: #0d1117;
       color: #e6edf3;
-      padding: 20px;
+      margin: 0;
+      padding: 0;
     }
 
-    .header {
+    .clean-header {
+      background-color: #0d1117;
+      padding: 14px 30px;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
+      justify-content: start;
+      border-bottom: 1px solid #21262d;
     }
 
-    .back-button {
-      text-decoration: none;
-      color: #58a6ff;
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .logo-text {
+      font-size: 22px;
       font-weight: bold;
-      border: 1px solid #30363d;
-      padding: 5px 10px;
-      border-radius: 6px;
+      color: #58a6ff;
     }
 
     .languages-container {
-      background: linear-gradient(145deg, #161b22, #1a1f27);
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-      border: 1px solid #30363d;
+      padding: 30px;
+    }
+
+    .languages-container h2 {
+      margin-bottom: 20px;
+      color: #58a6ff;
     }
 
     .language-list {
@@ -69,7 +87,7 @@
       padding: 0;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
+      gap: 12px;
     }
 
     .language-list li {
@@ -85,5 +103,6 @@
       background-color: #2b313a;
     }
   </style>
+
 </body>
 </html>
