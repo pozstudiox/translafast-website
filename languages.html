@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -5,13 +6,12 @@
   <title>Diller – TranslaFast</title>
   <link rel="stylesheet" href="style.css">
   <style>
-     body {
+    body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background-color: #0d1117;
       color: #e6edf3;
     }
-    
     .clean-header {
       display: flex;
       align-items: center;
@@ -19,274 +19,277 @@
       background-color: #0d1117;
       border-bottom: 1px solid #21262d;
     }
-    
     .logo-area {
       display: flex;
       align-items: center;
       gap: 12px;
-      cursor: pointer;
       text-decoration: none;
     }
-    
     .logo-icon {
       width: 36px;
       height: 36px;
       object-fit: contain;
     }
-    
     .logo-text {
       font-size: 24px;
       font-weight: bold;
       color: #58a6ff;
       transition: color 0.3s ease;
     }
-    
     .logo-area:hover .logo-text {
       color: #79c0ff;
     }
-    
     .languages-container {
       max-width: 1100px;
       margin: 40px auto;
       padding: 0 20px;
     }
-    
     .languages-container h2 {
-      font-size: 26px;
+      font-size: 24px;
       color: #58a6ff;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       text-align: center;
     }
-    
+    .alphabet-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 30px;
+    }
+    .alphabet-nav a {
+      color: #58a6ff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 6px 10px;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    .alphabet-nav a:hover {
+      background-color: #1a1f27;
+      color: #79c0ff;
+      transform: scale(1.05);
+    }
+    h3 {
+      font-size: 14px;
+      color: #8b949e;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      padding-left: 5px;
+    }
     .language-list {
       list-style: none;
       padding: 0;
       margin: 0;
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 16px;
+      gap: 14px;
     }
-    
     .language-list li {
       background: linear-gradient(135deg, #161b22, #1f2630);
       border: 1px solid #30363d;
-      padding: 16px 12px;
+      padding: 14px 10px;
       text-align: center;
-      border-radius: 14px;
+      border-radius: 12px;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      font-weight: 500;
-      letter-spacing: 0.3px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+      font-size: 13px;
+      letter-spacing: 0.2px;
     }
-    
     .language-list li:hover {
       background: linear-gradient(135deg, #202631, #2e3642);
       transform: scale(1.03);
       box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
-    
-    @media (max-width: 600px) {
-      .logo-text {
-        font-size: 20px;
-      }
-    }
   </style>
 </head>
 <body>
-
-    <!-- Header -->
   <header class="clean-header">
     <a href="index.html" class="logo-area">
-      <img src="assets/logo.png" alt="TranslaFast Logo" class="logo-icon">
+      <img src="translafast-icon.svg" alt="TranslaFast Logo" class="logo-icon">
       <span class="logo-text">TranslaFast</span>
     </a>
   </header>
+  
+<main class="languages-container">
+  <h2>🌐 Desteklenen Diller</h2>
 
-  <!-- Ana içerik -->
-  <main class="languages-container">
-    <h2>🌐 Desteklenen Diller</h2>
-    <ul class="language-list">
-      <!-- Aşağıya 178 dil listesi otomatik olarak yerleştirildi -->
-      <li>Abkhazian (ab)</li>
-      <li>Afar (aa)</li>
-      <li>Afrikaans (af)</li>
-      <li>Akan (ak)</li>
-      <li>Albanian (sq)</li>
-      <li>Amharic (am)</li>
-      <li>Arabic (ar)</li>
-      <li>Aragonese (an)</li>
-      <li>Armenian (hy)</li>
-      <li>Assamese (as)</li>
-      <li>Avaric (av)</li>
-      <li>Avestan (ae)</li>
-      <li>Aymara (ay)</li>
-      <li>Azerbaijani (az)</li>
-      <li>Bambara (bm)</li>
-      <li>Bashkir (ba)</li>
-      <li>Basque (eu)</li>
-      <li>Belarusian (be)</li>
-      <li>Bengali (bn)</li>
-      <li>Bislama (bi)</li>
-      <li>Bosnian (bs)</li>
-      <li>Breton (br)</li>
-      <li>Bulgarian (bg)</li>
-      <li>Burmese (my)</li>
-      <li>Catalan (ca)</li>
-      <li>Central Khmer (km)</li>
-      <li>Chamorro (ch)</li>
-      <li>Chechen (ce)</li>
-      <li>Chinese (zh)</li>
-      <li>Church Slavic (cu)</li>
-      <li>Chuvash (cv)</li>
-      <li>Cornish (kw)</li>
-      <li>Corsican (co)</li>
-      <li>Cree (cr)</li>
-      <li>Croatian (hr)</li>
-      <li>Czech (cs)</li>
-      <li>Danish (da)</li>
-      <li>Dhivehi (dv)</li>
-      <li>Dutch (nl)</li>
-      <li>Dzongkha (dz)</li>
-      <li>English (en)</li>
-      <li>Esperanto (eo)</li>
-      <li>Estonian (et)</li>
-      <li>Ewe (ee)</li>
-      <li>Faroese (fo)</li>
-      <li>Fijian (fj)</li>
-      <li>Finnish (fi)</li>
-      <li>French (fr)</li>
-      <li>Fulah (ff)</li>
-      <li>Galician (gl)</li>
-      <li>Ganda (lg)</li>
-      <li>Georgian (ka)</li>
-      <li>German (de)</li>
-      <li>Guarani (gn)</li>
-      <li>Gujarati (gu)</li>
-      <li>Haitian (ht)</li>
-      <li>Hausa (ha)</li>
-      <li>Hebrew (he)</li>
-      <li>Herero (hz)</li>
-      <li>Hindi (hi)</li>
-      <li>Hiri Motu (ho)</li>
-      <li>Hungarian (hu)</li>
-      <li>Icelandic (is)</li>
-      <li>Ido (io)</li>
-      <li>Igbo (ig)</li>
-      <li>Indonesian (id)</li>
-      <li>Interlingua (ia)</li>
-      <li>Interlingue (ie)</li>
-      <li>Inuktitut (iu)</li>
-      <li>Inupiaq (ik)</li>
-      <li>Irish (ga)</li>
-      <li>Italian (it)</li>
-      <li>Japanese (ja)</li>
-      <li>Javanese (jv)</li>
-      <li>Kalaallisut (kl)</li>
-      <li>Kannada (kn)</li>
-      <li>Kanuri (kr)</li>
-      <li>Kashmiri (ks)</li>
-      <li>Kazakh (kk)</li>
-      <li>Kikuyu (ki)</li>
-      <li>Kinyarwanda (rw)</li>
-      <li>Kirghiz (ky)</li>
-      <li>Komi (kv)</li>
-      <li>Kongo (kg)</li>
-      <li>Korean (ko)</li>
-      <li>Kuanyama (kj)</li>
-      <li>Kurdish (ku)</li>
-      <li>Lao (lo)</li>
-      <li>Latin (la)</li>
-      <li>Latvian (lv)</li>
-      <li>Limburgan (li)</li>
-      <li>Lingala (ln)</li>
-      <li>Lithuanian (lt)</li>
-      <li>Luba-Katanga (lu)</li>
-      <li>Luxembourgish (lb)</li>
-      <li>Macedonian (mk)</li>
-      <li>Malagasy (mg)</li>
-      <li>Malay (ms)</li>
-      <li>Malayalam (ml)</li>
-      <li>Maltese (mt)</li>
-      <li>Manx (gv)</li>
-      <li>Maori (mi)</li>
-      <li>Marathi (mr)</li>
-      <li>Marshallese (mh)</li>
-      <li>Modern Greek (el)</li>
-      <li>Mongolian (mn)</li>
-      <li>Nauru (na)</li>
-      <li>Navajo (nv)</li>
-      <li>Ndonga (ng)</li>
-      <li>Nepali (ne)</li>
-      <li>North Ndebele (nd)</li>
-      <li>Northern Sami (se)</li>
-      <li>Norwegian (no)</li>
-      <li>Norwegian Bokmål (nb)</li>
-      <li>Norwegian Nynorsk (nn)</li>
-      <li>Nyanja (ny)</li>
-      <li>Occitan (oc)</li>
-      <li>Ojibwa (oj)</li>
-      <li>Oriya (or)</li>
-      <li>Oromo (om)</li>
-      <li>Ossetian (os)</li>
-      <li>Pali (pi)</li>
-      <li>Panjabi (pa)</li>
-      <li>Persian (fa)</li>
-      <li>Polish (pl)</li>
-      <li>Portuguese (pt)</li>
-      <li>Pushto (ps)</li>
-      <li>Quechua (qu)</li>
-      <li>Romanian (ro)</li>
-      <li>Romansh (rm)</li>
-      <li>Rundi (rn)</li>
-      <li>Russian (ru)</li>
-      <li>Samoan (sm)</li>
-      <li>Sango (sg)</li>
-      <li>Sanskrit (sa)</li>
-      <li>Sardinian (sc)</li>
-      <li>Scottish Gaelic (gd)</li>
-      <li>Serbian (sr)</li>
-      <li>Serbo-Croatian (sh)</li>
-      <li>Shona (sn)</li>
-      <li>Sichuan Yi (ii)</li>
-      <li>Sindhi (sd)</li>
-      <li>Sinhala (si)</li>
-      <li>Slovak (sk)</li>
-      <li>Slovenian (sl)</li>
-      <li>Somali (so)</li>
-      <li>South Ndebele (nr)</li>
-      <li>Southern Sotho (st)</li>
-      <li>Spanish (es)</li>
-      <li>Sundanese (su)</li>
-      <li>Swahili (sw)</li>
-      <li>Swati (ss)</li>
-      <li>Swedish (sv)</li>
-      <li>Tagalog (tl)</li>
-      <li>Tahitian (ty)</li>
-      <li>Tajik (tg)</li>
-      <li>Tamil (ta)</li>
-      <li>Tatar (tt)</li>
-      <li>Telugu (te)</li>
-      <li>Thai (th)</li>
-      <li>Tibetan (bo)</li>
-      <li>Tigrinya (ti)</li>
-      <li>Tonga (to)</li>
-      <li>Tsonga (ts)</li>
-      <li>Tswana (tn)</li>
-      <li>Turkish (tr)</li>
-      <li>Turkmen (tk)</li>
-      <li>Twi (tw)</li>
-      <li>Uighur (ug)</li>
-      <li>Ukrainian (uk)</li>
-      <li>Urdu (ur)</li>
-      <li>Uzbek (uz)</li>
-      <li>Venda (ve)</li>
-      <li>Vietnamese (vi)</li>
-      <li>Volapük (vo)</li>
-      <li>Walloon (wa)</li>
-      <li>Welsh (cy)</li>
-      <li>Western Frisian (fy)</li>
-    </ul>
-  </main>
-
+  <div class="alphabet-nav">
+    <a href="#A">A</a>
+    <a href="#B">B</a>
+    <a href="#C">C</a>
+    <a href="#D">D</a>
+    <a href="#E">E</a>
+    <a href="#F">F</a>
+    <a href="#G">G</a>
+    <a href="#H">H</a>
+    <a href="#I">I</a>
+    <a href="#J">J</a>
+    <a href="#K">K</a>
+    <a href="#L">L</a>
+    <a href="#M">M</a>
+    <a href="#N">N</a>
+    <a href="#O">O</a>
+    <a href="#P">P</a>
+    <a href="#Q">Q</a>
+    <a href="#R">R</a>
+    <a href="#S">S</a>
+    <a href="#T">T</a>
+    <a href="#U">U</a>
+    <a href="#V">V</a>
+    <a href="#W">W</a>
+    <a href="#X">X</a>
+    <a href="#Y">Y</a>
+    <a href="#Z">Z</a>
+  </div>
+  <h3 id="A">A</h3>
+  <ul class="language-list">
+    <li>Abkhazian (ab)</li>
+    <li>Afar (aa)</li>
+    <li>Afrikaans (af)</li>
+    <li>Akan (ak)</li>
+    <li>Albanian (sq)</li>
+    <li>Amharic (am)</li>
+    <li>Arabic (ar)</li>
+    <li>Aragonese (an)</li>
+    <li>Armenian (hy)</li>
+    <li>Assamese (as)</li>
+    <li>Azerbaijani (az)</li>
+  </ul>
+  <h3 id="B">B</h3>
+  <ul class="language-list">
+    <li>Bambara (bm)</li>
+    <li>Basque (eu)</li>
+    <li>Belarusian (be)</li>
+    <li>Bengali (bn)</li>
+    <li>Bosnian (bs)</li>
+    <li>Breton (br)</li>
+    <li>Bulgarian (bg)</li>
+  </ul>
+  <h3 id="C">C</h3>
+  <ul class="language-list">
+    <li>Catalan (ca)</li>
+    <li>Chinese (zh)</li>
+    <li>Croatian (hr)</li>
+    <li>Czech (cs)</li>
+  </ul>
+  <h3 id="D">D</h3>
+  <ul class="language-list">
+    <li>Danish (da)</li>
+    <li>Dutch (nl)</li>
+  </ul>
+  <h3 id="E">E</h3>
+  <ul class="language-list">
+    <li>English (en)</li>
+    <li>Estonian (et)</li>
+  </ul>
+  <h3 id="F">F</h3>
+  <ul class="language-list">
+    <li>Finnish (fi)</li>
+    <li>French (fr)</li>
+  </ul>
+  <h3 id="G">G</h3>
+  <ul class="language-list">
+    <li>German (de)</li>
+    <li>Greek (el)</li>
+    <li>Gujarati (gu)</li>
+  </ul>
+  <h3 id="H">H</h3>
+  <ul class="language-list">
+    <li>Hebrew (he)</li>
+    <li>Hindi (hi)</li>
+    <li>Hungarian (hu)</li>
+  </ul>
+  <h3 id="I">I</h3>
+  <ul class="language-list">
+    <li>Icelandic (is)</li>
+    <li>Indonesian (id)</li>
+    <li>Irish (ga)</li>
+    <li>Italian (it)</li>
+  </ul>
+  <h3 id="J">J</h3>
+  <ul class="language-list">
+    <li>Japanese (ja)</li>
+  </ul>
+  <h3 id="K">K</h3>
+  <ul class="language-list">
+    <li>Kannada (kn)</li>
+    <li>Kazakh (kk)</li>
+    <li>Khmer (km)</li>
+    <li>Korean (ko)</li>
+    <li>Kurdish (ku)</li>
+  </ul>
+  <h3 id="L">L</h3>
+  <ul class="language-list">
+    <li>Lao (lo)</li>
+    <li>Latin (la)</li>
+    <li>Latvian (lv)</li>
+    <li>Lithuanian (lt)</li>
+  </ul>
+  <h3 id="M">M</h3>
+  <ul class="language-list">
+    <li>Macedonian (mk)</li>
+    <li>Malay (ms)</li>
+    <li>Malayalam (ml)</li>
+    <li>Maltese (mt)</li>
+    <li>Maori (mi)</li>
+    <li>Marathi (mr)</li>
+    <li>Mongolian (mn)</li>
+  </ul>
+  <h3 id="N">N</h3>
+  <ul class="language-list">
+    <li>Nepali (ne)</li>
+    <li>Norwegian (no)</li>
+  </ul>
+  <h3 id="P">P</h3>
+  <ul class="language-list">
+    <li>Pashto (ps)</li>
+    <li>Persian (fa)</li>
+    <li>Polish (pl)</li>
+    <li>Portuguese (pt)</li>
+    <li>Punjabi (pa)</li>
+  </ul>
+  <h3 id="R">R</h3>
+  <ul class="language-list">
+    <li>Romanian (ro)</li>
+    <li>Russian (ru)</li>
+  </ul>
+  <h3 id="S">S</h3>
+  <ul class="language-list">
+    <li>Samoan (sm)</li>
+    <li>Serbian (sr)</li>
+    <li>Sindhi (sd)</li>
+    <li>Sinhala (si)</li>
+    <li>Slovak (sk)</li>
+    <li>Slovenian (sl)</li>
+    <li>Somali (so)</li>
+    <li>Spanish (es)</li>
+    <li>Swahili (sw)</li>
+    <li>Swedish (sv)</li>
+  </ul>
+  <h3 id="T">T</h3>
+  <ul class="language-list">
+    <li>Tamil (ta)</li>
+    <li>Telugu (te)</li>
+    <li>Thai (th)</li>
+    <li>Turkish (tr)</li>
+  </ul>
+  <h3 id="U">U</h3>
+  <ul class="language-list">
+    <li>Ukrainian (uk)</li>
+    <li>Urdu (ur)</li>
+    <li>Uzbek (uz)</li>
+  </ul>
+  <h3 id="V">V</h3>
+  <ul class="language-list">
+    <li>Vietnamese (vi)</li>
+  </ul>
+  <h3 id="W">W</h3>
+  <ul class="language-list">
+    <li>Welsh (cy)</li>
+  </ul>
+</main>
 </body>
 </html>
