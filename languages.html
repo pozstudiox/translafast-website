@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Diller – TranslaFast</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="header">
+    <h1>🌐 Desteklenen Diller</h1>
+    <a href="index.html" class="back-button">← Geri Dön</a>
+  </header>
+
+  <main class="languages-container">
+    <ul class="language-list">
+      <li>Türkçe (tr)</li>
+      <li>English (en)</li>
+      <li>Deutsch (de)</li>
+      <li>Français (fr)</li>
+      <li>Español (es)</li>
+      <li>Italiano (it)</li>
+      <li>Русский (ru)</li>
+      <li>Português (pt)</li>
+      <li>日本語 (ja)</li>
+      <li>한국어 (ko)</li>
+      <li>中文 (zh)</li>
+      <li>हिन्दी (hi)</li>
+      <li>বাংলা (bn)</li>
+      <li>اردو (ur)</li>
+      <li>فارسی (fa)</li>
+      <!-- Gerekirse daha fazlası eklenebilir -->
+    </ul>
+  </main>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d1117;
+      color: #e6edf3;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .back-button {
+      text-decoration: none;
+      color: #58a6ff;
+      font-weight: bold;
+      border: 1px solid #30363d;
+      padding: 5px 10px;
+      border-radius: 6px;
+    }
+
+    .languages-container {
+      background: linear-gradient(145deg, #161b22, #1a1f27);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      border: 1px solid #30363d;
+    }
+
+    .language-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .language-list li {
+      background-color: #1a1f27;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid #30363d;
+      transition: background 0.3s ease;
+    }
+
+    .language-list li:hover {
+      background-color: #2b313a;
+    }
+  </style>
+</body>
+</html>
