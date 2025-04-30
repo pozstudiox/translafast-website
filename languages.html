@@ -4,10 +4,89 @@
   <meta charset="UTF-8">
   <title>Diller – TranslaFast</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #0d1117;
+      color: #e6edf3;
+    }
+
+    /* Header Alanı */
+    .clean-header {
+      display: flex;
+      align-items: center;
+      padding: 16px 32px;
+      background-color: #0d1117;
+      border-bottom: 1px solid #21262d;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .logo-text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #58a6ff;
+    }
+
+    /* Ana içerik */
+    .languages-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .languages-container h2 {
+      font-size: 24px;
+      color: #58a6ff;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .language-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+    }
+
+    .language-list li {
+      background-color: #1a1f27;
+      border: 1px solid #30363d;
+      padding: 10px 12px;
+      text-align: center;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .language-list li:hover {
+      background-color: #2b313a;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    @media (max-width: 600px) {
+      .logo-text {
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Temiz Header (Sadece Logo ve Yazı) -->
+  <!-- Header -->
   <header class="clean-header">
     <div class="logo-area">
       <img src="assets/logo.png" alt="TranslaFast Logo" class="logo-icon">
@@ -15,10 +94,11 @@
     </div>
   </header>
 
-  <!-- Diller Listesi -->
+  <!-- Ana içerik -->
   <main class="languages-container">
     <h2>🌐 Desteklenen Diller</h2>
     <ul class="language-list">
+      <!-- Aşağıya 178 dil listesi otomatik olarak yerleştirildi -->
       <li>Abkhazian (ab)</li>
       <li>Afar (aa)</li>
       <li>Afrikaans (af)</li>
@@ -199,72 +279,6 @@
       <li>Western Frisian (fy)</li>
     </ul>
   </main>
-
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0d1117;
-      color: #e6edf3;
-      margin: 0;
-      padding: 0;
-    }
-
-    .clean-header {
-      background-color: #0d1117;
-      padding: 14px 30px;
-      display: flex;
-      align-items: center;
-      justify-content: start;
-      border-bottom: 1px solid #21262d;
-    }
-
-    .logo-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo-icon {
-      width: 32px;
-      height: 32px;
-    }
-
-    .logo-text {
-      font-size: 22px;
-      font-weight: bold;
-      color: #58a6ff;
-    }
-
-    .languages-container {
-      padding: 30px;
-    }
-
-    .languages-container h2 {
-      margin-bottom: 20px;
-      color: #58a6ff;
-    }
-
-    .language-list {
-      list-style: none;
-      padding: 0;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 12px;
-    }
-
-    .language-list li {
-      background-color: #1a1f27;
-      padding: 10px;
-      border-radius: 10px;
-      text-align: center;
-      border: 1px solid #30363d;
-      transition: background 0.3s ease;
-    }
-
-    .language-list li:hover {
-      background-color: #2b313a;
-    }
-  </style>
 
 </body>
 </html>
