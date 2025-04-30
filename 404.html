@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 - Page Not Found</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* 1. Genel Arka Plan ve Yazı Stili */
+    body {
+      background: linear-gradient(to bottom right, #0d1117, #161b22);
+      color: #e6edf3;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* 2. Ana Kapsayıcı */
+    .error-container {
+      text-align: center;
+      padding: 40px;
+      background: rgba(22, 27, 34, 0.85);
+      border: 1px solid #30363d;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+      max-width: 600px;
+      animation: popIn 0.8s ease-out;
+    }
+
+    /* 3. Dönerek Görünen İkon */
+    .icon {
+      width: 90px;
+      height: 90px;
+      margin-bottom: 20px;
+      animation: spin 6s infinite linear;
+      filter: drop-shadow(0 0 4px #58a6ff);
+    }
+
+    /* 4. 404 Başlık */
+    h1 {
+      font-size: 5rem;
+      color: #ff4c4c;
+      margin-bottom: 10px;
+      text-shadow: 0 0 10px #ff4c4c;
+      letter-spacing: 2px;
+    }
+
+    /* 5. Açıklama */
+    p {
+      font-size: 1.2rem;
+      color: #c9d1d9;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    /* 6. Ana Sayfa Butonu */
+    a {
+      background: #238636;
+      color: white;
+      text-decoration: none;
+      padding: 12px 30px;
+      border-radius: 10px;
+      font-size: 1rem;
+      transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+    }
+
+    /* 7. Hover Efekt */
+    a:hover {
+      background: #2ea043;
+      transform: scale(1.05);
+      box-shadow: 0 0 10px #2ea043;
+    }
+
+    /* 8. Animasyonlar */
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* 9. Küçük Yazı (Telif, Footer) */
+    .footer-note {
+      margin-top: 30px;
+      font-size: 0.8rem;
+      color: #8b949e;
+    }
+
+    /* 10. Responsive Tasarım */
+    @media (max-width: 600px) {
+      h1 { font-size: 3.5rem; }
+      .icon { width: 70px; height: 70px; }
+      p { font-size: 1rem; }
+    }
+
+    /* 11. Arka Plan Işıltısı */
+    .glow-bg {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, #58a6ff33 0%, transparent 70%);
+      top: 10%;
+      left: 20%;
+      z-index: -1;
+      animation: floatGlow 10s infinite alternate ease-in-out;
+      filter: blur(40px);
+    }
+
+    @keyframes floatGlow {
+      from { transform: translateY(0); }
+      to { transform: translateY(20px); }
+    }
+  </style>
+</head>
+<body>
+  <!-- 12. Arka Plan Işıltı Efekti -->
+  <div class="glow-bg"></div>
+
+  <div class="error-container">
+    <!-- 13. Logo İkonu -->
+    <img src="translafast-icon.svg" alt="TranslaFast Icon" class="icon" />
+
+    <!-- 14. Hata Kodu -->
+    <h1>404</h1>
+
+    <!-- 15. Açıklama Metni -->
+    <p>Sorry, the page you were looking for doesn't exist or has been moved.<br>
+    Please check the URL or return to the homepage.</p>
+
+    <!-- 16. Ana Sayfa Linki -->
+    <a href="index.html">Go to Homepage</a>
+
+    <!-- 17. Footer Notu -->
+    <div class="footer-note">
+      TranslaFast &copy; 2025 — All rights reserved
+    </div>
+  </div>
+</body>
+</html>
