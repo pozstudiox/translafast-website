@@ -54,10 +54,11 @@ body {
 }
 
 .navbar .container {
-  display: flex; gap: 4px;
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 0; display: flex; gap: 4px; }
+  padding: 12px 20px;
+}
 
 .navbar .logo {
   display: flex; gap: 4px;
@@ -616,10 +617,13 @@ html {
 }
 
 .menu-group {
-  display: flex; gap: 4px;
+  display: flex;
   align-items: center;
   gap: 14px;
+  flex: 1;
+  justify-content: flex-start; /* Sola yasla */
 }
+
 
 .hamburger-panel {
   position: fixed;
@@ -640,6 +644,10 @@ html {
   display: flex; gap: 4px;
   flex-direction: column;
   gap: 22px;
+}
+
+.hamburger-btn {
+  margin-left: auto;
 }
 
 .hamburger-panel ul li a {
