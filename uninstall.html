@@ -6,6 +6,14 @@
   <title>TranslaFast – Geri Bildirim</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d1117;
+      color: #e6edf3;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
     .uninstall-container {
       max-width: 860px;
       margin: 0 auto;
@@ -22,34 +30,30 @@
 
     .uninstall-container h1 {
       font-size: 2.2rem;
-      color: var(--color-accent);
+      color: var(--color-accent, #58a6ff);
       margin-bottom: 20px;
     }
 
     .uninstall-container p {
       font-size: 1.15rem;
-      color: var(--color-muted);
+      color: var(--color-muted, #8b949e);
       margin-bottom: 40px;
     }
 
-    .feedback-btn, .reinstall-btn {
+    .feedback-btn {
       padding: 14px 28px;
       font-size: 1.1rem;
-      background: var(--color-accent);
+      background: var(--color-accent, #58a6ff);
       color: #fff;
       border: none;
       border-radius: 12px;
       cursor: pointer;
       transition: background 0.3s ease, transform 0.3s ease;
-      box-shadow: var(--shadow);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 15px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
     }
 
-    .feedback-btn:hover, .reinstall-btn:hover {
-      background: var(--color-accent-hover);
+    .feedback-btn:hover {
+      background: var(--color-accent-hover, #1f6feb);
       transform: translateY(-2px);
     }
 
@@ -80,23 +84,44 @@
       }
     }
 
-    .reinstall-section {
-      margin-top: 60px;
+    /* Sağ Üstte Sabit Geri İndir Butonu */
+    .top-right-btn {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background-color: #238636;
+      color: #fff;
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 500;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: background 0.3s, transform 0.2s;
     }
 
-    .reinstall-section p {
-      font-size: 1.1rem;
-      color: var(--color-muted);
-      margin-bottom: 16px;
+    .top-right-btn:hover {
+      background-color: #2ea043;
+      transform: scale(1.05);
     }
 
-    .reinstall-btn img {
-      width: 24px;
-      height: 24px;
+    .top-right-btn img {
+      width: 20px;
+      height: 20px;
     }
   </style>
 </head>
 <body>
+
+  <!-- Sabitlenmiş Geri İndir Butonu -->
+  <a href="https://chrome.google.com/webstore/detail/YOUR_EXTENSION_ID" target="_blank" class="top-right-btn">
+    <img src="https://www.google.com/chrome/static/images/favicons/favicon-96x96.png" alt="Chrome">
+    Geri İndir
+  </a>
 
   <div class="uninstall-container">
     <img src="translafast-icon.svg" alt="TranslaFast Logo">
@@ -105,18 +130,9 @@
     <button class="feedback-btn" onclick="showForm()">Geri Bildirim Gönder</button>
 
     <div class="form-wrapper" id="formWrapper">
-      <iframe class="form-frame" src="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeBHe0BiHW0FdH1630dcowqzXHMQRJraUhxJehmxyhjZAZVgw/formResponse">
+      <iframe class="form-frame" src="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeBHe0BiHW0FdH1630dcowqzXHMQRJraUhxJehmxyhjZAZVgw/viewform?embedded=true">
         Form yüklenemedi.
       </iframe>
-    </div>
-
-    <!-- Geri Yükleme Alanı -->
-    <div class="reinstall-section">
-      <p>🎯 Geri indirmek ister misin?</p>
-      <a class="reinstall-btn" href="https://chrome.google.com/webstore/detail/YOUR_EXTENSION_ID" target="_blank">
-        <img src="https://www.google.com/chrome/static/images/favicons/favicon-96x96.png" alt="Chrome">
-        Geri İndir (Chrome Web Mağazası)
-      </a>
     </div>
   </div>
 
