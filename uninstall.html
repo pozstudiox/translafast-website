@@ -32,7 +32,7 @@
       margin-bottom: 40px;
     }
 
-    .feedback-btn {
+    .feedback-btn, .reinstall-btn {
       padding: 14px 28px;
       font-size: 1.1rem;
       background: var(--color-accent);
@@ -42,9 +42,13 @@
       cursor: pointer;
       transition: background 0.3s ease, transform 0.3s ease;
       box-shadow: var(--shadow);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 15px;
     }
 
-    .feedback-btn:hover {
+    .feedback-btn:hover, .reinstall-btn:hover {
       background: var(--color-accent-hover);
       transform: translateY(-2px);
     }
@@ -75,6 +79,21 @@
         height: 800px;
       }
     }
+
+    .reinstall-section {
+      margin-top: 60px;
+    }
+
+    .reinstall-section p {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      margin-bottom: 16px;
+    }
+
+    .reinstall-btn img {
+      width: 24px;
+      height: 24px;
+    }
   </style>
 </head>
 <body>
@@ -89,6 +108,15 @@
       <iframe class="form-frame" src="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeBHe0BiHW0FdH1630dcowqzXHMQRJraUhxJehmxyhjZAZVgw/formResponse">
         Form yüklenemedi.
       </iframe>
+    </div>
+
+    <!-- Geri Yükleme Alanı -->
+    <div class="reinstall-section">
+      <p>🎯 Geri indirmek ister misin?</p>
+      <a class="reinstall-btn" href="https://chrome.google.com/webstore/detail/YOUR_EXTENSION_ID" target="_blank">
+        <img src="https://www.google.com/chrome/static/images/favicons/favicon-96x96.png" alt="Chrome">
+        Geri İndir (Chrome Web Mağazası)
+      </a>
     </div>
   </div>
 
