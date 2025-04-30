@@ -60,7 +60,6 @@ body {
 .navbar .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 12px 20px;
 }
 
@@ -87,9 +86,8 @@ body {
   list-style: none;
   display: flex;
   gap: 24px;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-right: 20px;
 }
 
 .menu a {
@@ -547,7 +545,6 @@ body::-webkit-scrollbar-thumb:hover {
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
-  margin-left: auto;
 }
 
 .hamburger-btn:hover svg {
@@ -559,8 +556,6 @@ body::-webkit-scrollbar-thumb:hover {
   display: flex;
   align-items: center;
   gap: 14px;
-  flex: 1;
-  justify-content: flex-start;
 }
 
 .hamburger-panel {
