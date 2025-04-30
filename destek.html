@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Destek | TranslaFast</title>
+  <title>Support | TranslaFast</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="translafast-icon.svg" />
   <style>
@@ -77,13 +77,13 @@
   <div class="support-container fade-in">
     <div class="support-header">
       <img src="translafast-icon.svg" alt="TranslaFast Logo">
-      <h1>TranslaFast Destek</h1>
+      <h1>TranslaFast Support</h1>
     </div>
 
     <div class="chat-box">
-      <label for="message">Nasıl yardımcı olabiliriz?</label>
-      <input type="text" id="message" placeholder="Örn: API anahtımı bulamıyorum">
-      <button onclick="getResponse()">Gönder</button>
+      <label for="message">How can we help you?</label>
+      <input type="text" id="message" placeholder="e.g., I can't find my API key">
+      <button onclick="getResponse()">Send</button>
 
       <div id="response" class="chat-response"></div>
     </div>
@@ -95,13 +95,13 @@
       const responseBox = document.getElementById("response");
 
       if (msg.includes("api")) {
-        responseBox.innerText = "API anahtarınızı almak için profil sayfanıza gidin ve 'API Anahtarım' sekmesini ziyaret edin.";
-      } else if (msg.includes("çalışmıyor") || msg.includes("hata")) {
-        responseBox.innerText = "Lütfen yaşadığınız sorunu detaylandırın. Kısa süre sonra sizinle iletişime geçeceğiz.";
-      } else if (msg.includes("çeviri") || msg.includes("dil")) {
-        responseBox.innerText = "TranslaFast şu anda 178 dili desteklemektedir. Dil ayarlarını uygulama içinden değiştirebilirsiniz.";
+        responseBox.innerText = "To get your API key, go to your profile page and visit the 'My API Key' tab.";
+      } else if (msg.includes("not working") || msg.includes("error")) {
+        responseBox.innerText = "Please describe the issue in detail. We’ll get back to you shortly.";
+      } else if (msg.includes("translate") || msg.includes("language")) {
+        responseBox.innerText = "TranslaFast currently supports 178 languages. You can change your language settings within the extension.";
       } else {
-        responseBox.innerText = "Sorununuzu not ettik. Size en kısa sürede dönüş yapılacaktır.";
+        responseBox.innerText = "We’ve noted your issue. Our team will respond to you as soon as possible.";
       }
     }
   </script>
