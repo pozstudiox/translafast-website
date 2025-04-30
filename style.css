@@ -60,7 +60,7 @@ body {
 .navbar .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Changed: Added space-between to push items apart */
   padding: 12px 20px;
 }
 
@@ -87,7 +87,7 @@ body {
   list-style: none;
   display: flex;
   gap: 24px;
-  justify-content: flex-start;
+  margin-left: auto; /* Changed: Added auto margin to push menu to the right */
   margin-right: 20px;
 }
 
@@ -119,6 +119,13 @@ body {
 
 .menu a:hover {
   color: var(--color-accent-hover);
+}
+
+/* Added: Nav-controls container to group menu and hamburger */
+.nav-controls {
+  display: flex;
+  align-items: center;
+  margin-left: auto; /* Push to the right side */
 }
 
 /* HERO */
@@ -546,8 +553,7 @@ body::-webkit-scrollbar-thumb:hover {
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease;
-  margin-left: auto;
-  transform: translateX(-20px);
+  margin-left: 10px; /* Changed: Added small margin to separate from navigation */
 }
 
 .hamburger-btn:hover svg {
@@ -558,9 +564,9 @@ body::-webkit-scrollbar-thumb:hover {
 .menu-group {
   display: flex;
   align-items: center;
-  gap: 14px;
-  flex: 1;
-  justify-content: flex-start;
+  justify-content: flex-end; /* Changed: Align items to the right */
+  gap: 8px; /* Changed: Reduced gap for closer positioning */
+  margin-left: auto; /* Push to the right */
 }
 
 .hamburger-panel {
@@ -632,7 +638,6 @@ body::-webkit-scrollbar-thumb:hover {
   top: 24px;
   left: 24px;
 }
-
 
 .panel-logo img {
   width: 40px;
@@ -734,6 +739,7 @@ body::-webkit-scrollbar-thumb:hover {
     flex-direction: column;
     gap: 10px;
     padding: 10px 0;
+    margin-right: 0; /* Reset margin for mobile */
   }
 
   .menu li {
@@ -804,5 +810,12 @@ body::-webkit-scrollbar-thumb:hover {
   button, .btn {
     font-size: 0.95rem;
     padding: 10px 18px;
+  }
+  
+  /* Added: Keep menu-group right-aligned on mobile */
+  .menu-group {
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 8px;
   }
 }
