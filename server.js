@@ -27,7 +27,8 @@ const pages = [
   'destek.html',
   '404.html',
   'languages.html',
-  'api.html'
+  'api.html',
+  'coming-soon.html'
 ];
 
 // HTML sayfaları için yönlendirme ve parametre işle
