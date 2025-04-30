@@ -551,3 +551,25 @@
       font-size: 0.95rem;
     }
   }
+
+  /* Desktop’ta gizle */
+  .hamburger-btn {
+    display: none;
+  }
+  
+  /* Mobil için aç */
+  @media (max-width: 768px) {
+    .hamburger-btn {
+      display: flex;
+    }
+  
+    /* Mobilde standart menüyü gizle */
+    .menu {
+      display: none;
+    }
+  
+    /* Panel açılınca menu yerine hamburger butonu görünür */
+    .hamburger-panel.active ~ .menu {
+      display: block;
+    }
+  }
