@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TranslaFast – Geri Bildirim</title>
+  <title>TranslaFast – Feedback</title>
   <link rel="stylesheet" href="style.css" />
   <style>
     body {
@@ -84,7 +84,6 @@
       }
     }
 
-    /* Sağ Üstte Sabit Geri İndir Butonu */
     .top-right-btn {
       position: fixed;
       top: 16px;
@@ -117,21 +116,21 @@
 </head>
 <body>
 
-  <!-- Sabitlenmiş Geri İndir Butonu -->
+  <!-- Fixed Reinstall Button -->
   <a href="https://chrome.google.com/webstore/detail/YOUR_EXTENSION_ID" target="_blank" class="top-right-btn">
     <img src="https://www.google.com/chrome/static/images/favicons/favicon-96x96.png" alt="Chrome">
-    Geri İndir
+    Reinstall
   </a>
 
   <div class="uninstall-container">
     <img src="translafast-icon.svg" alt="TranslaFast Logo">
-    <h1>Üzgünüz! Kaldırdınız...</h1>
-    <p>TranslaFast’ı neden kaldırdığınızı paylaşmanız bizim için çok değerli.</p>
-    <button class="feedback-btn" onclick="showForm()">Geri Bildirim Gönder</button>
+    <h1>We're Sorry to See You Go</h1>
+    <p>Your feedback on why you uninstalled TranslaFast is highly appreciated and helps us improve.</p>
+    <button class="feedback-btn" onclick="showForm()">Leave Feedback</button>
 
     <div class="form-wrapper" id="formWrapper">
       <iframe class="form-frame" src="https://docs.google.com/forms/u/0/d/e/1FAIpQLSeBHe0BiHW0FdH1630dcowqzXHMQRJraUhxJehmxyhjZAZVgw/viewform?embedded=true">
-        Form yüklenemedi.
+        Unable to load the form.
       </iframe>
     </div>
   </div>
