@@ -48,10 +48,11 @@ body {
 	z-index: 1000;
 }
 .navbar .container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* önce space-between idi */
+  padding: 12px 20px;
+  gap: 20px; /* yazı ve hamburger arasında boşluk */
 }
 .navbar .logo {
 	display: flex;
