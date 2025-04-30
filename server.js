@@ -24,7 +24,10 @@ const pages = [
   'logs.html',
   'index.html',
   'api.html',
-  'destek.html'
+  'destek.html
+  '404.html',
+  'languages.html',
+  'api.html'
 ];
 
 // HTML sayfaları için yönlendirme ve parametre işle
