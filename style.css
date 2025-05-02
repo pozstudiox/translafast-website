@@ -1148,27 +1148,3 @@ body::-webkit-scrollbar-thumb:hover {
     outline-offset: 3px;
   }
 }
-
-/* Reklam alanı footer altında ortalanmış, koyu uyumlu alan */
-.ad-footer {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 24px 0;
-  background-color: #0e1117; /* footer ile uyumlu koyu arka plan */
-  border-top: 1px solid #1f1f1f;
-  z-index: 10;
-}
-
-/* Küçük ekranlar için responsif (mobil uyumlu) */
-@media (max-width: 768px) {
-  .ad-footer {
-    flex-direction: column;
-    padding: 16px 0;
-  }
-  .ad-footer iframe {
-    width: 320px !important;
-    height: 50px !important;
-  }
-}
