@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TranslaFast Apps</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="translafast-icon.svg" />
+  <style>
+    :root {
+      --color-bg: #0d1117;
+      --color-surface: #161b22;
+      --color-text: #e6edf3;
+      --color-accent: #58a6ff;
+      --color-muted: #9da5b4;
+      --border: 1px solid #2a2a2a;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    .navbar {
+      background: var(--color-surface);
+      border-bottom: var(--border);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo img {
+      width: 42px;
+      height: 42px;
+    }
+
+    .logo-text {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--color-accent);
+    }
+
+    .page-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+
+    .apps-header {
+      text-align: center;
+      padding: 100px 20px 50px;
+      background: radial-gradient(circle at center, #20262e, #0d1117);
+    }
+
+    .apps-header h1 {
+      font-size: 2.5rem;
+      color: var(--color-accent);
+      margin-bottom: 12px;
+      text-shadow: 0 0 8px rgba(88,166,255,0.4);
+    }
+
+    .apps-header p {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      max-width: 680px;
+      margin: 0 auto;
+    }
+
+    .apps-section {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .app-box {
+      background: var(--color-surface);
+      border: var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.2);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .app-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 24px rgba(88,166,255,0.3);
+    }
+
+    .app-box h2 {
+      color: var(--color-accent);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .app-box h2 img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .app-box p {
+      font-size: 1rem;
+      color: var(--color-muted);
+      margin-bottom: 18px;
+      line-height: 1.6;
+    }
+
+    .download-btn {
+      background: var(--color-accent);
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      text-align: center;
+      transition: background 0.3s ease;
+    }
+
+    .download-btn:hover {
+      background: #3794e0;
+    }
+
+    .disabled-btn {
+      background: #444c56;
+      color: #999;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-align: center;
+      cursor: not-allowed;
+    }
+
+    .badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: #2ea043;
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 40px 20px;
+      color: var(--color-muted);
+      border-top: 1px solid #2a2a2a;
+      margin-top: 60px;
+    }
+
+    @media (max-width: 600px) {
+      .logo-text {
+        font-size: 1.5rem;
+      }
+      .page-name {
+        font-size: 1rem;
+      }
+      .apps-header h1 {
+        font-size: 2rem;
+      }
+      .apps-header p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="translafast-icon.svg" alt="TranslaFast Icon">
+        <span class="logo-text">TranslaFast</span>
+      </a>
+      <div class="page-name">Apps</div>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="apps-header">
+    <h1>Our Applications</h1>
+    <p>Fast, powerful, and beautifully designed tools to translate and interact with the world.</p>
+  </div>
+
+  <!-- APPS SECTION -->
+  <div class="apps-section">
+    <div class="app-box">
+      <span class="badge">Popular</span>
+      <h2>
+        <img src="apps-icon/crome.svg" alt="Chrome Icon">
+        Chrome Extension
+      </h2>
+      <p>Translate websites instantly, skip sponsor segments, block ads, and integrate AI correction.</p>
+      <a href="#" class="download-btn">Download Now</a>
+    </div>
+
+    <div class="app-box">
+      <h2>
+        <img src="apps-icon/pc.svg" alt="PC Icon">
+        Desktop App
+      </h2>
+      <p>Translate documents, webpages or text offline with a sleek UI for Windows and macOS.</p>
+      <button class="disabled-btn">Coming Soon</button>
+    </div>
+
+    <div class="app-box">
+      <h2>
+        <img src="apps-icon/mobile.svg" alt="Mobile Icon">
+        Mobile App
+      </h2>
+      <p>Translate from any app or camera in real-time. iOS and Android release coming soon.</p>
+      <button class="disabled-btn">Coming Soon</button>
+    </div>
+
+    <div class="app-box">
+      <h2>
+        <img src="apps-icon/api.svg" alt="API Icon">
+        Developer API
+      </h2>
+      <p>Embed translation power into your software with our blazing-fast and customizable API.</p>
+      <button class="disabled-btn">Coming Soon</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 TranslaFast — Built with ❤️ by PozStudio
+  </footer>
+
+</body>
+</html>
