@@ -10,7 +10,6 @@
     body {
       background: var(--color-bg);
       color: var(--color-text);
-      font-family: var(--font);
       line-height: 1.8;
       margin: 0;
     }
@@ -177,12 +176,12 @@
       color: var(--color-muted);
     }
 
-    /* ————————————————————————————
-       Mobile styles
-    ———————————————————————————— */
+    /* Mobile adjustments */
     @media (max-width: 768px) {
       .navbar .container {
-        flex-direction: column;
+        /* keep logo and About side by side */
+        flex-direction: row;
+        justify-content: space-between;
         gap: 12px;
       }
       .logo-img {
@@ -212,9 +211,17 @@
         margin-bottom: 24px;
       }
       .team-members {
-        flex-direction: column;
-        gap: 30px;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
         overflow: visible;
+        padding-bottom: 0;
+      }
+      .team-member {
+        max-width: none;
+        flex: 0 0 calc(50% - 20px);
+        margin-bottom: 30px;
       }
       .team-member img {
         width: 100px;
@@ -235,15 +242,15 @@
         <img src="translafast-icon.svg" alt="PozStudio Logo" class="logo-img">
         <span class="logo-text">TranslaFast</span>
       </a>
-      <div class="navbar-right">
-        About Us
-      </div>
+      <div class="navbar-right">About Us</div>
     </div>
   </nav>
 
   <!-- TEAM SECTION -->
   <div class="team-section">
     <h2>Team</h2>
+
+    <!-- 1st Row -->
     <div class="team-members">
       <div class="team-member">
         <div class="team-img-wrapper">
@@ -281,7 +288,32 @@
         <div class="team-member-name">Zephyr</div>
       </div>
     </div>
+
+  <!-- 2nd Row -->
+  <div class="team-members" style="margin-top: 50px;">
+    <div class="team-member">
+      <div class="team-img-wrapper">
+        <img src="about-icons/emily.png" alt="ZYN">
+        <div class="hover-role">Discord Moderator</div>
+      </div>
+      <div class="team-member-name">ZYN</div>
+    </div>
+    <div class="team-member">
+      <div class="team-img-wrapper">
+        <img src="about-icons/leo.png" alt="Nexory">
+        <div class="hover-role">Bot Integration Lead</div>
+      </div>
+      <div class="team-member-name">Nexory</div>
+    </div>
+    <div class="team-member">
+      <div class="team-img-wrapper">
+        <img src="about-icons/sophia.png" alt="NOVA">
+        <div class="hover-role">Community Support</div>
+      </div>
+      <div class="team-member-name">NOVA</div>
+    </div>
   </div>
+
 
   <!-- ABOUT CONTENT -->
   <div class="about-container">
@@ -321,7 +353,6 @@
     <p style="text-align: center; font-size: 0.95rem; color: var(--color-muted); margin-top: 30px;">
       © 2025 TranslaFast. All rights reserved.
     </p>
-
     <div class="owner-info">
       <p>Website owned and developed by PozStudio.</p>
     </div>
