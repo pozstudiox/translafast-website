@@ -29,7 +29,8 @@ const pages = [
   'languages.html',
   'api.html',
   'coming-soon.html',
-  'about.html'
+  'about.html',
+  'apps.html'
 ];
 
 // HTML sayfaları için yönlendirme ve parametre işle
