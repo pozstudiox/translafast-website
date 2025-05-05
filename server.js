@@ -4,16 +4,22 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// ✅ Public klasörünü favicon, sitemap gibi statik dosyalar için ayarla
+app.use(express.static(path.join(__dirname, 'public')));
+
+// ✅ HTML, CSS, JS gibi diğer dosyalar için kök dizini de sun
+app.use(express.static(path.join(__dirname)));
+
 // Anasayfa
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Default değerler
+// Default parametreler
 const DEFAULT_VERSION = '7.0.3';
 const DEFAULT_XTID = 'cmedhionkhpnakcndndgjdbohmhepckk';
 
-// Parametre kontrolü yapılacak HTML sayfaları
+// Parametreli yönlendirme yapılacak sayfalar
 const pages = [
   'uninstall.html',
   'support.html',
@@ -27,22 +33,22 @@ const pages = [
   'destek.html',
   '404.html',
   'languages.html',
-  'api.html',
-  'coming-soon.html'
+  'coming-soon.html',
+  'about.html',
+  'apps.html'
 ];
 
-// HTML sayfaları için yönlendirme ve parametre işle
+// Sayfa yönlendirmeleri
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
     const version = req.query.v;
     const xtid = req.query.xtid;
 
-    // Eğer v veya xtid yoksa otomatik parametreli URL'ye yönlendir
+    // Otomatik yönlendirme
     if (!version || !xtid) {
       return res.redirect(`/${page}?v=${DEFAULT_VERSION}&xtid=${DEFAULT_XTID}`);
     }
 
-    // Eğer v ve xtid varsa HTML dosyasını aç, {{VERSION}} ve {{XTID}} değiştir
     fs.readFile(path.join(__dirname, page), 'utf8', (err, data) => {
       if (err) {
         return res.status(500).send('Sunucu hatası.');
@@ -57,10 +63,12 @@ pages.forEach(page => {
   });
 });
 
-// Şimdi css, js, img gibi diğer tüm dosyaları normal static olarak sunalım
-app.use(express.static(path.join(__dirname)));
+// ❗ sitemap.xml özel olarak route edilmek istenirse (isteğe bağlı)
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
+});
 
-// 404 - Diğer tüm istekler
+// 404 fallback
 app.get('*', (req, res) => {
   res.status(404).send('Sayfa bulunamadı.');
 });
