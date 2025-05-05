@@ -1,0 +1,9 @@
+{
+  "routes": {
+    "/sitemap.xml": {
+      "headers": {
+        "Content-Type": "application/xml"
+      }
+    }
+  }
+}
