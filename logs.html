@@ -4,13 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Changelog | TranslaFast</title>
-  <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="translafast-icon.svg" />
   <style>
+    :root {
+      --color-bg: #101014;
+      --color-surface: #1c1c22;
+      --color-text: #e0e0e0;
+      --color-accent: #3fa9f5;
+      --color-muted: #aaa;
+      --border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    * { box-sizing: border-box; }
+
     body {
       display: flex;
       min-height: 100vh;
       margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--color-bg);
+      color: var(--color-text);
     }
 
     .sidebar {
@@ -45,10 +58,11 @@
 
     .sidebar ul {
       list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       flex-direction: column;
       gap: 16px;
-      padding: 0;
     }
 
     .sidebar ul li a {
@@ -62,9 +76,11 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      cursor: pointer;
     }
 
-    .sidebar ul li a:hover {
+    .sidebar ul li a:hover,
+    .sidebar ul li a.active {
       background: rgba(255, 255, 255, 0.05);
       color: var(--color-accent);
     }
@@ -109,127 +125,198 @@
       font-size: 1.05rem;
       line-height: 1.6;
     }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        padding: 20px;
+        border-right: none;
+        border-bottom: var(--border);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      }
+      .content {
+        padding: 40px 20px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- SIDEBAR -->
   <aside class="sidebar">
     <a href="index.html" class="brand">
       <img src="translafast-icon.svg" alt="TranslaFast Icon">
       <h2>TranslaFast</h2>
     </a>
-    <ul>
-      <li><a href="#engines">🧠 Language Engines</a></li>
-      <li><a href="#settings">⚙️ Advanced Settings</a></li>
-      <li><a href="#beta">🧪 Beta Features</a></li>
-      <li><a href="#feedback">📤 Feedback</a></li>
-      <li><a href="#stats">📊 Usage Stats</a></li>
-      <li><a href="#dev">🔧 Developer Mode</a></li>
-      <li><a href="#releases">📂 Release Notes</a></li>
+    <ul id="filterMenu">
+      <li><a data-category="all" class="active">📋 All Versions</a></li>
+      <li><a data-category="performance">⚡ Performance</a></li>
+      <li><a data-category="ui">🎨 UI Updates</a></li>
+      <li><a data-category="mobile">📱 Mobile</a></li>
+      <li><a data-category="engine">🧠 Engine</a></li>
+      <li><a data-category="bugfix">🐞 Bug Fix</a></li>
+      <li><a data-category="security">🛡️ Security</a></li>
     </ul>
   </aside>
 
-  <!-- CONTENT -->
   <main class="content">
     <h1>Changelog</h1>
 
-    <div class="log-entry">
-      <h3>v1.3.5 – Improved Instant Translation Speed</h3>
-      <span>📅 April 30, 2025</span>
-      <p>Response times of translation engines were optimized. Translations now occur faster during page load.</p>
-    </div>
-
-    <div class="log-entry">
-      <h3>v1.3.4 – Enhanced Interface Responsiveness</h3>
+    <div class="log-entry" data-category="performance">
+      <h3>v10.6.3 – Performance Boost</h3>
       <span>📅 April 29, 2025</span>
-      <p>Hover animations and button interactions became more responsive and fluid.</p>
+      <p>Translation loading speeds improved by 15%.</p>
     </div>
 
-    <div class="log-entry">
-      <h3>v1.3.3 – Multi-language Detection Support</h3>
+    <div class="log-entry" data-category="ui">
+      <h3>v10.6.2 – Visual Polish</h3>
       <span>📅 April 28, 2025</span>
-      <p>Texts in different sections of a page are now detected independently for more accurate translations.</p>
+      <p>Added icons to menus and improved contrast in dark mode.</p>
     </div>
 
-    <div class="log-entry">
-      <h3>v1.3.2 – Fixed Ad Blocker Conflict</h3>
+    <div class="log-entry" data-category="engine">
+      <h3>v10.6.1 – New Language Support</h3>
       <span>📅 April 27, 2025</span>
-      <p>Resolved an issue where some ad blockers were interfering with the extension.</p>
+      <p>Support added for Armenian, Lao, and Pashto.</p>
     </div>
 
-    <div class="log-entry">
-      <h3>v1.3.1 – Updated Error Reporting</h3>
+    <div class="log-entry" data-category="bugfix">
+      <h3>v10.6.0 – Fixed Broken Language Swap</h3>
       <span>📅 April 26, 2025</span>
-      <p>Detailed translation errors can now be viewed in Developer Mode.</p>
+      <p>Resolved a bug where 'From' and 'To' languages were not switching properly.</p>
     </div>
 
-    <div class="log-entry">
-      <h3>v1.3 – Error Tracking & Auto Language Detection</h3>
-      <span>📅 April 25, 2025</span>
-      <p>Languages are now detected more accurately across page content.</p>
-    </div>
-
-    <div class="log-entry">
-      <h3>v1.2.2 – Added Image Label Translation</h3>
+    <div class="log-entry" data-category="mobile">
+      <h3>v10.5.0 – iOS Gesture Support</h3>
       <span>📅 April 24, 2025</span>
-      <p><code>alt</code>, <code>title</code>, and <code>aria-label</code> attributes are now translatable.</p>
+      <p>Improved gesture detection and swipe navigation on iOS.</p>
     </div>
 
-    <div class="log-entry">
-      <h3>v1.2.1 – Menu Click Bug Fixed</h3>
-      <span>📅 April 23, 2025</span>
-      <p>Fixed an issue where the translation engine menu wasn’t clickable on mobile.</p>
-    </div>
-
-    <div class="log-entry">
-      <h3>v1.2 – Dark Mode & DeepL Support</h3>
-      <span>📅 April 22, 2025</span>
-      <p>Dark mode and DeepL translation engine successfully integrated. Performance improved.</p>
-    </div>
-
-    <div class="log-entry">
-      <h3>v1.1.2 – Language List Expanded</h3>
-      <span>📅 April 21, 2025</span>
-      <p>Added new languages including Hebrew, Icelandic, and Zulu to the list of 178 supported languages.</p>
-    </div>
-
-    <div class="log-entry">
-      <h3>v1.1.1 – Improved Mobile Compatibility</h3>
+    <div class="log-entry" data-category="performance">
+      <h3>v10.4.0 – Reduced CPU Usage</h3>
       <span>📅 April 20, 2025</span>
-      <p>Mobile animations were enhanced for smoother opening experiences.</p>
+      <p>Idle usage dropped from 12% to 4% on low-end devices.</p>
     </div>
 
-    <div class="log-entry">
-      <h3>v1.1 – New Languages & UI Update</h3>
-      <span>📅 April 19, 2025</span>
-      <p>Translation accuracy increased. New languages, icons, and a cleaner interface introduced.</p>
-    </div>
-
-    <div class="log-entry">
-      <h3>v1.0.5 – Scroll Tracking Added</h3>
+    <div class="log-entry" data-category="engine">
+      <h3>v10.3.0 – New API Integration (MyMemory)</h3>
       <span>📅 April 18, 2025</span>
-      <p>Active section is now highlighted based on scroll position.</p>
+      <p>Fallback support added for MyMemory API as backup engine.</p>
     </div>
 
-    <div class="log-entry">
-      <h3>v1.0.4 – Privacy Notice Updated</h3>
-      <span>📅 April 17, 2025</span>
-      <p>KVKK and privacy text were revised for legal compliance.</p>
-    </div>
-
-    <div class="log-entry">
-      <h3>v1.0.3 – Added Launch Animation</h3>
-      <span>📅 April 16, 2025</span>
-      <p>A smooth 1-second animation was added on extension startup.</p>
-    </div>
-
-    <div class="log-entry">
-      <h3>v1.0 – Initial Release</h3>
+    <div class="log-entry" data-category="bugfix">
+      <h3>v10.2.0 – Tooltip Display Fixed</h3>
       <span>📅 April 15, 2025</span>
-      <p>Core translation features launched using the Google Translate engine.</p>
+      <p>Tooltips now appear correctly on hover in all languages.</p>
     </div>
+
+    <div class="log-entry" data-category="security">
+      <h3>v10.1.0 – Token Leak Prevention</h3>
+      <span>📅 April 12, 2025</span>
+      <p>Authentication tokens are now encrypted in memory.</p>
+    </div>
+
+    <div class="log-entry" data-category="ui">
+      <h3>v10.0.0 – Major UI Redesign</h3>
+      <span>📅 April 10, 2025</span>
+      <p>Complete visual overhaul with new typography, layout, and theme switcher.</p>
+    </div>
+
+    <div class="log-entry" data-category="engine">
+      <h3>v9.5.0 – Real-Time Translation Sync</h3>
+      <span>📅 April 5, 2025</span>
+      <p>Live translation now updates while typing instead of waiting.</p>
+    </div>
+
+    <div class="log-entry" data-category="bugfix">
+      <h3>v9.2.3 – Fix: Menu freeze on Firefox</h3>
+      <span>📅 April 3, 2025</span>
+      <p>Dropdown menus now open correctly on all browsers.</p>
+    </div>
+
+    <div class="log-entry" data-category="performance">
+      <h3>v9.0.0 – Lightweight Mode</h3>
+      <span>📅 April 1, 2025</span>
+      <p>Introduced “Lite Mode” for devices with low RAM.</p>
+    </div>
+
+    <div class="log-entry" data-category="mobile">
+      <h3>v8.1.0 – Android Scroll Bug Fixed</h3>
+      <span>📅 March 29, 2025</span>
+      <p>Pages now scroll correctly on Android WebView apps.</p>
+    </div>
+
+    <div class="log-entry" data-category="security">
+      <h3>v8.0.0 – CSP Enhanced</h3>
+      <span>📅 March 26, 2025</span>
+      <p>Implemented strict CSP headers to prevent script injection.</p>
+    </div>
+
+    <div class="log-entry" data-category="ui">
+      <h3>v7.2.0 – New Language Selector Dropdown</h3>
+      <span>📅 March 23, 2025</span>
+      <p>Improved dropdown behavior with search and autocomplete.</p>
+    </div>
+
+    <div class="log-entry" data-category="performance">
+      <h3>v6.0.0 – Engine Boot Speed x2</h3>
+      <span>📅 March 18, 2025</span>
+      <p>Initial translation engine loading time halved.</p>
+    </div>
+
+    <div class="log-entry" data-category="engine">
+      <h3>v5.5.0 – LibreTranslate Edge Support</h3>
+      <span>📅 March 15, 2025</span>
+      <p>Support for self-hosted LibreTranslate backends.</p>
+    </div>
+
+    <div class="log-entry" data-category="bugfix">
+      <h3>v4.4.0 – Subtitles Sync Bug Fixed</h3>
+      <span>📅 March 10, 2025</span>
+      <p>Subtitle translations are now in sync with audio.</p>
+    </div>
+
+    <div class="log-entry" data-category="mobile">
+      <h3>v3.2.0 – Notch Padding Support</h3>
+      <span>📅 March 5, 2025</span>
+      <p>Improved support for phones with notches and safe-areas.</p>
+    </div>
+
+    <div class="log-entry" data-category="ui">
+      <h3>v2.1.0 – High Contrast Theme Added</h3>
+      <span>📅 March 1, 2025</span>
+      <p>New accessibility theme for vision-impaired users.</p>
+    </div>
+
+    <div class="log-entry" data-category="engine">
+      <h3>v1.0 – Initial Public Release</h3>
+      <span>📅 February 28, 2025</span>
+      <p>TranslaFast launched with Google Translate backend and core DOM engine.</p>
+    </div>
+
+
   </main>
 
+  <script>
+    const filterMenu = document.getElementById("filterMenu");
+    const entries = document.querySelectorAll(".log-entry");
+
+    filterMenu.addEventListener("click", (e) => {
+      if (e.target.tagName !== "A") return;
+
+      const category = e.target.dataset.category;
+
+      // Active class
+      document.querySelectorAll("#filterMenu a").forEach(link => link.classList.remove("active"));
+      e.target.classList.add("active");
+
+      entries.forEach(entry => {
+        const match = category === "all" || entry.dataset.category === category;
+        entry.style.display = match ? "block" : "none";
+      });
+    });
+  </script>
 </body>
 </html>
