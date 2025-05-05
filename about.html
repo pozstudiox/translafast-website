@@ -169,6 +169,33 @@
       text-shadow: 0 0 8px rgba(88,166,255,1), 0 0 12px rgba(88,166,255,0.8);
     }
 
+        /* 🔸 Only Pozi: Gold style (first row, first member) */
+    .team-section .team-members:first-of-type .team-member:nth-child(1) img {
+      border: 4px solid gold;
+      box-shadow: 0 0 16px rgba(255, 215, 0, 0.7);
+    }
+
+    .team-section .team-members:first-of-type .team-member:nth-child(1):hover img {
+      box-shadow: 0 0 24px rgba(255, 215, 0, 1);
+      transform: scale(1.12);
+    }
+
+    .team-section .team-members:first-of-type .team-member:nth-child(1) .team-member-name {
+      color: gold;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 0 6px rgba(255, 215, 0, 0.6);
+    }
+
+    .team-section .team-members:first-of-type .team-member:nth-child(1):hover .team-member-name {
+      color: #fff8dc;
+      text-shadow: 0 0 8px gold, 0 0 12px rgba(255, 215, 0, 0.9);
+    }
+
+    .team-section .team-members:first-of-type .team-member:nth-child(1) .hover-role {
+      background: gold;
+      color: #000;
+    }
+
+
     .owner-info {
       font-size: 1rem;
       text-align: center;
