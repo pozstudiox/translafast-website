@@ -4,22 +4,16 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// ✅ Public klasörünü favicon, sitemap gibi statik dosyalar için ayarla
-app.use(express.static(path.join(__dirname, 'public')));
-
-// ✅ HTML, CSS, JS gibi diğer dosyalar için kök dizini de sun
-app.use(express.static(path.join(__dirname)));
-
 // Anasayfa
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// Default parametreler
+// Default değerler
 const DEFAULT_VERSION = '7.0.3';
 const DEFAULT_XTID = 'cmedhionkhpnakcndndgjdbohmhepckk';
 
-// Parametreli yönlendirme yapılacak sayfalar
+// Parametre kontrolü yapılacak HTML sayfaları
 const pages = [
   'uninstall.html',
   'support.html',
@@ -33,22 +27,24 @@ const pages = [
   'destek.html',
   '404.html',
   'languages.html',
+  'api.html',
   'coming-soon.html',
   'about.html',
   'apps.html'
 ];
 
-// Sayfa yönlendirmeleri
+// HTML sayfaları için yönlendirme ve parametre işle
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
     const version = req.query.v;
     const xtid = req.query.xtid;
 
-    // Otomatik yönlendirme
+    // Eğer v veya xtid yoksa otomatik parametreli URL'ye yönlendir
     if (!version || !xtid) {
       return res.redirect(`/${page}?v=${DEFAULT_VERSION}&xtid=${DEFAULT_XTID}`);
     }
 
+    // Eğer v ve xtid varsa HTML dosyasını aç, {{VERSION}} ve {{XTID}} değiştir
     fs.readFile(path.join(__dirname, page), 'utf8', (err, data) => {
       if (err) {
         return res.status(500).send('Sunucu hatası.');
@@ -63,12 +59,10 @@ pages.forEach(page => {
   });
 });
 
-// ❗ sitemap.xml özel olarak route edilmek istenirse (isteğe bağlı)
-app.get('/sitemap.xml', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'));
-});
+// Şimdi css, js, img gibi diğer tüm dosyaları normal static olarak sunalım
+app.use(express.static(path.join(__dirname)));
 
-// 404 fallback
+// 404 - Diğer tüm istekler
 app.get('*', (req, res) => {
   res.status(404).send('Sayfa bulunamadı.');
 });
