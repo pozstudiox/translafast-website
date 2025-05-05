@@ -59,8 +59,17 @@ pages.forEach(page => {
   });
 });
 
-// Şimdi css, js, img gibi diğer tüm dosyaları normal static olarak sunalım
-app.use(express.static(path.join(__dirname)));
+// sitemap.xml dosyasını doğru Content-Type ile sun
+app.get('/sitemap.xml', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'sitemap.xml'), {
+    headers: {
+      'Content-Type': 'application/xml'
+    }
+  });
+});
+
+// Diğer tüm static dosyaları public dizininden sun
+app.use(express.static(path.join(__dirname, 'public')));
 
 // 404 - Diğer tüm istekler
 app.get('*', (req, res) => {
