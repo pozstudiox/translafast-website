@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading | TranslaFast</title>
+  <link rel="icon" href="translafast-icon.svg" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --accent: #007acc;
+      --accent-hover: #005b9f;
+      --muted: #9ca3af;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    canvas#stars {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .logo {
+      z-index: 2;
+      animation: fadeDown 1.2s ease-in-out forwards;
+      opacity: 0;
+      transform: translateY(-40px);
+      margin-bottom: 30px;
+    }
+
+    .logo img {
+      width: 64px;
+      height: 64px;
+      animation: spin 4s linear infinite;
+    }
+
+    @keyframes fadeDown {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-text {
+      z-index: 2;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--muted);
+      animation: pulse 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.4; }
+      50% { opacity: 1; }
+      100% { opacity: 0.4; }
+    }
+
+    .progress-bar {
+      margin-top: 24px;
+      width: 220px;
+      height: 8px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.1);
+      overflow: hidden;
+      z-index: 2;
+    }
+
+    .progress {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+      animation: loadBar 5s ease-in-out forwards;
+    }
+
+    @keyframes loadBar {
+      to { width: 100%; }
+    }
+
+  </style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="logo">
+  <img src="translafast-icon.svg" alt="TranslaFast Logo" />
+</div>
+<div class="loading-text" id="loading-text">Loading...</div>
+<div class="progress-bar"><div class="progress"></div></div>
+
+<script>
+  // ⭐ Yıldızlı arka plan
+  const canvas = document.getElementById("stars");
+  const ctx = canvas.getContext("2d");
+  let stars = [];
+
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function createStars() {
+    stars = Array.from({ length: 150 }, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      r: Math.random() * 1.5 + 0.5,
+      a: Math.random() * 360
+    }));
+  }
+
+  function drawStars() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#ffffff";
+    stars.forEach(s => {
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fill();
+      s.y += 0.2;
+      if (s.y > canvas.height) s.y = 0;
+    });
+    requestAnimationFrame(drawStars);
+  }
+
+  window.addEventListener("resize", () => {
+    resizeCanvas();
+    createStars();
+  });
+
+  resizeCanvas();
+  createStars();
+  drawStars();
+
+  // ⏳ Yüklenme metni animasyonu
+  const steps = ["Loading...", "Initializing Engine...", "Connecting to TranslaFast Cloud...", "Preparing Interface..."];
+  let index = 0;
+  const textEl = document.getElementById("loading-text");
+
+  setInterval(() => {
+    index = (index + 1) % steps.length;
+    textEl.textContent = steps[index];
+  }, 2500);
+</script>
+
+</body>
+</html>
