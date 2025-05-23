@@ -27,7 +27,6 @@ const pages = [
   'destek.html',
   '404.html',
   'languages.html',
-  'api.html',
   'coming-soon.html',
   'about.html',
   'apps.html'
@@ -44,7 +43,7 @@ pages.forEach(page => {
       return res.redirect(`/${page}?v=${DEFAULT_VERSION}&xtid=${DEFAULT_XTID}`);
     }
 
-    // Eğer v ve xtid varsa HTML dosyasını aç, {{VERSION}} ve {{XTID}} değiştir
+    // HTML dosyasını oku ve değişkenleri yerleştir
     fs.readFile(path.join(__dirname, page), 'utf8', (err, data) => {
       if (err) {
         return res.status(500).send('Sunucu hatası.');
@@ -59,12 +58,25 @@ pages.forEach(page => {
   });
 });
 
-// Şimdi css, js, img gibi diğer tüm dosyaları normal static olarak sunalım
+// Statik dosyalar (CSS, JS, img vs.)
 app.use(express.static(path.join(__dirname)));
 
-// 404 - Diğer tüm istekler
-app.get('*', (req, res) => {
-  res.status(404).send('Sayfa bulunamadı.');
+// Özel 404 sayfası
+app.use((req, res) => {
+  const version = req.query.v || DEFAULT_VERSION;
+  const xtid = req.query.xtid || DEFAULT_XTID;
+
+  fs.readFile(path.join(__dirname, '404.html'), 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).send('404 sayfası yüklenemedi.');
+    }
+
+    const modifiedData = data
+      .replace('{{VERSION}}', version)
+      .replace('{{XTID}}', xtid);
+
+    res.status(404).send(modifiedData);
+  });
 });
 
 // Sunucuyu başlat
