@@ -7,15 +7,22 @@
   <link rel="icon" href="translafast-icon.svg" />
   <style>
     :root {
-      --color-bg: #101014;
-      --color-surface: #1c1c22;
-      --color-text: #e0e0e0;
+      --color-bg: #0e0e13;
+      --color-surface: #1b1b23;
+      --color-surface-alt: #2a2a35;
+      --color-text: #e6edf3;
+      --color-muted: #9ca3af;
       --color-accent: #3fa9f5;
-      --color-muted: #aaa;
-      --border: 1px solid rgba(255, 255, 255, 0.06);
+      --color-accent-hover: #65c1ff;
+      --border: 1px solid rgba(255, 255, 255, 0.05);
+      --shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      --radius: 12px;
+      --transition: 0.3s ease;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       display: flex;
@@ -24,36 +31,40 @@
       font-family: 'Segoe UI', sans-serif;
       background: var(--color-bg);
       color: var(--color-text);
+      overflow-x: hidden;
     }
 
+    /* === SIDEBAR === */
     .sidebar {
       width: 260px;
       background: var(--color-surface);
       padding: 40px 24px;
       border-right: var(--border);
-      box-shadow: 6px 0 20px rgba(0,0,0,0.3);
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 2;
     }
 
     .sidebar .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 30px;
       justify-content: center;
+      gap: 12px;
+      margin-bottom: 36px;
       text-decoration: none;
     }
 
     .sidebar .brand img {
-      width: 30px;
-      height: 30px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 5px rgba(63, 169, 245, 0.5));
+      width: 32px;
+      height: 32px;
+      filter: drop-shadow(0 0 6px rgba(63, 169, 245, 0.5));
     }
 
     .sidebar .brand h2 {
       font-size: 1.6rem;
-      color: var(--color-accent);
       margin: 0;
+      color: var(--color-accent);
+      letter-spacing: 0.5px;
     }
 
     .sidebar ul {
@@ -62,54 +73,66 @@
       margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
     }
 
     .sidebar ul li a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       text-decoration: none;
       color: var(--color-text);
       font-size: 1.05rem;
       font-weight: 500;
-      padding: 10px 12px;
-      border-radius: 10px;
-      transition: background 0.2s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
+      padding: 12px 14px;
+      border-radius: var(--radius);
+      transition: background var(--transition), color var(--transition);
     }
 
     .sidebar ul li a:hover,
     .sidebar ul li a.active {
       background: rgba(255, 255, 255, 0.05);
-      color: var(--color-accent);
+      color: var(--color-accent-hover);
     }
 
+    /* === CONTENT === */
     .content {
       flex: 1;
-      padding: 80px 40px;
+      padding: 80px 60px;
       background: var(--color-bg);
       overflow-y: auto;
+      position: relative;
+      z-index: 1;
     }
 
     .content h1 {
-      font-size: 2.4rem;
-      color: var(--color-accent);
+      font-size: 2.5rem;
       margin-bottom: 40px;
+      color: var(--color-accent);
+      border-left: 4px solid var(--color-accent);
+      padding-left: 14px;
+      letter-spacing: -0.5px;
     }
 
+    /* === LOG ENTRIES === */
     .log-entry {
-      border-left: 4px solid var(--color-accent);
       background: var(--color-surface);
-      padding: 20px 24px;
-      margin-bottom: 28px;
-      border-radius: 10px;
-      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+      border-left: 4px solid var(--color-accent);
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      border-radius: var(--radius);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .log-entry:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
     }
 
     .log-entry h3 {
+      font-size: 1.4rem;
       margin-bottom: 6px;
-      font-size: 1.3rem;
       color: var(--color-text);
     }
 
@@ -121,26 +144,42 @@
     }
 
     .log-entry p {
-      color: var(--color-muted);
       font-size: 1.05rem;
-      line-height: 1.6;
+      color: var(--color-muted);
+      line-height: 1.7;
     }
 
+    /* === RESPONSIVE === */
     @media (max-width: 768px) {
       body {
         flex-direction: column;
       }
+
       .sidebar {
         width: 100%;
-        padding: 20px;
+        padding: 24px;
         border-right: none;
         border-bottom: var(--border);
-        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
       }
+
       .content {
         padding: 40px 20px;
       }
     }
+
+    /* === SCROLLBAR === */
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+    body::-webkit-scrollbar-thumb {
+      background: var(--color-accent);
+      border-radius: 4px;
+    }
+    body::-webkit-scrollbar-thumb:hover {
+      background: var(--color-accent-hover);
+    }
+
   </style>
 </head>
 <body>
@@ -163,6 +202,72 @@
 
   <main class="content">
     <h1>Changelog</h1>
+
+    <div class="log-entry" data-category="security">
+      <h3>v12.4.1 – Token Revocation System</h3>
+      <span>📅 May 23, 2025</span>
+      <p>Added automatic token expiration and revocation for enhanced session security.</p>
+    </div>
+
+    <div class="log-entry" data-category="engine">
+      <h3>v12.4.0 – GPT-4o Engine Integration</h3>
+      <span>📅 May 22, 2025</span>
+      <p>Hybrid engine now supports OpenAI's GPT-4o for contextual translations.</p>
+    </div>
+
+    <div class="log-entry" data-category="ui">
+      <h3>v12.3.0 – Animated Theme Transitions</h3>
+      <span>📅 May 20, 2025</span>
+      <p>Light/Dark mode now includes smooth color transitions and accessibility fixes.</p>
+    </div>
+
+    <div class="log-entry" data-category="performance">
+      <h3>v12.2.0 – Smart Caching Update</h3>
+      <span>📅 May 18, 2025</span>
+      <p>Repeated phrases are now cached locally using IndexedDB, reducing redundant requests.</p>
+    </div>
+
+    <div class="log-entry" data-category="mobile">
+      <h3>v12.1.0 – Improved Android Extension Support</h3>
+      <span>📅 May 15, 2025</span>
+      <p>Optimized compatibility with Kiwi and Firefox Android browsers.</p>
+    </div>
+
+    <div class="log-entry" data-category="bugfix">
+      <h3>v12.0.1 – YouTube Black Screen Fix</h3>
+      <span>📅 May 12, 2025</span>
+      <p>Resolved issue causing video overlays to render incorrectly after ad-skip on some devices.</p>
+    </div>
+
+    <div class="log-entry" data-category="engine">
+      <h3>v12.0.0 – Custom Translation Routing</h3>
+      <span>📅 May 10, 2025</span>
+      <p>Users can now set preferred engines per site or per language for precision control.</p>
+    </div>
+
+    <div class="log-entry" data-category="ui">
+      <h3>v11.5.0 – Sidebar Filter Categories</h3>
+      <span>📅 May 6, 2025</span>
+      <p>Change log and dashboard include dynamic filtering by category (UI, Engine, Bugfix, etc.).</p>
+    </div>
+
+    <div class="log-entry" data-category="performance">
+      <h3>v11.3.0 – Real-Time Prefetch Optimization</h3>
+      <span>📅 May 4, 2025</span>
+      <p>Prefetching now predicts and loads translations before user scrolls into view.</p>
+    </div>
+
+    <div class="log-entry" data-category="bugfix">
+      <h3>v11.2.0 – RTL Language Formatting Fix</h3>
+      <span>📅 May 2, 2025</span>
+      <p>Fixed layout bugs affecting Arabic and Hebrew translations on structured layouts.</p>
+    </div>
+
+    <div class="log-entry" data-category="mobile">
+      <h3>v11.0.0 – PWA Compatibility Enhancements</h3>
+      <span>📅 April 30, 2025</span>
+      <p>TranslaFast is now installable as a standalone PWA on desktop and mobile.</p>
+    </div>
 
     <div class="log-entry" data-category="performance">
       <h3>v10.6.3 – Performance Boost</h3>
