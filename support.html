@@ -5,88 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Support | TranslaFast</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="support.css" />
   <link rel="icon" href="translafast-icon.svg" />
-  <style>
-    .support-container {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 100px 20px 60px;
-    }
-
-    .support-container h1 {
-      font-size: 2.4rem;
-      color: var(--color-accent);
-      margin-bottom: 30px;
-      text-align: center;
-    }
-
-    .support-container p {
-      font-size: 1.1rem;
-      color: var(--color-muted);
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    form.support-form {
-      background: var(--color-surface);
-      padding: 40px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    form.support-form input,
-    form.support-form textarea {
-      padding: 14px 16px;
-      font-size: 1rem;
-      border: var(--border);
-      border-radius: 10px;
-      background: var(--color-surface-alt);
-      color: var(--color-text);
-    }
-
-    form.support-form textarea {
-      resize: vertical;
-      min-height: 140px;
-    }
-
-    form.support-form button {
-      background: var(--color-accent);
-      color: white;
-      padding: 14px;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background var(--transition);
-    }
-
-    form.support-form button:hover {
-      background: var(--color-accent-hover);
-    }
-
-    .note {
-      text-align: center;
-      font-size: 0.95rem;
-      color: var(--color-muted);
-      margin-top: 20px;
-    }
-  </style>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
 </head>
 <body>
 
   <!-- NAVBAR -->
   <nav class="navbar">
     <div class="container">
-      <a href="index.html" class="logo" style="display: flex; align-items: center; gap: 12px;">
-        <img src="translafast-icon.svg" alt="TranslaFast Logo" class="logo-img" style="width: 36px; height: 36px;">
-        <span class="logo-text" style="font-size: 1.7rem; font-weight: 700; color: var(--color-accent);">TranslaFast</span>
+      <a href="index.html" class="logo">
+        <img src="translafast-icon.svg" alt="TranslaFast Logo" class="logo-img">
+        <span class="logo-text">TranslaFast</span>
       </a>
-      <div class="navbar-right">
-        Support
-      </div>
+      <div class="navbar-right">Support</div>
     </div>
   </nav>
 
@@ -95,17 +27,58 @@
     <h1>Need Help?</h1>
     <p>You can contact us for any feedback, questions, or technical issues.</p>
 
-    <form class="support-form" action="mailto:pozstudiosh@gmail.com" method="POST" enctype="text/plain">
-      <input type="text" name="fullname" placeholder="Your Full Name" required>
-      <input type="email" name="email" placeholder="Your Email Address" required>
-      <textarea name="message" placeholder="Your Message..." required></textarea>
+    <form class="support-form" id="supportForm">
+      <input type="text" name="user_name" placeholder="Your Full Name" required>
+      <input type="email" name="to_email" placeholder="Your Email Address" required>
+      <input type="text" name="message_title" placeholder="Message Subject" required>
+      <textarea name="message_content" placeholder="Your Message..." required></textarea>
       <button type="submit">Send</button>
     </form>
 
     <div class="note">
-      This form will open your email application and send your message to <strong>pozstudiosh@gmail.com</strong>.
+      This message will be securely sent to <strong>pozstudiosh@gmail.com</strong>.
     </div>
   </div>
+
+  <!-- SCRIPT -->
+  <script>
+    // Initialize EmailJS
+    emailjs.init("n2h0om7fDLhLB0ogE");
+
+    document.getElementById("supportForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = this.user_name.value.trim();
+      const email = this.to_email.value.trim();
+      const title = this.message_title.value.trim();
+      const message = this.message_content.value.trim();
+
+      // Validation Rules
+      if (title.length < 4) {
+        alert("❗ Message subject must be at least 4 characters long.");
+        return;
+      }
+
+      if (message.length < 8) {
+        alert("❗ Your message must be at least 8 characters long.");
+        return;
+      }
+
+      if (!email.includes("@") || !email.includes(".")) {
+        alert("❗ Please enter a valid email address.");
+        return;
+      }
+
+      // Send email
+      emailjs.sendForm("service_bg8nw6e", "template_5h0rs8n", this)
+        .then(() => {
+          alert("✅ Your message has been sent successfully!");
+          window.location.href = "index.html";
+        }, (error) => {
+          alert("❌ Failed to send message:\n" + JSON.stringify(error));
+        });
+    });
+  </script>
 
 </body>
 </html>
