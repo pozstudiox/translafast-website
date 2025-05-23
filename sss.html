@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="translafast-icon.svg" />
   <style>
+    :root {
+      --transition-slow: 0.5s ease;
+    }
+
     .sss-container {
       max-width: 900px;
       margin: 0 auto;
@@ -14,28 +18,133 @@
     }
 
     .sss-container h1 {
-      font-size: 2.4rem;
+      font-size: 2.6rem;
       color: var(--color-accent);
-      margin-bottom: 40px;
+      margin-bottom: 50px;
       text-align: center;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
     .faq-item {
-      margin-bottom: 30px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: 20px;
+      background: var(--color-surface);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .faq-item h3 {
-      font-size: 1.3rem;
+    .faq-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .faq-search {
+      width: 100%;
+      padding: 14px 18px;
+      margin-bottom: 36px;
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      font-size: 1rem;
+      background: var(--color-surface);
       color: var(--color-text);
-      margin-bottom: 10px;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .faq-search::placeholder {
+      color: var(--color-muted);
+      opacity: 0.7;
+    }
+
+    .faq-search:focus {
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 2px rgba(0, 128, 255, 0.2);
+      outline: none;
+    }
+
+    #faq-list {
+      transition: opacity 0.4s ease-in-out;
+    }
+
+
+    .faq-item h3 {
+      font-size: 1.25rem;
+      color: var(--color-accent);
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .faq-item p {
+      margin-top: 14px;
       color: var(--color-muted);
       font-size: 1.05rem;
+      line-height: 1.6;
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, opacity 0.4s ease;
     }
+
+    .faq-item.active p {
+      max-height: 500px;
+      opacity: 1;
+    }
+
+    .faq-item::after {
+      content: "+";
+      font-size: 1.5rem;
+      color: var(--color-accent);
+      position: absolute;
+      right: 24px;
+      top: 24px;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active::after {
+      content: "−";
+      transform: rotate(180deg);
+    }
+
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .page-btn {
+      padding: 10px 20px;
+      background: var(--color-surface);
+      border: var(--border);
+      border-radius: 12px;
+      color: var(--color-text);
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .page-btn:hover {
+      background: var(--color-surface-light);
+      transform: scale(1.05);
+    }
+
+    .page-btn.active {
+      background: var(--color-accent);
+      color: white;
+    }
+
+        #faq-list {
+      transition: opacity 0.4s ease-in-out;
+    }
+
+
+
   </style>
 </head>
 <body>
@@ -47,76 +156,132 @@
         <img src="translafast-icon.svg" alt="TranslaFast Logo" class="logo-img">
         <span class="logo-text">TranslaFast</span>
       </a>
-      <div class="navbar-right">
-        Frequently Asked Questions
-      </div>
+      <div class="navbar-right">Frequently Asked Questions</div>
     </div>
   </nav>
 
   <!-- FAQ Content -->
   <div class="sss-container">
     <h1>Frequently Asked Questions</h1>
+    <div id="faq-list"></div>
 
-    <div class="faq-item">
-      <h3>What is TranslaFast?</h3>
-      <p>TranslaFast is a browser extension that instantly translates web pages while respecting privacy and displaying no ads.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Which languages are supported?</h3>
-      <p>We support over 178 languages, including Turkish, English, German, Japanese, Russian, and many more.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Is TranslaFast free?</h3>
-      <p>Yes. TranslaFast is completely free and never asks for your personal information.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Is my data safe?</h3>
-      <p>Yes. All translation processing happens on your device. No data is sent to any server.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Does TranslaFast show ads?</h3>
-      <p>No. There are no ads or analytics in our app. It offers a clean, fast, and ad-free experience.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Does it work offline?</h3>
-      <p>No. An internet connection is required for translation engines to function properly.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>How accurate are the translations?</h3>
-      <p>Users can switch between engines like Google, LibreTranslate, and DeepL. Choose the one that provides the best result for your needs.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Which browsers are supported?</h3>
-      <p>Currently, TranslaFast is fully compatible with Google Chrome. Support for other browsers is under development.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Does translation affect the website's design?</h3>
-      <p>No. TranslaFast only changes text content and keeps the layout and design intact.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Can I set a default language?</h3>
-      <p>Yes. You can set your preferred default language and translation engine from the settings menu.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Is TranslaFast open source?</h3>
-      <p>Yes. You can view and contribute to our open-source project on GitHub.</p>
-    </div>
-
-    <div class="faq-item">
-      <h3>Is there a way to get support?</h3>
-      <p>Yes. You can send your questions and feedback to <a href="mailto:pozstudiosh@gmail.com">pozstudiosh@gmail.com</a>.</p>
+    <div class="pagination">
+      <button class="page-btn active" onclick="changePage(1)">Page 1</button>
+      <button class="page-btn" onclick="changePage(2)">Page 2</button>
     </div>
   </div>
+
+  <script>
+    const allFaqs = [
+      { q: "What is TranslaFast?", a: "TranslaFast is a browser extension that instantly translates websites into 178+ languages while maintaining privacy." },
+      { q: "Which browsers support TranslaFast?", a: "Currently, TranslaFast is fully supported on Google Chrome. Support for Edge and Firefox is coming soon." },
+      { q: "Is TranslaFast free to use?", a: "Yes, TranslaFast is 100% free with no hidden costs." },
+      { q: "Does TranslaFast work offline?", a: "No. An internet connection is required to access the translation engines." },
+      { q: "Is user data collected or tracked?", a: "Absolutely not. TranslaFast processes translations on your device and does not collect any user data." },
+      { q: "Which languages are supported?", a: "Over 178 languages including English, Turkish, Japanese, German, Russian, and Arabic." },
+      { q: "Can I set a default language?", a: "Yes, you can select your default language in the extension settings." },
+      { q: "Which translation engines are used?", a: "TranslaFast supports Google Translate, LibreTranslate, DeepL, and GPT-4o." },
+      { q: "How accurate are the translations?", a: "You can choose the best engine for your content. GPT-4o and DeepL offer context-aware results." },
+      { q: "Will the website layout change?", a: "No. Only the text is translated. The layout, structure, and design remain intact." },
+      { q: "Is there a dark mode?", a: "Yes, TranslaFast fully supports dark mode for a better viewing experience." },
+      { q: "Can I switch engines instantly?", a: "Yes, you can switch between engines live without reloading the page." },
+      { q: "Can I exclude certain sites from translation?", a: "Yes. You can whitelist or blacklist specific websites from being translated." },
+      { q: "Does it translate PDFs or images?", a: "Currently it supports only live text, but OCR (image-text) support is in development." },
+      { q: "Is TranslaFast available on mobile browsers?", a: "No, but a mobile app and PWA version are under development." },
+      { q: "Does TranslaFast support right-to-left languages?", a: "Yes. Languages like Arabic, Hebrew, and Persian are fully supported." },
+      { q: "How do I install TranslaFast?", a: "Go to the Chrome Web Store, search for TranslaFast, and click 'Add to Chrome'." },
+      { q: "How do I report a bug?", a: "Send an email to pozstudiosh@gmail.com or open an issue on our GitHub page." },
+      { q: "Is there a user guide?", a: "Yes, visit translafast.xyz/guide for full documentation and walkthroughs." },
+      { q: "Is TranslaFast open source?", a: "Yes. You can view and contribute to the code at github.com/pozstudiox." },
+      { q: "Can I request a new feature?", a: "Yes, suggestions are welcome via email or GitHub issues." },
+      { q: "Is there a premium version?", a: "Not yet. Premium features like offline translation and AI-based rephrasing are planned." },
+      { q: "What makes TranslaFast unique?", a: "It prioritizes privacy, works instantly, supports multiple engines, and doesn’t require login." },
+      { q: "Does it support subtitles on video sites?", a: "Experimental support for YouTube subtitles is available in beta." },
+      { q: "Can I contribute translations to improve the tool?", a: "Yes. Our GitHub includes a community language contribution module." },
+      { q: "What is the hybrid engine?", a: "It's a smart selector that dynamically chooses the best engine based on content and language." },
+      { q: "Is TranslaFast fast enough for real-time use?", a: "Yes. It uses prefetching and caching to minimize delays." },
+      { q: "Does it support websites with dynamic content?", a: "Yes. Single-page apps (SPAs) and AJAX-based content are supported." },
+      { q: "What if a page fails to translate?", a: "You can retry, switch engines, or report it for a fix." },
+      { q: "Can I use it for educational purposes?", a: "Yes. TranslaFast is perfect for students, researchers, and international readers." },
+      { q: "Can TranslaFast translate chat interfaces?", a: "Yes, including Discord, WhatsApp Web, and Facebook Messenger (experimental)." },
+      { q: "Will TranslaFast slow down my browser?", a: "No. It's optimized to run efficiently in the background." },
+      { q: "Can I temporarily pause translation?", a: "Yes. The popup interface allows you to enable or disable it with one click." },
+      { q: "How often is TranslaFast updated?", a: "We release improvements every 2-3 weeks with bug fixes and feature updates." },
+      { q: "Is there a way to support the project?", a: "Yes. You can star our GitHub repo or sponsor us via GitHub Sponsors." },
+      { q: "Who created TranslaFast?", a: "It was created by PozStudio, a privacy-first web tools company based in Türkiye." }
+    ];
+
+    let currentPage = 1;
+    const faqsPerPage = 6;
+    let searchQuery = "";
+
+    function renderPagination(filteredFaqs) {
+      const pagination = document.querySelector(".pagination");
+      const totalPages = Math.ceil(filteredFaqs.length / faqsPerPage);
+      pagination.innerHTML = "";
+
+      for (let i = 1; i <= totalPages; i++) {
+        const btn = document.createElement("button");
+        btn.className = "page-btn" + (i === currentPage ? " active" : "");
+        btn.textContent = `Page ${i}`;
+        btn.onclick = () => changePage(i);
+        pagination.appendChild(btn);
+      }
+    }
+
+    function renderFilteredFAQs() {
+      const faqList = document.getElementById("faq-list");
+      const filtered = allFaqs.filter(faq =>
+        faq.q.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        faq.a.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+
+      const start = (currentPage - 1) * faqsPerPage;
+      const end = start + faqsPerPage;
+
+      // Fade-out animasyon
+      faqList.style.opacity = "0";
+      setTimeout(() => {
+        faqList.innerHTML = "";
+        filtered.slice(start, end).forEach(faq => {
+          const div = document.createElement("div");
+          div.className = "faq-item";
+          div.innerHTML = `<h3>${faq.q}</h3><p>${faq.a}</p>`;
+          div.onclick = () => div.classList.toggle("active");
+          faqList.appendChild(div);
+        });
+        faqList.style.opacity = "1";
+      }, 200);
+
+      renderPagination(filtered);
+    }
+
+    function changePage(page) {
+      if (page === currentPage) return;
+      currentPage = page;
+      renderFilteredFAQs();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function handleSearch(e) {
+      searchQuery = e.target.value;
+      currentPage = 1;
+      renderFilteredFAQs();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.querySelector(".sss-container");
+      const searchBox = document.createElement("input");
+      searchBox.type = "text";
+      searchBox.placeholder = "Search FAQs...";
+      searchBox.className = "faq-search";
+      searchBox.oninput = handleSearch;
+      container.insertBefore(searchBox, container.children[1]);
+
+      renderFilteredFAQs();
+    });
+  </script>
+
 
 </body>
 </html>
