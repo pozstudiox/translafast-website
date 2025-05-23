@@ -42,25 +42,25 @@
 
   <!-- SCRIPT -->
   <script>
-    // Initialize EmailJS
     emailjs.init("n2h0om7fDLhLB0ogE");
 
-    document.getElementById("supportForm").addEventListener("submit", function(e) {
+    const form = document.getElementById("supportForm");
+    form.addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const name = this.user_name.value.trim();
-      const email = this.to_email.value.trim();
-      const title = this.message_title.value.trim();
-      const message = this.message_content.value.trim();
+      const name = form.user_name.value.trim();
+      const email = form.to_email.value.trim();
+      const title = form.message_title.value.trim();
+      const message = form.message_content.value.trim();
 
-      // Validation Rules
+      // Validation
       if (title.length < 4) {
-        alert("❗ Message subject must be at least 4 characters long.");
+        alert("❗ Message subject must be at least 4 characters.");
         return;
       }
 
       if (message.length < 8) {
-        alert("❗ Your message must be at least 8 characters long.");
+        alert("❗ Message must be at least 8 characters.");
         return;
       }
 
@@ -69,12 +69,25 @@
         return;
       }
 
-      // Send email
-      emailjs.sendForm("service_bg8nw6e", "template_5h0rs8n", this)
+      // EmailJS send
+      emailjs.sendForm("service_bg8nw6e", "template_5h0rs8n", form)
         .then(() => {
-          alert("✅ Your message has been sent successfully!");
-          window.location.href = "index.html";
-        }, (error) => {
+          form.style.display = "none";
+
+          const thanks = document.createElement("div");
+          thanks.innerHTML = `
+            <div style="margin-top: 30px; background: #1c1f26; padding: 20px; border-radius: 12px; border: 1px solid #2e2e2e; color: #58a6ff; font-size: 1.05rem; text-align: center;">
+              ✅ Your message has been sent successfully!<br>
+              Redirecting...
+            </div>`;
+          document.querySelector(".support-container").appendChild(thanks);
+
+          // 1 saniye sonra fast-loading'e geçiş
+          setTimeout(() => {
+            window.location.href = "fast-loading.html";
+          }, 1000);
+        })
+        .catch(error => {
           alert("❌ Failed to send message:\n" + JSON.stringify(error));
         });
     });
