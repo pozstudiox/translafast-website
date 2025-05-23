@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Coming Soon – v12.4.1 | TranslaFast</title>
+  <link rel="icon" href="translafast-icon.svg" />
+  <style>
+    :root {
+      --color-bg: #0d1117;
+      --color-text: #e6edf3;
+      --color-muted: #8b949e;
+      --color-accent: #249cff;
+      --color-surface: #161b22;
+      --font: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font);
+    }
+
+    .coming-hero {
+      background: linear-gradient(135deg, var(--color-surface), #1a1f27);
+      text-align: center;
+      padding: 160px 20px 60px;
+    }
+
+    .logo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+      justify-content: center;
+    }
+
+    .logo-link img {
+      width: 64px;
+      height: 64px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo-link:hover img {
+      transform: scale(1.08);
+    }
+
+    .logo-link span {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--color-accent);
+    }
+
+    .coming-hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4rem);
+      color: var(--color-accent);
+      font-weight: 800;
+      margin-top: 30px;
+    }
+
+    .coming-hero p {
+      font-size: 1.2rem;
+      max-width: 720px;
+      margin: 20px auto;
+      color: var(--color-muted);
+    }
+
+    .update-info {
+      background: var(--color-surface);
+      color: var(--color-muted);
+      max-width: 680px;
+      margin: 40px auto 0;
+      padding: 16px 24px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      font-size: 1.05rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .update-info .calendar-icon {
+      font-size: 1.3rem;
+    }
+
+    .update-info .highlight {
+      color: var(--color-accent);
+      font-weight: bold;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+      padding: 0 20px;
+    }
+
+    .feature-card {
+      background: var(--color-surface);
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .feature-card .icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      color: var(--color-accent);
+    }
+
+    .feature-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      font-size: 1rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+    }
+
+    .info-section, .image-section {
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .info-section h2 {
+      font-size: 2.2rem;
+      margin-bottom: 18px;
+      color: var(--color-accent);
+    }
+
+    .info-section p {
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--color-muted);
+      font-size: 1.05rem;
+    }
+
+    .image-section img {
+      max-width: 480px;
+      border-radius: 18px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+    }
+
+    .quote-slider {
+      padding: 80px 20px;
+      background: var(--color-surface);
+      text-align: center;
+    }
+
+    .quote-container {
+      position: relative;
+      height: 80px;
+    }
+
+    .quote-item {
+      display: none;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--color-muted);
+      position: absolute;
+      width: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      will-change: opacity, transform;
+    }
+
+    .quote-item.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .dots {
+      margin-top: 28px;
+    }
+
+    .dot {
+      height: 12px;
+      width: 12px;
+      margin: 0 6px;
+      background-color: #666;
+      border-radius: 50%;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+
+    .dot.active {
+      background-color: var(--color-accent);
+    }
+
+    .launch-text {
+      margin-top: 40px;
+      font-size: 1rem;
+      color: var(--color-accent);
+    }
+
+    @media (max-width: 768px) {
+      .logo-link span {
+        font-size: 1.6rem;
+      }
+      .feature-grid {
+        padding: 0 10px;
+      }
+    }
+
+    .fancy-heading {
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 900;
+      color: transparent;
+      background: linear-gradient(90deg, #249cff, #13c2c2, #249cff);
+      background-size: 300% auto;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+      animation: shimmer 5s infinite linear;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% center;
+      }
+      100% {
+        background-position: 200% center;
+      }
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="coming-hero fade-in">
+    <a href="index.html" class="logo-link" title="Go back to homepage">
+      <img src="translafast-icon.svg" alt="TranslaFast Logo">
+      <span>TranslaFast</span>
+    </a>
+    <h1 class="fancy-heading">Coming Soon: v12.4.1</h1>
+    <p>Experience our most advanced update yet — powered by GPT-4o, blazing speeds, and bulletproof security.</p>
+
+    <!-- Update Launch Info -->
+    <div class="update-info">
+      <span class="calendar-icon">📅</span>
+      <strong>TranslaFast v12.4.1</strong> launches <span class="highlight">next Wednesday</span> with game-changing improvements!
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">⚡</div>
+        <h3>Real-Time Boost</h3>
+        <p>Translation speeds are now 30% faster across all engines using predictive optimization.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🧠</div>
+        <h3>GPT-4o Hybrid Engine</h3>
+        <p>TranslaFast now merges GPT-4o with traditional engines for unmatched accuracy and fluency.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔐</div>
+        <h3>Token Revocation</h3>
+        <p>Inactive tokens are now automatically revoked for improved session security.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🎨</div>
+        <h3>Animated Themes</h3>
+        <p>Enjoy smooth transitions between light and dark themes with improved accessibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Included -->
+  <section class="info-section">
+    <h2>🚀 What’s Included in v12.4.1?</h2>
+    <p>
+      This update introduces intelligent workflows, improved translation logic, seamless animations, and top-tier security.
+      With a reengineered architecture, TranslaFast v12.4.1 delivers faster, smarter, and more secure translation experiences than ever before.
+      Enhanced real-time performance ensures that content is translated the moment it appears, while adaptive translation engines respond dynamically to language context and tone.
+    </p>
+
+    <p>
+      Thanks to full GPT-4o integration, users can now experience human-like accuracy and nuance in over 178 languages.
+      Our redesigned interface offers a smoother, more accessible user experience with animated transitions and auto-theming.
+      Privacy-focused updates, including token revocation and local translation mode, ensure that your data stays safe at all times.
+    </p>
+
+    <p>
+      From casual users to professional translators, v12.4.1 is built to empower every user with tools that adapt, learn, and perform in real-time.
+      It’s not just an update — it’s a leap forward in how we understand and interact with language on the web.
+    </p>
+  </section>
+
+  <!-- Visual -->
+  <section class="image-section">
+    <img src="https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDIzNmxyYmdsZDJkYTVnMDQzbGR0c2NvbTNhaWJqeTI1M3ExNDQzZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FP47IFqWyXfdKYU6VG/giphy.gif" alt="Coming Soon Animation">
+  </section>
+
+  <!-- Quote Slider -->
+  <section class="quote-slider">
+    <div class="quote-container" id="quoteContainer">
+      <div class="quote-item active">“Innovation distinguishes between a leader and a follower.” — Steve Jobs</div>
+      <div class="quote-item">“The future belongs to those who prepare for it today.” — Malcolm X</div>
+      <div class="quote-item">“Simplicity is the ultimate sophistication.” — Leonardo da Vinci</div>
+      <div class="quote-item">“Quality means doing it right when no one is looking.” — Henry Ford</div>
+      <div class="quote-item">“The best way to get started is to quit talking and begin doing.” — Walt Disney</div>
+    </div>
+    <div class="dots" id="quoteDots">
+      <span class="dot active"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+      <span class="dot"></span>
+    </div>
+  </section>
+
+    <!-- Footer -->
+  <footer style="text-align: center; padding: 40px 20px; font-size: 0.95rem; color: var(--color-muted); background: var(--color-surface); border-top: 1px solid rgba(255, 255, 255, 0.05);">
+    © 2025 TranslaFast. All rights reserved.
+  </footer>
+
+  <script>
+    const quotes = document.querySelectorAll('.quote-item');
+    const dots = document.querySelectorAll('.dot');
+    let index = 0;
+
+    function showQuote(i) {
+      quotes.forEach(q => q.classList.remove('active'));
+      dots.forEach(d => d.classList.remove('active'));
+      quotes[i].classList.add('active');
+      dots[i].classList.add('active');
+    }
+
+    function nextQuote() {
+      index = (index + 1) % quotes.length;
+      showQuote(index);
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => {
+        index = i;
+        showQuote(index);
+      });
+    });
+
+    setInterval(nextQuote, 5000);
+  </script>
+
+</body>
+</html>
