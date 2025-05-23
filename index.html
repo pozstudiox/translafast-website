@@ -152,14 +152,14 @@
     </div>
   </section>
 
-    <!-- Watch a Trailer (Deluxe Version) -->
+  <!-- Watch a Trailer -->
   <section class="watch-trailer fade-in" style="padding: 100px 20px; text-align: center;">
     <h2 style="
-      font-size: 2.5rem;
+      font-size: 2.6rem;
       margin-bottom: 20px;
       color: var(--color-accent);
       font-weight: 600;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
     ">🎬 Watch the Official Trailer</h2>
 
     <p style="font-size: 1.15rem; color: var(--color-muted); margin-bottom: 40px;">
@@ -171,59 +171,95 @@
       aspect-ratio: 16 / 9;
       margin: 0 auto;
       position: relative;
-      border-radius: 20px;
+      border-radius: 22px;
       overflow: hidden;
-      background: linear-gradient(135deg, #1a1a1a, #2c2c2e);
+      background: var(--color-surface);
       box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
       cursor: pointer;
       transition: transform 0.4s ease;
     " onmouseover="this.style.transform='scale(1.015)'" onmouseout="this.style.transform='scale(1)'">
 
-      <!-- Thumbnail -->
+      <!-- Thumbnail Image -->
       <img src="https://img.youtube.com/vi/OeCg-LCw55k/hqdefault.jpg" alt="Watch Trailer" style="
         width: 100%;
         height: 100%;
         object-fit: cover;
-        opacity: 0.95;
         filter: brightness(0.85) contrast(1.05);
-        transition: opacity 0.3s ease;
-      "/>
+      " />
 
-      <!-- Play Button -->
-      <div style="
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.6);
-        backdrop-filter: blur(6px);
-        border: 2px solid #00ffc3;
-        padding: 30px;
-        border-radius: 50%;
-        box-shadow: 0 0 20px #00ffc3, 0 0 60px rgba(0, 255, 195, 0.3);
-        transition: all 0.4s ease;
-      ">
-        <svg width="60" height="60" viewBox="0 0 24 24" fill="#00ffc3">
-          <path d="M8 5v14l11-7z" />
-        </svg>
+      <!-- Hover Play Button -->
+      <div class="play-button-container">
+        <div class="play-button-glow"></div>
+        <div class="play-icon">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="var(--color-accent)">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
       </div>
     </div>
   </section>
+
+  <style>
+  .play-button-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    border: 2px solid var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 18px var(--color-accent), 0 0 60px rgba(0, 255, 195, 0.3);
+    z-index: 2;
+  }
+
+  .play-button-container:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+    box-shadow: 0 0 30px var(--color-accent), 0 0 80px rgba(0, 255, 195, 0.5);
+  }
+
+  .play-button-glow {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 108px;
+    height: 108px;
+    border-radius: 50%;
+    border: 2px dashed var(--color-accent);
+    animation: rotateGlow 4s linear infinite;
+    opacity: 0.4;
+    z-index: 1;
+  }
+
+  @keyframes rotateGlow {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .play-icon {
+    z-index: 3;
+  }
+  </style>
 
   <script>
     const trailerDiv = document.getElementById("trailer-thumbnail");
 
     trailerDiv.addEventListener("click", () => {
-      trailerDiv.style.transition = "all 0.5s ease";
-      trailerDiv.style.transform = "scale(1)";
       trailerDiv.innerHTML = `
         <iframe width="100%" height="100%" src="https://www.youtube.com/embed/OeCg-LCw55k?autoplay=1&rel=0"
           title="TranslaFast Trailer" frameborder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen style="width: 100%; height: 100%; border-radius: 20px;"></iframe>
+          allowfullscreen style="width: 100%; height: 100%; border-radius: 22px;"></iframe>
       `;
     });
   </script>
+
 
 
 
