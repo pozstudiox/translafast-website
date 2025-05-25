@@ -8,15 +8,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --gradient-1: #0d1117;
-      --gradient-2: #161b22;
-      --gradient-3: #1f2937;
+      --bg1: #0d1117;
+      --bg2: #161b22;
       --accent: #58a6ff;
       --accent-hover: #79c0ff;
-      --text-main: #e6edf3;
-      --text-muted: #8b949e;
-      --radius: 10px;
-      --transition: 0.3s ease;
+      --alert: #f85149;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --radius: 14px;
     }
 
     * {
@@ -25,148 +24,204 @@
       box-sizing: border-box;
     }
 
-    html, body {
-      height: 100%;
-      font-family: 'Inter', sans-serif;
-    }
-
     body {
-      background: linear-gradient(-45deg, var(--gradient-1), var(--gradient-2), var(--gradient-3), var(--gradient-1));
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg1));
       background-size: 400% 400%;
-      animation: gradient 15s ease infinite;
+      animation: bgmove 15s ease infinite;
+      min-height: 100vh;
+      color: var(--text);
       display: flex;
-      justify-content: center;
       align-items: center;
-      text-align: center;
-      color: var(--text-main);
+      justify-content: center;
       padding: 20px;
     }
 
-    @keyframes gradient {
+    @keyframes bgmove {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
 
-    .coming-container {
-      max-width: 400px;
-      width: 100%;
-      padding: 40px 20px;
+    .container {
       background: rgba(25, 25, 30, 0.7);
-      border-radius: var(--radius);
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+      padding: 50px 30px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      border-radius: var(--radius);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 1.4s ease;
     }
 
-    .coming-logo {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 24px;
-      display: block;
-      animation: glow 2.5s ease-in-out infinite;
-      filter: drop-shadow(0 0 12px var(--accent));
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.96); }
+      to { opacity: 1; transform: scale(1); }
     }
 
-    @keyframes glow {
-      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 8px var(--accent)); }
-      50% { transform: scale(1.05); filter: drop-shadow(0 0 20px var(--accent)); }
+    .logo {
+      width: 90px;
+      margin-bottom: 20px;
+      filter: drop-shadow(0 0 8px var(--accent));
     }
 
     h1 {
       font-size: 2.5rem;
-      margin-bottom: 16px;
       color: var(--accent);
-      letter-spacing: 1px;
+      margin-bottom: 12px;
+      text-shadow: 0 0 6px var(--accent);
+      animation: titleIn 1.2s ease;
+    }
+
+    @keyframes titleIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     p {
-      font-size: 1rem;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-      line-height: 1.4;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .version {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 24px;
     }
 
     .countdown {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 32px;
-      gap: 10px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 30px;
+      transition: all 0.4s ease;
     }
 
-    .countdown div {
-      flex: 1;
-      background: rgba(255,255,255,0.1);
-      padding: 12px;
-      border-radius: var(--radius);
+    .time-box {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 18px 10px;
+      border-radius: 12px;
+      position: relative;
+      box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.05),
+                  0 0 10px rgba(88, 166, 255, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     }
 
-    .countdown .number {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-main);
+    .time-box:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 16px var(--accent);
     }
 
-    .countdown .label {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--text-muted);
+    .number {
+      font-size: 2.3rem;
+      font-weight: bold;
+    }
+
+    .label {
+      font-size: 0.75rem;
       margin-top: 4px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      color: var(--muted);
     }
 
     .back-btn {
       display: inline-block;
-      padding: 12px 24px;
+      margin-top: 10px;
+      background: var(--accent);
+      color: white;
+      padding: 12px 26px;
       font-size: 0.9rem;
       font-weight: 500;
-      color: #fff;
-      background: var(--accent);
-      text-decoration: none;
       border-radius: var(--radius);
-      transition: background var(--transition), transform var(--transition);
+      text-decoration: none;
+      transition: all 0.3s ease;
     }
 
     .back-btn:hover {
       background: var(--accent-hover);
       transform: translateY(-2px);
     }
+
+    .footer-note {
+      margin-top: 24px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* kırmızı alarm durumu */
+    .alert .time-box {
+      background: rgba(248, 81, 73, 0.12);
+      box-shadow: 0 0 16px var(--alert);
+    }
+
+    .alert h1 {
+      color: var(--alert);
+      text-shadow: 0 0 8px var(--alert);
+    }
+
+    .alert .back-btn {
+      background: var(--alert);
+    }
+
+    @media (max-width: 480px) {
+      .countdown {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      h1 { font-size: 2rem; }
+    }
   </style>
 </head>
 <body>
 
-  <div class="coming-container">
-    <img src="translafast-icon.svg" alt="TranslaFast Logo" class="coming-logo">
-    <h1>Launching Soon</h1>
-    <p>We're working hard to bring you the best translation experience. Stay tuned!</p>
+  <div class="container" id="container">
+    <img src="translafast-icon.svg" alt="Logo" class="logo">
+    <h1 id="title">Launching Soon</h1>
+    <p>We're almost ready! TranslaFast is coming soon.</p>
+    <div class="version">Version 12.4.1 · Launch Date: 1 June 2025</div>
 
     <div class="countdown" id="countdown">
-      <div><span class="number" id="days">00</span><span class="label">Days</span></div>
-      <div><span class="number" id="hours">00</span><span class="label">Hours</span></div>
-      <div><span class="number" id="minutes">00</span><span class="label">Minutes</span></div>
-      <div><span class="number" id="seconds">00</span><span class="label">Seconds</span></div>
+      <div class="time-box"><div class="number" id="days">00</div><div class="label">Days</div></div>
+      <div class="time-box"><div class="number" id="hours">00</div><div class="label">Hours</div></div>
+      <div class="time-box"><div class="number" id="minutes">00</div><div class="label">Minutes</div></div>
+      <div class="time-box"><div class="number" id="seconds">00</div><div class="label">Seconds</div></div>
     </div>
 
     <a href="index.html" class="back-btn">Back to Home</a>
+    <div class="footer-note">Crafted with ♥ by PozStudio</div>
   </div>
 
   <script>
-    const launchDate = new Date('2025-06-01T00:00:00');
+    const launchDate = new Date("2025-06-01T00:00:00");
+    const container = document.getElementById('container');
+
     function updateCountdown() {
       const now = new Date();
       const diff = launchDate - now;
+
       if (diff <= 0) return;
+
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
-      document.getElementById('days').textContent = String(days).padStart(2, '0');
-      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+      document.getElementById("days").textContent = String(days).padStart(2, '0');
+      document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+      document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+      document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+
+      // Eğer gün 1'e eşitse kırmızıya çevir
+      if (days <= 1) {
+        container.classList.add("alert");
+      } else {
+        container.classList.remove("alert");
+      }
     }
-    setInterval(updateCountdown, 1000);
+
     updateCountdown();
+    setInterval(updateCountdown, 1000);
   </script>
 
 </body>
