@@ -1699,34 +1699,80 @@ body::-webkit-scrollbar-thumb:hover {
 }
 
 .update-banner {
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-hover));
+  background: linear-gradient(105deg, var(--color-accent) 60%, var(--color-accent-hover) 100%);
   color: #fff;
   text-align: center;
-  padding: 12px 18px;
-  font-size: 0.95rem;
-  font-weight: 500;
+  padding: 15px 24px 15px 55px;
+  font-size: 1.06rem;
+  font-weight: 600;
   position: sticky;
   top: 0;
   z-index: 1100;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  animation: slideDown 0.6s ease;
+  box-shadow: 0 4px 18px 0 #007acc39, 0 1px 5px #232c3c33;
+  border-radius: 0 0 16px 16px;
+  animation: slideDown 0.64s cubic-bezier(.6,1.6,.55,1) 1;
+  letter-spacing: .01em;
+  overflow: hidden;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.update-banner .update-icon {
+  margin-right: 13px;
+  font-size: 1.57em;
+  display: inline-block;
+  vertical-align: middle;
+  filter: drop-shadow(0 0 9px #ffe58a70);
+  opacity: 0.93;
 }
 
 .update-banner a {
-  color: #ffffff;
-  font-weight: bold;
+  color: #ffe58a;
+  font-weight: 700;
   margin-left: 8px;
-  text-decoration: underline;
-  transition: color 0.3s ease;
+  text-decoration: underline dotted;
+  padding: 0 2px;
+  border-radius: 6px;
+  transition: 
+    background 0.23s,
+    color 0.25s,
+    box-shadow 0.2s;
+  box-shadow: 0 2px 10px #ffe58a2b;
 }
 
 .update-banner a:hover {
+  color: #fff;
+  background: #ffe58a24;
+  box-shadow: 0 4px 24px #ffe58a28;
+  text-shadow: 0 2px 12px #ffe58a88;
+}
+
+.update-banner .update-close {
+  position: absolute;
+  right: 18px;
+  top: 12px;
+  font-size: 1.2em;
+  background: none;
+  border: none;
+  color: #fff;
+  opacity: 0.6;
+  cursor: pointer;
+  padding: 0 8px;
+  border-radius: 5px;
+  transition: background 0.2s, color 0.22s, opacity 0.14s;
+}
+.update-banner .update-close:hover {
   color: #ffe58a;
+  background: #fff2;
+  opacity: 1;
 }
 
 @keyframes slideDown {
   from {
-    transform: translateY(-100%);
+    transform: translateY(-80%);
     opacity: 0;
   }
   to {
@@ -1734,6 +1780,7 @@ body::-webkit-scrollbar-thumb:hover {
     opacity: 1;
   }
 }
+
 
 .ai-comparison {
   margin: 56px 0 32px;
