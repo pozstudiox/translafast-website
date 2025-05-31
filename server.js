@@ -24,7 +24,8 @@ const pages = [
   'coming-soon',
   'about',
   'apps',
-  'now-lives'
+  'now-lives',
+  'learn-12-4-1' //UPDATELERDE DEĞİŞECEK!!
 ];
 
 // .html ile gelirse, uzantısız haline yönlendir
