@@ -102,14 +102,24 @@
     </div>
   </div>
   <script>
-    // IP adresini çek ve ekrana yaz
-    fetch('https://ipinfo.io/json')
-      .then(r => r.json())
-      .then(data => {
-        document.querySelector('#ip span').textContent = data.ip || "Unknown";
+    // IP adresini çek ve ekrana yaz, timeout ekleyerek daha güvenli hale getir
+    const ipSpan = document.querySelector('#ip span');
+
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 saniye timeout
+
+    fetch('https://ipinfo.io/json', { signal: controller.signal })
+      .then(response => {
+        clearTimeout(timeoutId);
+        if (!response.ok) throw new Error("Network response was not ok");
+        return response.json();
       })
-      .catch(() => {
-        document.querySelector('#ip span').textContent = "Unavailable";
+      .then(data => {
+        ipSpan.textContent = data.ip || "Unknown";
+      })
+      .catch(err => {
+        console.error("IP Fetch Error:", err);
+        ipSpan.textContent = "Unavailable";
       });
   </script>
 </body>
