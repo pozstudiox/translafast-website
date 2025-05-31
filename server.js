@@ -4,52 +4,55 @@ const fs = require('fs');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Anasayfa
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// Default değerler
 const DEFAULT_VERSION = '7.0.3';
 const DEFAULT_XTID = 'cmedhionkhpnakcndndgjdbohmhepckk';
 
-// Parametre kontrolü yapılacak HTML sayfaları
+// .html uzantısı olmadan kullanılacak sayfalar:
 const pages = [
-  'uninstall.html',
-  'support.html',
-  'teşekkürler.html',
-  'sss.html',
-  'privacy.html',
-  'kvkk.html',
-  'logs.html',
-  'index.html',
-  'api.html',
-  'destek.html',
-  '404.html',
-  'languages.html',
-  'coming-soon.html',
-  'about.html',
-  'apps.html',
-  'now-lives.html'
+  'uninstall',
+  'support',
+  'teşekkürler',
+  'sss',
+  'privacy',
+  'kvkk',
+  'logs',
+  'index',
+  'api',
+  'destek',
+  '404',
+  'languages',
+  'coming-soon',
+  'about',
+  'apps',
+  'now-lives'
 ];
 
-// HTML sayfaları için yönlendirme ve parametre işle
+// .html ile gelirse, uzantısız haline yönlendir
+pages.forEach(page => {
+  app.get(`/${page}.html`, (req, res) => {
+    // Query parametreleri koruyarak yönlendir
+    const search = Object.entries(req.query).map(([k, v]) => `${k}=${v}`).join('&');
+    const redirectUrl = `/${page}` + (search ? `?${search}` : '');
+    res.redirect(301, redirectUrl);
+  });
+});
+
+// Normal sayfa gösterimi, uzantısız
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
-    const version = req.query.v;
-    const xtid = req.query.xtid;
+    const version = req.query.v || DEFAULT_VERSION;
+    const xtid = req.query.xtid || DEFAULT_XTID;
 
-    // Eğer v veya xtid yoksa otomatik parametreli URL'ye yönlendir
-    if (!version || !xtid) {
-      return res.redirect(`/${page}?v=${DEFAULT_VERSION}&xtid=${DEFAULT_XTID}`);
+    // Query parametreleri yoksa otomatik ekle ve yönlendir
+    if (!req.query.v || !req.query.xtid) {
+      return res.redirect(`/${page}?v=${version}&xtid=${xtid}`);
     }
 
     // HTML dosyasını oku ve değişkenleri yerleştir
-    fs.readFile(path.join(__dirname, page), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, `${page}.html`), 'utf8', (err, data) => {
       if (err) {
         return res.status(500).send('Sunucu hatası.');
       }
-
       const modifiedData = data
         .replace('{{VERSION}}', version)
         .replace('{{XTID}}', xtid);
@@ -59,10 +62,31 @@ pages.forEach(page => {
   });
 });
 
+// Anasayfa (index)
+app.get('/', (req, res) => {
+  // Kök sayfa için de parametreleri kontrol et
+  const version = req.query.v || DEFAULT_VERSION;
+  const xtid = req.query.xtid || DEFAULT_XTID;
+
+  if (!req.query.v || !req.query.xtid) {
+    return res.redirect(`/?v=${version}&xtid=${xtid}`);
+  }
+
+  fs.readFile(path.join(__dirname, 'index.html'), 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).send('Sunucu hatası.');
+    }
+    const modifiedData = data
+      .replace('{{VERSION}}', version)
+      .replace('{{XTID}}', xtid);
+    res.send(modifiedData);
+  });
+});
+
 // Statik dosyalar (CSS, JS, img vs.)
 app.use(express.static(path.join(__dirname)));
 
-// Özel 404 sayfası
+// 404 - bulunamayan sayfa (her URL için çalışır)
 app.use((req, res) => {
   const version = req.query.v || DEFAULT_VERSION;
   const xtid = req.query.xtid || DEFAULT_XTID;
@@ -71,7 +95,6 @@ app.use((req, res) => {
     if (err) {
       return res.status(500).send('404 sayfası yüklenemedi.');
     }
-
     const modifiedData = data
       .replace('{{VERSION}}', version)
       .replace('{{XTID}}', xtid);
