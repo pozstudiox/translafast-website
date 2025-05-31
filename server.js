@@ -1,6 +1,9 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -25,13 +28,55 @@ const pages = [
   'about',
   'apps',
   'now-lives',
-  'learn-12-4-1' //UPDATELERDE DEĞİŞECEK!!
+  'learn-12-4-1', //UPDATELERDE DEĞİŞECEK!!
+  'hacker'
 ];
+
+// Helmet: güvenlik header'ları
+app.use(helmet());
+
+// Body parser limitleri
+app.use(express.json({ limit: '64kb' }));
+app.use(express.urlencoded({ extended: false, limit: '64kb' }));
+
+// User-Agent ve Bot filtresi
+app.use((req, res, next) => {
+  const ua = req.headers['user-agent'];
+  if (!ua || ua.length < 10 || /curl|bot|python|fetch|wget|scrapy|requests|spider|scan/i.test(ua)) {
+    return fs.readFile(path.join(__dirname, 'hacker.html'), 'utf8', (err, data) => {
+      if (err) return res.status(403).send('Access Denied!');
+      res.status(403).send(data);
+    });
+  }
+  next();
+});
+
+// Rate limit: DDoS ve botları yavaşlat
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 dakika
+  max: 100, // 100 istek (bu sayıyı daha düşük de yapabilirsin)
+  standardHeaders: true,
+  legacyHeaders: false,
+  handler: function (req, res) {
+    fs.readFile(path.join(__dirname, 'hacker.html'), 'utf8', (err, data) => {
+      if (err) return res.status(429).send('Too many requests');
+      res.status(429).send(data);
+    });
+  }
+});
+app.use(generalLimiter);
+
+// Timeout (10 sn)
+app.use((req, res, next) => {
+  res.setTimeout(10 * 1000, () => {
+    res.status(408).send('Request Timeout');
+  });
+  next();
+});
 
 // .html ile gelirse, uzantısız haline yönlendir
 pages.forEach(page => {
   app.get(`/${page}.html`, (req, res) => {
-    // Query parametreleri koruyarak yönlendir
     const search = Object.entries(req.query).map(([k, v]) => `${k}=${v}`).join('&');
     const redirectUrl = `/${page}` + (search ? `?${search}` : '');
     res.redirect(301, redirectUrl);
@@ -65,7 +110,6 @@ pages.forEach(page => {
 
 // Anasayfa (index)
 app.get('/', (req, res) => {
-  // Kök sayfa için de parametreleri kontrol et
   const version = req.query.v || DEFAULT_VERSION;
   const xtid = req.query.xtid || DEFAULT_XTID;
 
@@ -87,7 +131,7 @@ app.get('/', (req, res) => {
 // Statik dosyalar (CSS, JS, img vs.)
 app.use(express.static(path.join(__dirname)));
 
-// 404 - bulunamayan sayfa (her URL için çalışır)
+// 404 - bulunamayan sayfa
 app.use((req, res) => {
   const version = req.query.v || DEFAULT_VERSION;
   const xtid = req.query.xtid || DEFAULT_XTID;
