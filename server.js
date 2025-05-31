@@ -29,7 +29,8 @@ const pages = [
   'apps',
   'now-lives',
   'learn-12-4-1', //UPDATELERDE DEĞİŞECEK!!
-  'hacker'
+  //'hacker',
+  'suspicious-activity-observed'
 ];
 
 // Helmet: güvenlik header'ları
@@ -43,7 +44,7 @@ app.use(express.urlencoded({ extended: false, limit: '64kb' }));
 app.use((req, res, next) => {
   const ua = req.headers['user-agent'];
   if (!ua || ua.length < 10 || /curl|bot|python|fetch|wget|scrapy|requests|spider|scan/i.test(ua)) {
-    return fs.readFile(path.join(__dirname, 'hacker.html'), 'utf8', (err, data) => {
+    return fs.readFile(path.join(__dirname, 'suspicious-activity-observed.html'), 'utf8', (err, data) => {
       if (err) return res.status(403).send('Access Denied!');
       res.status(403).send(data);
     });
@@ -58,7 +59,7 @@ const generalLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
   handler: function (req, res) {
-    fs.readFile(path.join(__dirname, 'hacker.html'), 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, 'suspicious-activity-observed.html'), 'utf8', (err, data) => {
       if (err) return res.status(429).send('Too many requests');
       res.status(429).send(data);
     });
