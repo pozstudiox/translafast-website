@@ -30,7 +30,8 @@ const pages = [
   'now-lives',
   'learn-12-4-1', //UPDATELERDE DEĞİŞECEK!!
   //'hacker',
-  'suspicious-activity-observed'
+  'suspicious-activity-observed',
+  'fire_wall'
 ];
 
 // Helmet: güvenlik header'ları
