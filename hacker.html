@@ -3,11 +3,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Nice Try 😈 | TranslaFast Security</title>
+  <title>Access Blocked | TranslaFast Security</title>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <style>
     body {
-      background: #100021;
+      background: #110025;
       color: #fff;
       font-family: 'Segoe UI', sans-serif;
       display: flex;
@@ -18,58 +18,98 @@
       margin: 0;
     }
     .box {
-      background: rgba(40,10,60,0.85);
-      padding: 40px 30px;
-      border-radius: 20px;
-      box-shadow: 0 4px 24px #000c;
+      background: rgba(32,10,48,0.93);
+      padding: 22px 18px 18px 18px;
+      border-radius: 15px;
+      box-shadow: 0 4px 28px #000a;
       text-align: center;
+      border: 2px solid #fd366e;
+      max-width: 340px;
+    }
+    .warning-icon {
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+      animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+      0% { filter: brightness(1);}
+      50% { filter: brightness(1.7);}
+      100% { filter: brightness(1);}
     }
     h1 {
-      font-size: 2.7rem;
+      font-size: 1.45rem;
       color: #fd366e;
-      margin-bottom: 16px;
-      text-shadow: 0 2px 12px #f08;
+      margin-bottom: 7px;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 12px #d00a;
+    }
+    .log {
+      font-size: 0.98rem;
+      color: #fa6363;
+      background: #220718;
+      border-radius: 6px;
+      padding: 4px 8px;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+    .ip-row {
+      font-size: 0.99rem;
+      color: #ffd700;
+      margin-bottom: 10px;
+      background: #171717;
+      border-radius: 5px;
+      padding: 3px 7px;
+      display: inline-block;
+      letter-spacing: 0.01em;
     }
     p {
-      font-size: 1.25rem;
-      color: #ffbbff;
-      margin-bottom: 18px;
-    }
-    .emoji {
-      font-size: 3rem;
-      animation: shake 0.8s infinite;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-    @keyframes shake {
-      0% { transform: rotate(-6deg);}
-      50% {transform: rotate(6deg);}
-      100% {transform: rotate(-6deg);}
+      font-size: 1.01rem;
+      color: #ffe7fc;
+      margin-bottom: 13px;
+      line-height: 1.4;
     }
     .subtitle {
-      font-size: 1.1rem;
+      font-size: 0.92rem;
       color: #60d9f7;
-      margin-top: 20px;
+      margin-bottom: 9px;
     }
-    code {
-      color: #ffd700;
-      background: #212;
-      border-radius: 6px;
-      padding: 2px 6px;
-      font-size: 1.05em;
+    .legal {
+      font-size: 0.88rem;
+      color: #ffa2a2;
+      opacity: 0.7;
+      margin-top: 13px;
+      line-height: 1.3;
     }
   </style>
 </head>
 <body>
   <div class="box">
-    <div class="emoji">👾</div>
-    <h1>Access Denied!</h1>
-    <p>Looks like you’re trying something suspicious.<br>
-    <b>Your activity has been logged.</b></p>
+    <div class="warning-icon">🚫</div>
+    <h1>Access Blocked</h1>
+    <div class="log">All suspicious actions are logged.</div>
+    <div class="ip-row" id="ip">IP Address: <span>Loading...</span></div>
+    <p>
+      Unauthorized access detected.<br>
+      <b>Further attempts may result in a permanent ban or legal action.</b>
+    </p>
     <div class="subtitle">
-      If you think this is a mistake, <code>stop the attack</code> and try again like a normal human.<br>
-      <br>Powered by TranslaFast Security 🚨
+      If this is an error, contact <b>security@translafast.xyz</b>
+    </div>
+    <div class="legal">
+      All activity is monitored. Attacks are automatically reported.<br>
+      © 2025 TranslaFast Security
     </div>
   </div>
+  <script>
+    // IP adresini çek ve ekrana yaz
+    fetch('https://ipinfo.io/json')
+      .then(r => r.json())
+      .then(data => {
+        document.querySelector('#ip span').textContent = data.ip || "Unknown";
+      })
+      .catch(() => {
+        document.querySelector('#ip span').textContent = "Unavailable";
+      });
+  </script>
 </body>
 </html>
