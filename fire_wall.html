@@ -7,9 +7,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="icon" href="translafast-securty.png" />
   <style>
-    /* ================== Genel Stil ================== */
     @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
     :root {
       --color-bg: #040a0a;
       --color-green: #39ff14;
@@ -20,8 +18,6 @@
       --color-firewall: #ffaa00;
       --font-mono: 'Share Tech Mono', monospace;
     }
-
-    /* Body ve merkez */
     body {
       margin: 0;
       height: 100vh;
@@ -37,8 +33,6 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
-
-    /* Arka plan hareketli kod animasyonu */
     body::before {
       content: '';
       position: fixed;
@@ -54,13 +48,10 @@
       z-index: 0;
       animation: scanlineMove 4s linear infinite;
     }
-
     @keyframes scanlineMove {
       0% { background-position: 0 0; }
       100% { background-position: 0 100%; }
     }
-
-    /* Konsol kutusu */
     .console-box {
       position: relative;
       background: #001500cc;
@@ -79,8 +70,6 @@
       overflow: hidden;
       z-index: 10;
     }
-
-    /* Başlık neon animasyonlu */
     h1 {
       font-size: 2.8rem;
       color: var(--color-alert);
@@ -96,7 +85,6 @@
       letter-spacing: 1.4px;
       font-family: 'Share Tech Mono', monospace;
     }
-
     @keyframes neonPulse {
       0% {
         text-shadow:
@@ -115,8 +103,6 @@
         color: #ff2222;
       }
     }
-
-    /* Log satırlarını içeren alan */
     .lines-wrapper {
       flex-grow: 1;
       overflow-y: auto;
@@ -134,8 +120,6 @@
         inset 0 0 10px #00ff0055;
       font-feature-settings: "liga", "calt";
     }
-
-    /* Scrollbar özel */
     .lines-wrapper::-webkit-scrollbar {
       width: 10px;
       background: transparent;
@@ -153,8 +137,6 @@
     .lines-wrapper::-webkit-scrollbar-thumb:hover {
       background: #00ff00bb;
     }
-
-    /* Her log satırı */
     .line {
       user-select: none;
       margin-bottom: 12px;
@@ -166,14 +148,10 @@
       border-left: 3px solid transparent;
       transition: border-color 0.3s ease;
     }
-
-    /* Hover yapınca seçmeye çalışanlara uyarı */
     .line:hover {
       border-color: var(--color-alert);
       cursor: not-allowed;
     }
-
-    /* Uyarı ve kritik mesajlar */
     .alert {
       color: var(--color-alert);
       font-weight: 700;
@@ -183,15 +161,11 @@
       border-left-color: var(--color-alert);
       user-select: text;
     }
-
-    /* Normal mesajlar */
     .normal {
       color: var(--color-normal);
       font-weight: 600;
       border-left-color: var(--color-normal);
     }
-
-    /* Prompt satırı (komut satırı) */
     .prompt {
       font-weight: 700;
       color: var(--color-prompt);
@@ -204,8 +178,6 @@
       align-items: center;
       font-family: var(--font-mono);
     }
-
-    /* Cursor yanıp sönen neon */
     .cursor {
       display: inline-block;
       width: 12px;
@@ -217,13 +189,10 @@
       filter: drop-shadow(0 0 3px var(--color-prompt));
       border-radius: 2px;
     }
-
     @keyframes blink {
       0%, 50%, 100% { opacity: 1; }
       25%, 75% { opacity: 0; }
     }
-
-    /* Animasyonlu firewall durumu */
     .firewall-status {
       position: absolute;
       top: 20px;
@@ -241,7 +210,6 @@
       pointer-events: none;
       z-index: 20;
     }
-
     @keyframes pulseFire {
       0% {
         text-shadow:
@@ -256,16 +224,12 @@
         color: #ffbb00ff;
       }
     }
-
-    /* Hacker jargon efekti satırı - renk ve italik */
     .jargon {
       font-style: italic;
       color: #8cff8c;
       opacity: 0.8;
       user-select: none;
     }
-
-    /* IP simülasyonu satırı */
     .ip-address {
       font-weight: 700;
       color: #00ffffcc;
@@ -273,8 +237,6 @@
       text-shadow:
         0 0 6px #00ffffaa;
     }
-
-    /* Footer gizli küçük metin */
     .footer-text {
       position: absolute;
       bottom: 12px;
@@ -285,8 +247,6 @@
       font-family: var(--font-mono);
       letter-spacing: 1.5px;
     }
-
-    /* Responsive (küçük ekran) */
     @media (max-width: 750px) {
       .console-box {
         width: 95vw;
@@ -310,158 +270,139 @@
   <div class="console-box" role="alert" aria-live="assertive" aria-atomic="false" aria-label="TranslaFast Security Console">
     <h1>TranslaFast Security Console</h1>
     <div class="firewall-status" aria-hidden="true">FIREWALL STATUS: ACTIVE</div>
-    <div class="lines-wrapper" id="consoleLines" aria-label="Security log output">
-      <!-- Yazılar JS ile gelecek -->
-    </div>
+    <div class="lines-wrapper" id="consoleLines" aria-label="Security log output"></div>
     <div class="line prompt" aria-hidden="true">[root@translafast ~]# <span class="cursor"></span></div>
     <div class="footer-text" aria-hidden="true">© 2025 TranslaFast Security • All Rights Reserved</div>
   </div>
 
   <script>
-    // ======= Mesajlar ve dinamik efektler =======
-    const messages = [
-      "[root@translafast ~]# Unauthorized access detected!",
-      "Logging all suspicious activity...",
-      "Tracing attack vector: INTRUSION_ATTEMPT_42069",
-      "Deploying countermeasures: ACTIVE",
-      "WARNING: Further attempts will trigger immediate IP ban & legal prosecution.",
-      "System status: SECURE",
-      "Contact security@translafast.xyz if you believe this is an error.",
-      "Initializing firewall lockdown...",
-      "Activating AI threat detection module...",
-      "Launching counter-hacking protocols...",
-      "Recording your activities for authorities...",
-      "Last login attempt: [REDACTED]",
-      "Encrypting logs and sending to Federal Cyber Security Division...",
-      "Enjoy your permanent ban. Goodbye."
-    ];
-
-    // Çoklu rastgele hacker jargonları
-    const jargonPhrases = [
-      "Payload injection detected...",
-      "Firewall breach attempt failed.",
-      "IP spoofing identified: ",
-      "Malware signature matched: Trojan-XYZ",
-      "Suspicious packet flood detected...",
-      "System integrity check: OK",
-      "Access logs timestamp mismatch.",
-      "Port scan from IP ",
-      "Exploit kit usage detected.",
-      "Brute force login attempt blocked.",
-      "Zero-day vulnerability alert!",
-      "Suspicious DNS request: ",
-      "Reverse shell attempt caught.",
-      "Network anomaly detected.",
-      "Rootkit detection engine active.",
-      "Encrypted communication established.",
-      "VPN bypass attempt failed.",
-      "Intrusion prevention system alert!",
-      "Unauthorized command execution blocked."
-    ];
-
-    // Rastgele IP üretici (v4)
-    function randomIP() {
-      return Array.from({length:4}, () => Math.floor(Math.random()*256)).join('.');
-    }
-
-    // Satır yazma ayarları
-    const container = document.getElementById('consoleLines');
-    let currentIndex = 0;
-    const typingSpeed = 30; // ms per karakter
-    const delayBetweenLines = 700; // ms satırlar arası
-
-    // Random jargon satırı araya serpiştir
-    function getRandomJargonLine() {
-      const phrase = jargonPhrases[Math.floor(Math.random() * jargonPhrases.length)];
-      // IP eklemeli jargonlar için
-      if (phrase.includes("IP ")) {
-        return phrase + randomIP();
-      }
-      if (phrase.includes("Suspicious DNS request: ")) {
-        return phrase + "malicious-domain.xyz";
-      }
-      return phrase;
-    }
-
-    // Satır tip etme fonksiyonu
-    function typeLine(text, callback) {
-      let i = 0;
-      const line = document.createElement('div');
-      line.classList.add('line');
-
-      // Özel stiller
-      if (text.startsWith("WARNING") || text.includes("BAN") || text.includes("Legal prosecution")) {
-        line.classList.add('alert');
-      } else if (text.startsWith("[root@")) {
-        line.classList.add('prompt');
-      } else if (text.startsWith("IP ")) {
-        line.classList.add('ip-address');
-      } else if (text.startsWith("Payload") || text.startsWith("Malware") || text.startsWith("Exploit") || text.startsWith("Intrusion") || text.startsWith("Reverse")) {
-        line.classList.add('jargon');
-      } else {
-        line.classList.add('normal');
-      }
-
-      container.appendChild(line);
-      container.scrollTop = container.scrollHeight;
-
-      function typeChar() {
-        if (i < text.length) {
-          line.textContent += text.charAt(i);
-          i++;
-          container.scrollTop = container.scrollHeight;
-          setTimeout(typeChar, typingSpeed);
-        } else {
-          callback && callback();
-        }
-      }
-      typeChar();
-    }
-
-    // Döngüyle mesajları ve jargonları yazdırma
-    function runMessages() {
-      if (currentIndex < messages.length) {
-        typeLine(messages[currentIndex], () => {
-          currentIndex++;
-          // Arada rastgele jargon satırı ekleyelim
-          if (currentIndex % 2 === 1 && currentIndex < messages.length) {
-            setTimeout(() => {
-              typeLine(getRandomJargonLine(), () => {
-                setTimeout(runMessages, delayBetweenLines);
-              });
-            }, delayBetweenLines / 2);
-          } else {
-            setTimeout(runMessages, delayBetweenLines);
-          }
-        });
-      } else {
-        // Sonunda biraz rastgele jargon bırakıp beklet
-        let jargonCount = 5;
-        function typeJargons() {
-          if (jargonCount > 0) {
-            typeLine(getRandomJargonLine(), () => {
-              jargonCount--;
-              setTimeout(typeJargons, 900);
-            });
-          }
-        }
-        typeJargons();
-      }
-    }
-
-    runMessages();
-
-    // Fare ile seçmeye çalışınca caydırıcı uyarı
-    document.body.addEventListener('selectstart', (e) => {
-      e.preventDefault();
-      alert("Selection disabled for security reasons! Access is monitored.");
-    });
-
-    // Sayfa yenilendiğinde scroll en alta
     window.onload = () => {
+      const container = document.getElementById('consoleLines');
+
+      const messages = [
+        "[root@translafast ~]# Unauthorized access detected!",
+        "Logging all suspicious activity...",
+        "Tracing attack vector: INTRUSION_ATTEMPT_42069",
+        "Deploying countermeasures: ACTIVE",
+        "WARNING: Further attempts will trigger immediate IP ban & legal prosecution.",
+        "System status: SECURE",
+        "Contact security@translafast.xyz if you believe this is an error.",
+        "Initializing firewall lockdown...",
+        "Activating AI threat detection module...",
+        "Launching counter-hacking protocols...",
+        "Recording your activities for authorities...",
+        "Last login attempt: [REDACTED]",
+        "Encrypting logs and sending to Federal Cyber Security Division...",
+        "Enjoy your permanent ban. Goodbye."
+      ];
+
+      const jargonPhrases = [
+        "Payload injection detected...",
+        "Firewall breach attempt failed.",
+        "IP spoofing identified: ",
+        "Malware signature matched: Trojan-XYZ",
+        "Suspicious packet flood detected...",
+        "System integrity check: OK",
+        "Access logs timestamp mismatch.",
+        "Port scan from IP ",
+        "Exploit kit usage detected.",
+        "Brute force login attempt blocked.",
+        "Zero-day vulnerability alert!",
+        "Suspicious DNS request: ",
+        "Reverse shell attempt caught.",
+        "Network anomaly detected.",
+        "Rootkit detection engine active.",
+        "Encrypted communication established.",
+        "VPN bypass attempt failed.",
+        "Intrusion prevention system alert!",
+        "Unauthorized command execution blocked."
+      ];
+
+      function randomIP() {
+        return Array.from({length:4}, () => Math.floor(Math.random()*256)).join('.');
+      }
+
+      function getRandomJargonLine() {
+        const phrase = jargonPhrases[Math.floor(Math.random() * jargonPhrases.length)];
+        if (phrase.includes("IP ")) return phrase + randomIP();
+        if (phrase.includes("Suspicious DNS request: ")) return phrase + "malicious-domain.xyz";
+        return phrase;
+      }
+
+      let currentIndex = 0;
+      const typingSpeed = 30;
+      const delayBetweenLines = 700;
+
+      function typeLine(text, callback) {
+        let i = 0;
+        const line = document.createElement('div');
+        line.classList.add('line');
+
+        if (text.startsWith("WARNING") || text.includes("BAN") || text.includes("Legal prosecution")) {
+          line.classList.add('alert');
+        } else if (text.startsWith("[root@")) {
+          line.classList.add('prompt');
+        } else if (text.startsWith("IP ")) {
+          line.classList.add('ip-address');
+        } else if (/^(Payload|Malware|Exploit|Intrusion|Reverse)/.test(text)) {
+          line.classList.add('jargon');
+        } else {
+          line.classList.add('normal');
+        }
+
+        container.appendChild(line);
+        container.scrollTop = container.scrollHeight;
+
+        function typeChar() {
+          if (i < text.length) {
+            line.textContent += text.charAt(i);
+            i++;
+            container.scrollTop = container.scrollHeight;
+            setTimeout(typeChar, typingSpeed);
+          } else {
+            callback && callback();
+          }
+        }
+        typeChar();
+      }
+
+      function runMessages() {
+        if (currentIndex < messages.length) {
+          typeLine(messages[currentIndex], () => {
+            currentIndex++;
+            if (currentIndex % 2 === 1 && currentIndex < messages.length) {
+              setTimeout(() => {
+                typeLine(getRandomJargonLine(), () => {
+                  setTimeout(runMessages, delayBetweenLines);
+                });
+              }, delayBetweenLines / 2);
+            } else {
+              setTimeout(runMessages, delayBetweenLines);
+            }
+          });
+        } else {
+          let jargonCount = 5;
+          function typeJargons() {
+            if (jargonCount > 0) {
+              typeLine(getRandomJargonLine(), () => {
+                jargonCount--;
+                setTimeout(typeJargons, 900);
+              });
+            }
+          }
+          typeJargons();
+        }
+      }
+
+      runMessages();
+
+      document.body.addEventListener('selectstart', (e) => {
+        e.preventDefault();
+        alert("Selection disabled for security reasons! Access is monitored.");
+      });
+
       container.scrollTop = container.scrollHeight;
     };
-
   </script>
 </body>
 </html>
