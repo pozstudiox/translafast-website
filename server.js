@@ -24,28 +24,41 @@ const pages = [
   'languages.html',
   'coming-soon.html',
   'about.html',
-  'apps.html'
+  'apps.html',
+  'learn-12-4-1.html' // örnek ekledim, gerçek dosyalar burada olmalı
 ];
 
-// 1) Uzantısız sayfa isteği gelirse .html uzantısını ekleyip yönlendir
+// 1) Eğer istek uzantısızsa, aynı ada .html uzantısı varsa yönlendir
 app.get('/:page', (req, res, next) => {
   const page = req.params.page;
 
-  // Eğer istek .html uzantısı içermiyorsa ve sayfa listesinde varsa
-  if (!page.endsWith('.html') && pages.includes(page + '.html')) {
-    const query = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
-    return res.redirect(`/${page}.html${query}`);
+  if (!page.endsWith('.html')) {
+    const possibleFile = page + '.html';
+    const fullPath = path.join(__dirname, possibleFile);
+
+    // Dosyanın varlığını kontrol et
+    fs.access(fullPath, fs.constants.F_OK, (err) => {
+      if (!err) {
+        // Dosya varsa query varsa al, yoksa boş string
+        const query = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+        return res.redirect(`/${possibleFile}${query}`);
+      } else {
+        // Dosya yoksa bir sonraki middleware geç
+        next();
+      }
+    });
+  } else {
+    // Zaten .html uzantılıysa devam et
+    next();
   }
-  next();
 });
 
 // 2) Anasayfa kesin index.html gönder
 app.get('/', (req, res) => {
-  const filePath = path.join(__dirname, 'index.html');
-  res.sendFile(filePath);
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// 3) Sayfalar için dinamik parametre kontrolü ve içerik değişimi
+// 3) Sayfa bazlı parametre kontrolü ve içerik değiştirme
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
     const version = req.query.v;
@@ -55,14 +68,12 @@ pages.forEach(page => {
       return res.redirect(`/${page}?v=${DEFAULT_VERSION}&xtid=${DEFAULT_XTID}`);
     }
 
-    const filePath = path.join(__dirname, page);
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    fs.readFile(path.join(__dirname, page), 'utf8', (err, data) => {
       if (err) {
-        console.error('Dosya okunamadı:', filePath, err);
+        console.error('Dosya okunamadı:', page, err);
         return res.status(500).send('Sunucu hatası.');
       }
 
-      // Tüm {{VERSION}} ve {{XTID}} yerlerini değiştir
       const modifiedData = data.replace(/{{VERSION}}/g, version).replace(/{{XTID}}/g, xtid);
       res.send(modifiedData);
     });
@@ -72,7 +83,7 @@ pages.forEach(page => {
 // 4) Statik dosyaları sun
 app.use(express.static(path.join(__dirname)));
 
-// 5) 404 sayfası
+// 5) 404 - Bulunamayan sayfa
 app.use((req, res) => {
   res.status(404).send('Sayfa bulunamadı.');
 });
