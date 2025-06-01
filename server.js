@@ -27,24 +27,34 @@ const pages = [
   'apps.html'
 ];
 
-// Anasayfa olarak kesinlikle index.html gönder
+// 1) Uzantısız sayfa isteği gelirse .html uzantısını ekleyip yönlendir
+app.get('/:page', (req, res, next) => {
+  const page = req.params.page;
+
+  // Eğer istek .html uzantısı içermiyorsa ve sayfa listesinde varsa
+  if (!page.endsWith('.html') && pages.includes(page + '.html')) {
+    const query = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+    return res.redirect(`/${page}.html${query}`);
+  }
+  next();
+});
+
+// 2) Anasayfa kesin index.html gönder
 app.get('/', (req, res) => {
   const filePath = path.join(__dirname, 'index.html');
   res.sendFile(filePath);
 });
 
-// HTML sayfaları için dinamik parametre kontrolü ve içeriği değiştirerek gönderme
+// 3) Sayfalar için dinamik parametre kontrolü ve içerik değişimi
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
     const version = req.query.v;
     const xtid = req.query.xtid;
 
-    // v veya xtid yoksa otomatik parametreli URL'ye yönlendir
     if (!version || !xtid) {
       return res.redirect(`/${page}?v=${DEFAULT_VERSION}&xtid=${DEFAULT_XTID}`);
     }
 
-    // Dosyayı oku ve {{VERSION}}, {{XTID}} yerlerini değiştir
     const filePath = path.join(__dirname, page);
     fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
@@ -52,22 +62,22 @@ pages.forEach(page => {
         return res.status(500).send('Sunucu hatası.');
       }
 
-      // Basit metin değişimi (iki kere replace gerekebilir)
-      let modifiedData = data.replace(/{{VERSION}}/g, version).replace(/{{XTID}}/g, xtid);
+      // Tüm {{VERSION}} ve {{XTID}} yerlerini değiştir
+      const modifiedData = data.replace(/{{VERSION}}/g, version).replace(/{{XTID}}/g, xtid);
       res.send(modifiedData);
     });
   });
 });
 
-// CSS, JS, resim gibi statik dosyaları kök dizinden servis et
+// 4) Statik dosyaları sun
 app.use(express.static(path.join(__dirname)));
 
-// 404 handler — sayfa bulunamadığında özel sayfa sunabiliriz
+// 5) 404 sayfası
 app.use((req, res) => {
   res.status(404).send('Sayfa bulunamadı.');
 });
 
-// Server başlat
+// 6) Server başlat
 app.listen(PORT, () => {
   console.log(`🌐 Sunucu çalışıyor: http://localhost:${PORT}`);
 });
