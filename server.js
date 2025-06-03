@@ -1,94 +1,91 @@
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const rateLimit = require('express-rate-limit');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Default parametreler
+// Basit Rate Limiter (her IP'ye 1 dk'da 60 istek limiti)
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 dakika
+  max: 60, // Her IP'ye 60 istek
+  message: 'Çok fazla istek gönderdiniz, lütfen biraz bekleyin.',
+});
+app.use(limiter);
+
+// Varsayılan parametreler
 const DEFAULT_VERSION = '7.0.3';
 const DEFAULT_XTID = 'cmedhionkhpnakcndndgjdbohmhepckk';
 
-// Sunulacak HTML sayfaları listesi
+// Sunulacak HTML sayfalarının uzantısız halleri
 const pages = [
-  'uninstall.html',
-  'support.html',
-  'teşekkürler.html',
-  'sss.html',
-  'privacy.html',
-  'kvkk.html',
-  'logs.html',
-  'index.html',
-  'api.html',
-  'destek.html',
-  '404.html',
-  'languages.html',
-  'coming-soon.html',
-  'about.html',
-  'apps.html',
-  'learn-12-4-1.html' // örnek ekledim, gerçek dosyalar burada olmalı
+  'uninstall',
+  'support',
+  'teşekkürler',
+  'sss',
+  'privacy',
+  'kvkk',
+  'logs',
+  'index',
+  'api',
+  'destek',
+  '404',
+  'languages',
+  'coming-soon',
+  'about',
+  'apps',
+  'learn-12-4-1'
 ];
 
-// 1) Eğer istek uzantısızsa, aynı ada .html uzantısı varsa yönlendir
-app.get('/:page', (req, res, next) => {
-  const page = req.params.page;
-
-  if (!page.endsWith('.html')) {
-    const possibleFile = page + '.html';
-    const fullPath = path.join(__dirname, possibleFile);
-
-    // Dosyanın varlığını kontrol et
-    fs.access(fullPath, fs.constants.F_OK, (err) => {
-      if (!err) {
-        // Dosya varsa query varsa al, yoksa boş string
-        const query = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
-        return res.redirect(`/${possibleFile}${query}`);
-      } else {
-        // Dosya yoksa bir sonraki middleware geç
-        next();
-      }
-    });
-  } else {
-    // Zaten .html uzantılıysa devam et
-    next();
-  }
-});
-
-// 2) Anasayfa kesin index.html gönder
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-// 3) Sayfa bazlı parametre kontrolü ve içerik değiştirme
+// 1) Her uzantısız sayfayı .html ile eşleştir
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
-    const version = req.query.v;
-    const xtid = req.query.xtid;
+    const version = req.query.v || DEFAULT_VERSION;
+    const xtid = req.query.xtid || DEFAULT_XTID;
+    const filePath = path.join(__dirname, `${page}.html`);
 
-    if (!version || !xtid) {
-      return res.redirect(`/${page}?v=${DEFAULT_VERSION}&xtid=${DEFAULT_XTID}`);
-    }
-
-    fs.readFile(path.join(__dirname, page), 'utf8', (err, data) => {
+    fs.readFile(filePath, 'utf8', (err, data) => {
       if (err) {
-        console.error('Dosya okunamadı:', page, err);
-        return res.status(500).send('Sunucu hatası.');
+        // Dosya yoksa 404'e yönlendir
+        return res.status(404).sendFile(path.join(__dirname, '404.html'));
       }
-
-      const modifiedData = data.replace(/{{VERSION}}/g, version).replace(/{{XTID}}/g, xtid);
+      // Dynamic değişken yerleştirme
+      const modifiedData = data
+        .replace(/{{VERSION}}/g, version)
+        .replace(/{{XTID}}/g, xtid);
       res.send(modifiedData);
     });
   });
 });
 
-// 4) Statik dosyaları sun
-app.use(express.static(path.join(__dirname)));
+// 2) Anasayfa (root)
+app.get('/', (req, res) => {
+  const version = req.query.v || DEFAULT_VERSION;
+  const xtid = req.query.xtid || DEFAULT_XTID;
+  const filePath = path.join(__dirname, 'index.html');
 
-// 5) 404 - Bulunamayan sayfa
-app.use((req, res) => {
-  res.status(404).send('Sayfa bulunamadı.');
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).send('Sunucu hatası.');
+    }
+    const modifiedData = data
+      .replace(/{{VERSION}}/g, version)
+      .replace(/{{XTID}}/g, xtid);
+    res.send(modifiedData);
+  });
 });
 
-// 6) Server başlat
+// 3) Statik dosyalar (css, js, resim)
+app.use(express.static(path.join(__dirname), {
+  extensions: ['html']
+}));
+
+// 4) 404 fallback
+app.use((req, res) => {
+  res.status(404).sendFile(path.join(__dirname, '404.html'));
+});
+
+// 5) Server başlat
 app.listen(PORT, () => {
   console.log(`🌐 Sunucu çalışıyor: http://localhost:${PORT}`);
 });
