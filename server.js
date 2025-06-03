@@ -5,14 +5,6 @@ const rateLimit = require('express-rate-limit');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Basit Rate Limiter
-const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000,
-  max: 60,
-  message: 'Çok fazla istek gönderdiniz, lütfen bekleyin.',
-});
-app.use(limiter);
-
 const DEFAULT_VERSION = '7.0.3';
 const DEFAULT_XTID = 'cmedhionkhpnakcndndgjdbohmhepckk';
 
@@ -32,44 +24,54 @@ const pages = [
   'coming-soon',
   'about',
   'apps',
-  'learn-12-4-1'
+  'learn-12-4-1',
+  'suspicious-activity-observed' // Bunu da ekliyoruz
 ];
 
-// 1. Eğer .html uzantılı sayfa istenirse, .html'siz haline redirect et
+// DDoS/rate limit ihlalinde özel sayfaya yönlendiren rate limiter
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 dakika
+  max: 60, // Her IP'ye 60 istek hakkı
+  handler: (req, res) => {
+    res.status(429).redirect('/suspicious-activity-observed');
+  }
+});
+app.use(limiter);
+
+// .html uzantılı istekleri .html'siz sayfalara yönlendir
 pages.forEach(page => {
   app.get(`/${page}.html`, (req, res) => {
-    // Query stringi koru
     const params = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
     res.redirect(301, `/${page}${params}`);
   });
 });
 
-// 2. Her sayfa için hem parametre kontrolü hem template işlemi
+// Sayfaları dinamik parametre ile sun
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
     const version = req.query.v;
     const xtid = req.query.xtid;
 
-    // Eğer parametre eksikse redirect et
+    // Sadece suspicious-activity-observed sayfası parametre gerektirmez
+    if (page === 'suspicious-activity-observed') {
+      return res.sendFile(path.join(__dirname, 'suspicious-activity-observed.html'));
+    }
+
+    // Parametre yoksa otomatik ekle
     if (!version || !xtid) {
-      // Query stringi oluştur
       const params = [];
       if (!version) params.push(`v=${DEFAULT_VERSION}`);
       if (!xtid) params.push(`xtid=${DEFAULT_XTID}`);
-      // Eski parametreler varsa ekle
       const currentParams = [];
       if (version) currentParams.push(`v=${version}`);
       if (xtid) currentParams.push(`xtid=${xtid}`);
-      // Redirectle
       return res.redirect(
         `/${page}?${[...currentParams, ...params].join('&')}`
       );
     }
 
-    // Dosyayı oku ve değişkenleri doldur
     fs.readFile(path.join(__dirname, `${page}.html`), 'utf8', (err, data) => {
       if (err) {
-        // 404'e yönlendir
         return res.status(404).sendFile(path.join(__dirname, '404.html'));
       }
       const modifiedData = data
@@ -80,15 +82,15 @@ pages.forEach(page => {
   });
 });
 
-// 3. Root (anasayfa) için de aynı yapı
+// Root (anasayfa)
 app.get('/', (req, res) => {
   res.redirect('/index');
 });
 
-// 4. Statik dosyalar
+// Statik dosyalar
 app.use(express.static(path.join(__dirname)));
 
-// 5. 404 fallback
+// 404 fallback
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, '404.html'));
 });
