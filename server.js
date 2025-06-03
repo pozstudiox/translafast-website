@@ -16,7 +16,7 @@ const pages = [
   'privacy',
   'kvkk',
   'logs',
-  'index',
+  // 'index', // Artık index'i ayrı handle edeceğiz
   'api',
   'destek',
   '404',
@@ -25,18 +25,41 @@ const pages = [
   'about',
   'apps',
   'learn-12-4-1',
-  'suspicious-activity-observed' // Bunu da ekliyoruz
+  'suspicious-activity-observed'
 ];
 
-// DDoS/rate limit ihlalinde özel sayfaya yönlendiren rate limiter
+// Rate limiter
 const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 1 dakika
-  max: 60, // Her IP'ye 60 istek hakkı
+  windowMs: 1 * 60 * 1000,
+  max: 60,
   handler: (req, res) => {
     res.status(429).redirect('/suspicious-activity-observed');
   }
 });
 app.use(limiter);
+
+// Herhangi bir /index.html ya da /index isteğinde köke yönlendir
+app.get(['/index', '/index.html'], (req, res) => {
+  // Parametreleri köke aktar
+  const params = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+  res.redirect(301, `/${params}`);
+});
+
+// Anasayfa (/)
+app.get('/', (req, res) => {
+  const version = req.query.v || DEFAULT_VERSION;
+  const xtid = req.query.xtid || DEFAULT_XTID;
+
+  fs.readFile(path.join(__dirname, 'index.html'), 'utf8', (err, data) => {
+    if (err) {
+      return res.status(500).send('Sunucu hatası.');
+    }
+    const modifiedData = data
+      .replace(/{{VERSION}}/g, version)
+      .replace(/{{XTID}}/g, xtid);
+    res.send(modifiedData);
+  });
+});
 
 // .html uzantılı istekleri .html'siz sayfalara yönlendir
 pages.forEach(page => {
@@ -49,15 +72,12 @@ pages.forEach(page => {
 // Sayfaları dinamik parametre ile sun
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
-    const version = req.query.v;
-    const xtid = req.query.xtid;
-
-    // Sadece suspicious-activity-observed sayfası parametre gerektirmez
     if (page === 'suspicious-activity-observed') {
       return res.sendFile(path.join(__dirname, 'suspicious-activity-observed.html'));
     }
+    const version = req.query.v;
+    const xtid = req.query.xtid;
 
-    // Parametre yoksa otomatik ekle
     if (!version || !xtid) {
       const params = [];
       if (!version) params.push(`v=${DEFAULT_VERSION}`);
@@ -80,11 +100,6 @@ pages.forEach(page => {
       res.send(modifiedData);
     });
   });
-});
-
-// Root (anasayfa)
-app.get('/', (req, res) => {
-  res.redirect('/index');
 });
 
 // Statik dosyalar
