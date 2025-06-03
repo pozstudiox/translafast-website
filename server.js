@@ -5,19 +5,17 @@ const rateLimit = require('express-rate-limit');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Basit Rate Limiter (her IP'ye 1 dk'da 60 istek limiti)
+// Basit Rate Limiter
 const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 1 dakika
-  max: 60, // Her IP'ye 60 istek
-  message: 'Çok fazla istek gönderdiniz, lütfen biraz bekleyin.',
+  windowMs: 1 * 60 * 1000,
+  max: 60,
+  message: 'Çok fazla istek gönderdiniz, lütfen bekleyin.',
 });
 app.use(limiter);
 
-// Varsayılan parametreler
 const DEFAULT_VERSION = '7.0.3';
 const DEFAULT_XTID = 'cmedhionkhpnakcndndgjdbohmhepckk';
 
-// Sunulacak HTML sayfalarının uzantısız halleri
 const pages = [
   'uninstall',
   'support',
@@ -37,19 +35,43 @@ const pages = [
   'learn-12-4-1'
 ];
 
-// 1) Her uzantısız sayfayı .html ile eşleştir
+// 1. Eğer .html uzantılı sayfa istenirse, .html'siz haline redirect et
+pages.forEach(page => {
+  app.get(`/${page}.html`, (req, res) => {
+    // Query stringi koru
+    const params = req.url.includes('?') ? req.url.slice(req.url.indexOf('?')) : '';
+    res.redirect(301, `/${page}${params}`);
+  });
+});
+
+// 2. Her sayfa için hem parametre kontrolü hem template işlemi
 pages.forEach(page => {
   app.get(`/${page}`, (req, res) => {
-    const version = req.query.v || DEFAULT_VERSION;
-    const xtid = req.query.xtid || DEFAULT_XTID;
-    const filePath = path.join(__dirname, `${page}.html`);
+    const version = req.query.v;
+    const xtid = req.query.xtid;
 
-    fs.readFile(filePath, 'utf8', (err, data) => {
+    // Eğer parametre eksikse redirect et
+    if (!version || !xtid) {
+      // Query stringi oluştur
+      const params = [];
+      if (!version) params.push(`v=${DEFAULT_VERSION}`);
+      if (!xtid) params.push(`xtid=${DEFAULT_XTID}`);
+      // Eski parametreler varsa ekle
+      const currentParams = [];
+      if (version) currentParams.push(`v=${version}`);
+      if (xtid) currentParams.push(`xtid=${xtid}`);
+      // Redirectle
+      return res.redirect(
+        `/${page}?${[...currentParams, ...params].join('&')}`
+      );
+    }
+
+    // Dosyayı oku ve değişkenleri doldur
+    fs.readFile(path.join(__dirname, `${page}.html`), 'utf8', (err, data) => {
       if (err) {
-        // Dosya yoksa 404'e yönlendir
+        // 404'e yönlendir
         return res.status(404).sendFile(path.join(__dirname, '404.html'));
       }
-      // Dynamic değişken yerleştirme
       const modifiedData = data
         .replace(/{{VERSION}}/g, version)
         .replace(/{{XTID}}/g, xtid);
@@ -58,34 +80,19 @@ pages.forEach(page => {
   });
 });
 
-// 2) Anasayfa (root)
+// 3. Root (anasayfa) için de aynı yapı
 app.get('/', (req, res) => {
-  const version = req.query.v || DEFAULT_VERSION;
-  const xtid = req.query.xtid || DEFAULT_XTID;
-  const filePath = path.join(__dirname, 'index.html');
-
-  fs.readFile(filePath, 'utf8', (err, data) => {
-    if (err) {
-      return res.status(500).send('Sunucu hatası.');
-    }
-    const modifiedData = data
-      .replace(/{{VERSION}}/g, version)
-      .replace(/{{XTID}}/g, xtid);
-    res.send(modifiedData);
-  });
+  res.redirect('/index');
 });
 
-// 3) Statik dosyalar (css, js, resim)
-app.use(express.static(path.join(__dirname), {
-  extensions: ['html']
-}));
+// 4. Statik dosyalar
+app.use(express.static(path.join(__dirname)));
 
-// 4) 404 fallback
+// 5. 404 fallback
 app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, '404.html'));
 });
 
-// 5) Server başlat
 app.listen(PORT, () => {
   console.log(`🌐 Sunucu çalışıyor: http://localhost:${PORT}`);
 });
